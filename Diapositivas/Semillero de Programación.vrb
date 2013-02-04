@@ -1,0 +1,7 @@
+\frametitle {Arreglos y vectores en C++}
+\begin{alertblock}{Pregunta}
+¿Qué significa \verb|vector <int> g [1000]|?
+\end{alertblock}\pause
+\begin{exampleblock}{Respuesta}
+Es un arreglo de 1000 posiciones en el que cada posición contiene un vector de enteros
+\end{exampleblock}
