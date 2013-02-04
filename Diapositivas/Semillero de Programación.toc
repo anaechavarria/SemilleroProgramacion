@@ -1,5 +1,0 @@
-\beamer@endinputifotherversion {3.10pt}
-\select@language {spanish}
-\beamer@sectionintoc {1}{Arreglos de C++}{3}{0}{1}
-\beamer@sectionintoc {2}{Vectores de C++}{7}{0}{2}
-\beamer@sectionintoc {3}{Grafos}{12}{0}{3}
