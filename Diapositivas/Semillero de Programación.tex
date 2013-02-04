@@ -7,6 +7,7 @@
 
 \setbeamercovered{invisible}
 \usetheme{Frankfurt}
+\usefonttheme{serif}
 
 % Configurar los listings (Códigos)
 \renewcommand{\lstlistingname}{Código}
@@ -216,9 +217,116 @@
 	
 	\begin{frame}
 		\frametitle{Representación de grafos}
-		
-		
+		Hay dos formas de representar los grafos (tanto dirigidos como no dirigidos) con una matriz de adyacencia o con una lista de ayacencia.\\
+		La lista de adyacencia es más comúnmente usada porque usa menos memoria que la matriz de adyacencia.
 	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Matriz de adyacencia}
+		La representación de un grafo $G = (V, E)$ como matriz de adyacencia consiste en una matriz $M$ de tamaño $|V| \cdot |V|$ donde se asume que los nodos están numerados de $0 \ldots |V|$. La matriz de adyacencia se define así:
+		\begin{equation}
+			M[u][v] =
+			\left\{
+				\begin{array}{ll}
+					1 & \mbox{si } (u, v) \in E \mbox{ o} \\
+					  & \mbox{si } (v, u) \in E \mbox{ para grafos no dirigidos}\\
+					0 & \mbox{en caso contrario.} 
+				\end{array}
+			\right.
+		\end{equation}
+		Esto quiere decir que la matriz contiene un 1 si $u$ es adyacente a $v$ y un 0 si no lo es.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Matriz de adyacencia}
+		\begin{alertblock}{Pregunta}
+			¿Cuánto espacio requiere la representación de matriz de adyacencia para un grafo $G = (V, E)$?
+		\end{alertblock}\pause
+		\begin{exampleblock}{Respuesta}
+			$|V|^2$, se necesita una matriz de tamaño $|V| \cdot |V|$.
+		\end{exampleblock}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Lista de adyacencia}
+		La representación de un grafo $G = (V, E)$ como lista de ayacencia consiste en un arreglo $Adj$ de $|V|$ vectores.\\ \quad \\
+		Para cada $u \in V$, $Adj[u]$ contiene una lista (vector) con todos los elementos $v \in V$ tales que $(u, v) \in E$, es decir, todos los nodos adyacentes a $u$. \\ \quad \\
+		En los grafos no dirigidos, dada la arista $(u, v)$ se agregaría $v$ a $Adj[u]$ y $u$ a $Adj[v]$.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Lista de adyacencia}
+		\begin{alertblock}{Pregunta}
+			¿Cuánto espacio requiere la representación de lista de adyacencia para un grafo $G = (V, E)$?
+		\end{alertblock}\pause
+		\begin{exampleblock}{Respuesta}
+			\begin{itemize}
+				\item{$|E|$ para grafos dirigidos. Por cada arista se agrega un valor nuevo a la lista de adyacencia.}
+				\item{$2 \cdot |E|$ para grafos no dirigidos. Por cada arista se agregan dos valores a la lista de adyacencia.}
+			\end{itemize}
+		\end{exampleblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Lista de adyacencia vs. Matriz de adyacencia}
+		\begin{itemize}
+			\item{La representación como lista de adyacencia es más común en grafos dispersos, cuando el número de aristas es pequeño ($|E|$ es mucho menor que $|V|^2$).}
+			\item{La representación como matriz de adyacencia es más común en grafos densos, cuando el número de aritas es grande ($|E|$ es cercano a $|V|^2$).}
+			\item{Verificar si dos nodos están conectados en un la matriz de adyacencia es más fácil que hacerlo en la lista de adyacencia.} %Preguntarles que vean por qué.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ejercicio}
+		Representar el siguiente grafo dirigido por medio de su matriz de adyacencia y su lista de adyacencia.
+		\begin{figure}
+			\includegraphics[height = 0.3\textheight]{ejemplo_digraph.png}
+		\end{figure}
+		\pause
+		\begin{columns}
+			\column{.45\textwidth}
+				\includegraphics[height = 0.3\textheight]{lista_digraph.png}
+			\column{.40\textwidth}
+				\includegraphics[height = 0.3\textheight]{matriz_digraph.png}
+		\end{columns}		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ejercicio}
+		Representar el siguiente grafo no dirigido por medio de su matriz de adyacencia y su lista de adyacencia.
+		\begin{figure}
+			\includegraphics[height = 0.3\textheight]{ejemplo_graph.png}
+		\end{figure}
+		\pause
+		\begin{columns}
+			\column{.45\textwidth}
+				\includegraphics[height = 0.3\textheight]{lista_graph.png}
+			\column{.40\textwidth}
+				\includegraphics[height = 0.3\textheight]{matriz_graph.png}
+		\end{columns}		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Tarea}
+		\begin{alertblock}{Tarea 1.}
+			Escrbir un programa que dado $1 \leq n \leq 10$ y $1 \leq m \leq 100$ el número de nodos y aristas de un grafo $G$ respectivamente, genere las representaciones como matriz y lista de adyacencia de $G$.
+		\end{alertblock}
+		
+		\begin{alertblock}{Tarea 2.}
+			Las representaciones que vimos son para grafos en los que las aristas no tienen pesos. ¿Cómo representarían grafos cuyas aristas tienen pesos?\\
+			Pista: Pensar primero cómo lo harían usando la matriz de adyacencia y luego la lista de adyacencia.
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{La próxima clase}
+		La próxima clase veremos dos métodos para recorrer grafos.
+		\begin{itemize}
+			\item {BFS (Breath First Search)}
+			\item {DFS (Depth First Search)}
+		\end{itemize}
+	\end{frame}
+	
 	
 \end{section}
 

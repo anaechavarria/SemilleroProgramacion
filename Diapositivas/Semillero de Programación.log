@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  3 FEB 2013 16:53
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  3 FEB 2013 22:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -981,10 +981,12 @@ Package: beamercolorthemeorchid 2010/06/17  (rcs-revision d02a7cf4d8ae)
 emewhale.sty
 Package: beamercolorthemewhale 2010/06/17  (rcs-revision d02a7cf4d8ae)
 ))
-(/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstlang1.sty
+(/usr/local/texlive/2011/texmf-dist/tex/latex/beamer/themes/font/beamerfontthem
+eserif.sty
+Package: beamerfontthemeserif 2010/06/17  (rcs-revision d02a7cf4d8ae)
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
-)
-(/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstlang1.sty
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/local/texlive/2011/texmf-dist/tex/latex/listings/lstmisc.sty
@@ -993,20 +995,20 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 (./Semillero de Programación.aux)
 \openout1 = `"Semillero de Programación.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1072,7 +1074,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box56
-Package hyperref Info: Link coloring OFF on input line 37.
+Package hyperref Info: Link coloring OFF on input line 38.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -1082,56 +1084,14 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count170
 )
-LaTeX Info: Redefining \ref on input line 37.
-LaTeX Info: Redefining \pageref on input line 37.
-LaTeX Info: Redefining \nameref on input line 37.
+LaTeX Info: Redefining \ref on input line 38.
+LaTeX Info: Redefining \pageref on input line 38.
+LaTeX Info: Redefining \nameref on input line 38.
 
 (./Semillero de Programación.out) (./Semillero de Programación.out)
 \@outlinefile=\write5
 \openout5 = `"Semillero de Programación.out"'.
 
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 37.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 37.
-\symnumbers=\mathgroup6
-\sympureletters=\mathgroup7
-LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/bx/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 37.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 37.
-LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 37.
-LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmr/bx/n on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/bx/n on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/bx/n on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/bx/it on input line 37.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/bx/n on input line 37.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/beamer/translator/dicts/translato
 r-basic-dictionary/translator-basic-dictionary-English.dict
@@ -1161,8 +1121,8 @@ Dictionary: translator-theorem-dictionary, Language: English
 
 (./Semillero de Programación.nav)
 
-LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
-(Font)              size <5> substituted on input line 41.
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4> not available
+(Font)              size <5> substituted on input line 42.
 
 [1{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
@@ -1183,7 +1143,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 6.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-<arreglo.jpg, id=108, 416.30531pt x 97.86563pt>
+<arreglo.jpg, id=109, 416.30531pt x 97.86563pt>
 File: arreglo.jpg Graphic file (type jpg)
  <use arreglo.jpg>
 Package pdftex.def Info: arreglo.jpg used on input line 8.
@@ -1200,7 +1160,7 @@ Package pdftex.def Info: arreglo.jpg used on input line 8.
 
 
 (./Semillero de Programación.vrb
-<arreglo2.png, id=171, 505.89pt x 126.4725pt>
+<arreglo2.png, id=172, 505.89pt x 126.4725pt>
 File: arreglo2.png Graphic file (type png)
  <use arreglo2.png>
 Package pdftex.def Info: arreglo2.png used on input line 13.
@@ -1217,7 +1177,7 @@ Package pdftex.def Info: arreglo2.png used on input line 13.
 
 
 (./Semillero de Programación.vrb
-<vector.jpg, id=228, 432.61626pt x 117.43875pt>
+<vector.jpg, id=229, 432.61626pt x 117.43875pt>
 File: vector.jpg Graphic file (type jpg)
  <use vector.jpg>
 Package pdftex.def Info: vector.jpg used on input line 8.
@@ -1241,22 +1201,134 @@ Package pdftex.def Info: vector.jpg used on input line 8.
 
 ] (./Semillero de Programación.vrb) [11
 
-] <digraph.png, id=375, 507.8975pt x 421.575pt>
+] <digraph.png, id=376, 507.8975pt x 421.575pt>
 File: digraph.png Graphic file (type png)
  <use digraph.png>
-Package pdftex.def Info: digraph.png used on input line 206.
-(pdftex.def)             Requested size: 106.73912pt x 88.60287pt.
+Package pdftex.def Info: digraph.png used on input line 207.
+(pdftex.def)             Requested size: 106.95612pt x 88.77791pt.
  [12
 
- <./digraph.png>] <graph.png, id=406, 332.24126pt x 233.87375pt>
+ <./digraph.png>] <graph.png, id=407, 332.24126pt x 233.87375pt>
 File: graph.png Graphic file (type png)
  <use graph.png>
-Package pdftex.def Info: graph.png used on input line 215.
-(pdftex.def)             Requested size: 125.86769pt x 88.60287pt.
+Package pdftex.def Info: graph.png used on input line 216.
+(pdftex.def)             Requested size: 126.12117pt x 88.77791pt.
 
 [13
 
- <./graph.png>]
+ <./graph.png>] [14
+
+]
+\openout4 = `"Semillero de Programación.vrb"'.
+
+ (./Semillero de Programación.vrb) [15
+
+] [16
+
+] [17
+
+]
+\openout4 = `"Semillero de Programación.vrb"'.
+
+
+(./Semillero de Programación.vrb) [18
+
+] [19
+
+] [20
+
+] [21
+
+]
+<ejemplo_digraph.png, id=667, 243.91125pt x 136.51pt>
+File: ejemplo_digraph.png Graphic file (type png)
+
+<use ejemplo_digraph.png>
+Package pdftex.def Info: ejemplo_digraph.png used on input line 292.
+(pdftex.def)             Requested size: 135.9641pt x 76.09479pt.
+
+<lista_digraph.png, id=668, 207.77625pt x 186.6975pt>
+File: lista_digraph.png Graphic file (type png)
+ <use lista_digraph.png>
+Package pdftex.def Info: lista_digraph.png used on input line 292.
+(pdftex.def)             Requested size: 84.68471pt x 76.09479pt.
+
+<matriz_digraph.png, id=669, 202.7575pt x 202.7575pt>
+File: matriz_digraph.png Graphic file (type png)
+ <use matriz_digraph.png>
+Package pdftex.def Info: matriz_digraph.png used on input line 292.
+(pdftex.def)             Requested size: 76.09575pt x 76.09479pt.
+
+[22
+
+ <./ejemplo_digraph.png> <./lista_digraph.png> <./matriz_digraph.png>]
+File: ejemplo_digraph.png Graphic file (type png)
+
+<use ejemplo_digraph.png>
+Package pdftex.def Info: ejemplo_digraph.png used on input line 292.
+(pdftex.def)             Requested size: 135.9641pt x 76.09479pt.
+File: lista_digraph.png Graphic file (type png)
+ <use lista_digraph.png>
+Package pdftex.def Info: lista_digraph.png used on input line 292.
+(pdftex.def)             Requested size: 84.68471pt x 76.09479pt.
+File: matriz_digraph.png Graphic file (type png)
+ <use matriz_digraph.png>
+Package pdftex.def Info: matriz_digraph.png used on input line 292.
+(pdftex.def)             Requested size: 76.09575pt x 76.09479pt.
+
+[23
+
+] <ejemplo_graph.png, id=727, 188.705pt x 131.49126pt>
+File: ejemplo_graph.png Graphic file (type png)
+
+<use ejemplo_graph.png>
+Package pdftex.def Info: ejemplo_graph.png used on input line 307.
+(pdftex.def)             Requested size: 109.20998pt x 76.09479pt.
+ <lista_graph.png, id=728, 342.27875pt x 155.58125pt>
+File: lista_graph.png Graphic file (type png)
+
+<use lista_graph.png>
+Package pdftex.def Info: lista_graph.png used on input line 307.
+(pdftex.def)             Requested size: 167.4099pt x 76.09479pt.
+
+Overfull \hbox (29.1304pt too wide) in paragraph at lines 307--307
+[][]  
+ []
+
+<matriz_graph.png, id=729, 177.66376pt x 172.645pt>
+File: matriz_graph.png Graphic file (type png)
+ <use matriz_graph.png>
+Package pdftex.def Info: matriz_graph.png used on input line 307.
+(pdftex.def)             Requested size: 78.30783pt x 76.09479pt.
+
+[24
+
+ <./ejemplo_graph.png> <./lista_graph.png> <./matriz_graph.png>]
+File: ejemplo_graph.png Graphic file (type png)
+
+<use ejemplo_graph.png>
+Package pdftex.def Info: ejemplo_graph.png used on input line 307.
+(pdftex.def)             Requested size: 109.20998pt x 76.09479pt.
+File: lista_graph.png Graphic file (type png)
+ <use lista_graph.png>
+Package pdftex.def Info: lista_graph.png used on input line 307.
+(pdftex.def)             Requested size: 167.4099pt x 76.09479pt.
+
+Overfull \hbox (29.1304pt too wide) in paragraph at lines 307--307
+[][]  
+ []
+
+File: matriz_graph.png Graphic file (type png)
+<use matriz_graph.png>
+Package pdftex.def Info: matriz_graph.png used on input line 307.
+(pdftex.def)             Requested size: 78.30783pt x 76.09479pt.
+ [25
+
+] [26
+
+] [27
+
+]
 \tf@nav=\write6
 \openout6 = `"Semillero de Programación.nav"'.
 
@@ -1266,11 +1338,11 @@ Package pdftex.def Info: graph.png used on input line 215.
 \tf@snm=\write8
 \openout8 = `"Semillero de Programación.snm"'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 219.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 219.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 333.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 333.
  (./Semillero de Programación.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 219.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 219.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 333.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 333.
 Package rerunfilecheck Info: File `"Semillero de Programación".out' has not ch
 anged.
 (rerunfilecheck)             Checksum: 0A2452CA2A240162C7C84BE744EACDA2;141.
@@ -1279,29 +1351,30 @@ anged.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 219.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 333.
  ) 
 Here is how much of TeX's memory you used:
- 18188 strings out of 493633
- 328340 string characters out of 3143378
- 528818 words of memory out of 3000000
- 21011 multiletter control sequences out of 15000+200000
- 11361 words of font info for 43 fonts, out of 3000000 for 9000
+ 18284 strings out of 493633
+ 330323 string characters out of 3143378
+ 528974 words of memory out of 3000000
+ 21067 multiletter control sequences out of 15000+200000
+ 9703 words of font info for 38 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 49i,16n,66p,444b,1457s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb>
-</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb><
-/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></u
-sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
-usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></
-usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></us
-r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on "Semillero de Programación.pdf" (13 pages, 168384 bytes).
+ 49i,16n,66p,444b,1456s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
+texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/t
+exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on "Semillero de Programación.pdf" (27 pages, 257982 bytes).
 PDF statistics:
- 474 PDF objects out of 1000 (max. 8388607)
- 422 compressed objects within 5 object streams
- 30 named destinations out of 1000 (max. 500000)
- 148 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 891 PDF objects out of 1000 (max. 8388607)
+ 813 compressed objects within 9 object streams
+ 58 named destinations out of 1000 (max. 500000)
+ 184 words of extra memory for PDF output out of 10000 (max. 10000000)
 
