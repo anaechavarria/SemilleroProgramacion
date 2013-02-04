@@ -1,4 +1,0 @@
-\frametitle {Lista de adyacencia}
-La representación de un grafo $G = (V, E)$ como lista de ayacencia consiste en un arreglo $Adj$ de $|V|$ vectores.\\ \quad \\
-Para cada $u \in V$, $Adj[u]$ contiene una lista (vector) con todos los elementos $v \in V$ tales que $(u, v) \in E$, es decir, todos los nodos adyacentes a $u$. \\ \quad \\
-En los grafos no dirigidos, dada la arista $(u, v)$ se agregaría $v$ a $Adj[u]$ y $u$ a $Adj[v]$.
