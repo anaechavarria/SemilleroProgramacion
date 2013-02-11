@@ -1,0 +1,28 @@
+\begin{thebibliography}{10}
+
+\bibitem{Cormen}
+CORMEN, T.H., LEISERSON, C.E., RIVEST, R.L., STEIN, C.
+\newblock {\em Introduction to Algorithms}.
+\newblock The MIT Press, 3ra ed. 2009.
+
+\bibitem{Codeforces}
+MIRZAYANOV, M.
+\newblock {\em Codefroces}.
+\newblock www.codeforces.com
+
+\bibitem{ProgrammingChallenges}
+SKIENA, S.S, REVILLA, M.M.
+\newblock {\em Programming Challenges: The Programming Contest Training Manuals}.
+\newblock Springer, 2003.
+
+\bibitem{FelixHalim}
+HALIM, S.HALIM, F.
+\newblock {\em Competitive Programming: Handbook for ACM ICPC and IOI Contestants}.
+\newblock Lulu, 2010.
+
+\bibitem{FelixHalim2}
+HALIM, S.HALIM, F.
+\newblock {\em Competitive Programming 2: Handbook for ACM ICPC and IOI Contestants}.
+\newblock Lulu, 2011.
+
+\end{thebibliography}
