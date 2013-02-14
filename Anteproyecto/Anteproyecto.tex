@@ -8,6 +8,7 @@
 \usepackage{url} % Inserta URL's de las notas al pie
 \usepackage{hyperref} % Crea accesos directos dentro del documento
 \usepackage{amsmath, amsthm, amsfonts} % Paquete de la AMS
+\usepackage{longtable} % Para que una tabla se parta por la página
 	
 \usepackage{setspace} % Espaciado
 	\onehalfspacing
@@ -81,44 +82,45 @@
 % 3.	PLANTEAMIENTO DEL PROBLEMA
 % Debe darse en términos del marco teórico matemático dentro del cual se halla el problema que se desea solucionar, indicando por qué y cómo puede ser resuelto desde las áreas de conocimiento que el estudiante domina.
 \section{Planteamiento del Problema}
-El semillero de programación es un grupo de la universidad que tiene como objetivo preparar a los estudiantes para las maratones de programación realizadas por la ICPC (International Collegiate Programming Contest). En este semillero se enseñan los temas más útiles para estas competencias que son los algoritmos de grafos, strings y teoría de números, paradigmas de programación como la programación dinámica y la recursividad y estructuras de datos.\\
-Durante los últimos años el semillero ha estado a cargo de estudiantes destacados en las maratones de programación bajo la supervisión de docentes del departamento de ingeniería de sistemas; sin embargo, durante este tiempo, no se desarrolló un plan de trabajo para el curso. Lo que se busca en esta práctica investigativa es desarrollar e implementar un programa de clases para el semillero de programación que le de a los estudiantes las bases teóricas y prácticas para enfrentarse por primera vez a las maratones de programación.
+El semillero de programación es un grupo de la Universidad que tiene como objetivo enseñar nuevas técnicas de programación a estudiantes interesados en mejorar sus habilidades en esta área y prepararlos para participar en las maratones de programación realizadas por ACIS/REDIS \cite{ACIS} y por la ACM-ICPC \cite{ICPC}. En este semillero se enseñan los temas más útiles \cite{ProgrammingChallenges, Halim, Halim2, Brasil} para estas competencias que son los algoritmos de grafos, strings y teoría de números, programación dinámica, la recursividad y las estructuras de datos.\\
+Durante los últimos años el semillero ha estado a cargo de estudiantes destacados en las maratones de programación bajo la supervisión de docentes del departamento de ingeniería de sistemas; sin embargo, durante este tiempo no se desarrolló un plan de trabajo para el curso. Lo que se busca en esta práctica investigativa es desarrollar e implementar un programa de clases para el semillero de programación que le dé a los estudiantes las bases teóricas y prácticas para mejorar sus habilidades y enfrentarse por primera vez a las maratones de programación.
 
 \section{Objetivos generales y específicos}
 % 4.	OBJETIVOS GENERAL Y ESPECÍFICOS
 % Se deben presentar el objetivo general y algunos específicos (tantos como sean suficientes para describir el tipo de resultados esperados). El objetivo general indica la meta global que se desea alcanzar, por lo general es bastante amplio, pero no intangible. Los objetivos específicos deben ser precisos y mostrar cómo se alcanzará la meta propuesta mediante pequeñas metas específicas, muy claras y tangibles.
 
 \subsection{Objetivo General}
-Desarrollar e implementar un programa de clases para el semillero de programación que de a los estudiantes las bases necesarias para participar en las maratones de programación de la ICPC.
+Desarrollar e implementar un programa de clases para el semillero de programación que busque mejorar las habilidades de programación de los estudiantes con miras que tengan las bases necesarias para participar en las maratones de programación realizadas por la ACIS/REDIS y por la ACM-ICPC.
 
 \subsection{Objetivos Específicos}
 \begin{itemize}
 	\item{Enseñar los conceptos básicos de la STL (Standard Template Library) de C++.}
-	\item{Introducir a los estudiantes a los diferentes jueces en línea.}
-	\item{Buscar y sugerir problemas en los diferentes jueces que permitan a los estudiantes aplicar los conceptos aprendidos en las clases.}
-	\item{Discutir las soluciones a los problemas propuestos luego de que los estudiantes hayan intentado resolverlos de manera independiente.}
-	\item{Crear diapositivas con los temas enseñados y enviarlas a los estudiantes para que les sirvan como material de estudio en casa.}
+	\item{Introducir a los estudiantes a algunos jueces en línea como \emph{Codeforces} \cite{Codeforces}, \emph{UVa} \cite{UVa} y \emph{Spoj} \cite{Spoj}.}
+	\item{Buscar, resolver y sugerir problemas en los diferentes jueces que permitan a los estudiantes aplicar los conceptos aprendidos en las clases.}
+	\item{Hacer revisiones de las soluciones a los problemas propuestos luego de que los estudiantes hayan intentado resolverlos de manera independiente.}
+	\item{Crear material de clase (diapositivas, programas, problemas, competencias) con los temas enseñados y compartirlo con los estudiantes para que les sirvan como material de estudio en casa.}
+	\item{Crear el repositorio \emph{github.com/anaechavarria/SemilleroProgramacion} y actualizarlo cada semana con el material de clase.}
 	\item{Enseñar los algoritmos de recorrido de grafos en profundidad (DFS) y en anchura (BFS) y sus aplicaciones.}
 	\item{Enseñar los algoritmos para hallar los caminos más cortos en grafos: Dijkstra, Bellman-Ford y Floyd-Warshall.}
-	\item{Enseñar en qué consiste el paradigma de programación dinámica y los problemas más comunes que se resuelven usando este paradigma.}
-	\item{Mostar cómo se pueden hallar las ocurrencias de una palabra en un texto de manera rápida usando el algoritmo de KMP.}
-	\item{Enseñar los algoritmos de teoría de números más útiles para las competencias de programación.}
+	\item{Enseñar en qué consisten los métodos y técnicas de programación dinámica y los problemas más comunes que se resuelven usándolos.}
+	\item{Mostrar cómo se pueden hallar las ocurrencias de una palabra en un texto de manera rápida usando el algoritmo de KMP.}
+	\item{Enseñar los algoritmos de teoría de números más útiles \cite{ProgrammingChallenges, Halim, Halim2, Brasil} para las competencias de programación.}
 	\item{Enseñar el algoritmo de Kruskal para hallar el árbol de mínima expansión.}
-	\item{Enseñar los algoritmos de geometría más usados en las competencias de programación.}
+	\item{Enseñar los algoritmos de geometría más usados \cite{ProgrammingChallenges, Halim, Halim2, Brasil} en las competencias de programación.}
 \end{itemize}
 
 \section{Antecedentes}
 % 5.	ANTECEDENTES
 % Permiten identificar pasos previos realizados por otras personas o entidades con miras a la solución del problema objeto del proyecto o problemas similares, que pueden servir como punto de partida para la obtención de los resultados esperados dentro de la realización del proyecto. Los antecedentes resultan muy útiles si se describen en términos de trabajos previos realizados en el ámbito mundial, nacional y cuando lo amerite, local, en el tema específico relacionado con el proyecto propuesto.
-El semillero de programación fue implementado hace varios años en la Universidad EAFIT y ha permitido que los estudiantes con interés en la programación, las matemáticas y los algoritmos tengan un espacio para aprender, interactuar y socializar problemas. En los años anteriores, el semillero era un espacio muy productivo para los estudiantes avanzados ya que durante las clases se socializaban y solucionaban problemas de dificultad media y alta lo que le permitía a quienes iban mejorar su habilidad de solución de problemas. Sin embargo, para los principiantes, el nivel del semillero era avanzado y se trataban problemas que ellos no tenían la fundamentación teórica para resolver.\\
-El semestre 2012-1 se dividió el semillero de programación en dos grupos: básico y avanzado. En el semillero avanzado se siguieron resolviendo y discutiendo problemas como se hacía anteriormente y el semillero básico se enfocó en desarrollar las habilidades de programación de los estudiantes de primero y segundo semestre. Los resultados de la creación de un grupo básico fueron positivos.\\
+El semillero de programación fue establecido hace varios años en la Universidad EAFIT y ha permitido que los estudiantes con interés en la programación, las matemáticas y los algoritmos tengan un espacio para aprender, interactuar y socializar problemas. En los años anteriores, el semillero era un espacio muy productivo para los estudiantes avanzados ya que durante las clases se socializaban y resolvían problemas de dificultad media y alta lo que le permitía, a quienes asistían, mejorar su habilidad de solución de problemas. Para los principiantes, sin embargo, el nivel del semillero era avanzado y se trataban problemas que ellos todavía no tenían la fundamentación teórica para resolver.\\
+El semestre 2012-1 se dividió el semillero de programación en dos grupos: básico y avanzado. En el semillero avanzado se siguieron resolviendo y discutiendo problemas como se hacía anteriormente y el semillero básico se enfocó en desarrollar las habilidades de programación de los estudiantes de primero y segundo semestre. Este cambio logró despertar el interés de nuevos alumnos que anteriormente no asistían al semillero porque el nivel era muy avanzado para ellos.\\
 
 \section{Justificación}
 % 6.	JUSTIFICACIÓN
 % Describe las razones por las cuales es de interés académico, gubernamental  o empresarial resolver el problema de la propuesta. En este caso se debe enunciar claramente que áreas del conocimiento de la matemática se hacen necesarias para poder resolver el problema. Así mismo, es de gran importancia señalar el impacto que generará el desarrollo del proyecto en diversas áreas como social, ambiental, científico, económico, etc.
-Actualmente, los estudiantes que pertenecen al semillero de programación son en su mayoría de tercer semestre, lo que quiere decir que tienen conocimientos acerca de cómo programar mas no conocen las técnicas más utilizadas en la solución de problemas de maratones de programación como los son los algoritmos de grafos, strings y geometría, la programación dinámica y los conceptos y algoritmos básicos de teoría de números. Este semestre se busca crear un programa de clases que se ajuste al nivel de los estudiantes y les de la fundamentación teórica necesaria para resolver los problemas más comunes presentados en las maratones de programación.\\
-Se busca que la documentación y diapositivas utilizadas este semestre sirvan como material de clase para futuras generaciones del semillero y para que aquellos que continúen a cargo del semillero de programación el semestre entrante sepan cuáles son los conceptos que los estudiantes actuales conocen y puedan continuar enseñándoles aquellos temas que los estudiantes todavía no conocen.\\
-Se espera que los temas enseñados a los estudiantes durante este semestre y el próximo sirvan para que ellos tengan un buen desempeño en la Maratón Nacional de Programación ACIS/REDIS que se realiza en octubre y tengan la posibilidad de participar en la Maratón Regional Suramericana ACM-ICPC y en la Maratón Mundial ACM-ICPC bajo el nombre la Universidad como ha ocurrido en ocasiones anteriores.
+Actualmente, los estudiantes que pertenecen al semillero de programación son en su mayoría de tercer semestre, lo que quiere decir que tienen conocimientos acerca de cómo programar mas no conocen las técnicas más utilizadas en la solución de problemas de maratones de programación como los son los algoritmos de grafos, strings y geometría, la programación dinámica y los conceptos y algoritmos básicos de teoría de números. Este semestre se busca crear un programa de clases que se ajuste al nivel de los estudiantes y les dé la fundamentación teórica necesaria para resolver los problemas más comunes presentados en las maratones de programación.\\
+Se busca que la documentación y diapositivas utilizadas este semestre sirvan como material de clase para futuras generaciones del semillero. Por otro lado, el plan de clases permitirá que aquellos que continúen a cargo del semillero de programación el semestre entrante sepan cuáles son los conceptos que los estudiantes actuales conocen y puedan continuar enseñándoles aquellos temas que los estudiantes todavía no conocen.\\
+Se espera que los temas enseñados a los estudiantes durante este semestre y el próximo sirvan para que ellos tengan un buen desempeño en la Maratón Nacional de Programación ACIS/REDIS que se realiza en octubre y tengan la posibilidad de participar en la Maratón Regional Suramericana ACM-ICPC y en la Maratón Mundial ACM-ICPC bajo el nombre la Universidad, como ha ocurrido en ocasiones anteriores.
 
 \section{Alcance}
 % 7.	ALCANCE
@@ -130,21 +132,22 @@ La implementación de este proyecto permitirá que los estudiantes participantes
 % Dentro de la metodología deben describirse detalladamente en qué consistirán las actividades o etapas globales del proyecto, tipo de información o datos requeridos, variables a considerar, tipo de medidas a realizar, cantidad, número de muestras y equipos que se utilizarán y normativa requerida que se aplicará. En los casos que lo ameriten, debe incluirse el diseño de experimentos a seguir (variables a medir o controlar, medidas a realizar y número de muestras requeridas).
 El semillero de programación consiste en una clase semanal que dura entre 1 hora y media y 2 horas. La estructura de cada clases se compone de tres etapas principales:
 \begin{enumerate}
-	\item{Discusión y solución de los problemas propuestos como tarea en la sesión anterior.}
+	\item{Discusión, solución y revisión de los problemas propuestos como tarea en la sesión anterior.}
 	\item{Exposición del nuevo tema a trabajar.}
 	\item{Explicación y discusión breve de los problemas propuestos para la siguiente sesión.}
 \end{enumerate}
-Para desarrollar cada clase es necesario investigar acerca del tema a enseñar, preparar documentación que le permita a los estudiantes repasar lo aprendido y buscar y solucionar problemas que se ajusten al nivel y los temas aprendidos en la clase.
+Para desarrollar cada clase es necesario investigar acerca del tema a enseñar, preparar documentación (diapositivas, programas, competencias) que le permita a los estudiantes repasar lo aprendido y buscar y solucionar problemas que se ajusten al nivel y los temas aprendidos en la clase.
 
 \section{Cronograma de Actividades}
 % 9.	CRONOGRAMA DE ACTIVIDADES
 % Una vez establecida la metodología a seguir, es posible establecer una lista de actividades que conducirán al logro de los objetivos planteados. Puede presentarse el cronograma en forma de tabla que liste cada actividad y el tiempo que se dedicará a desarrollar cada una en meses o preferiblemente en semanas.
-El semillero consistirá de 15 clases que se dictarán los todos los viernes desde el 1 de febrero hasta el 17 de mayo de 2013. Los temas a tratar en cada clase son: \\ \quad \\
-\begin{tabular}{|l|l|}
+El semillero consistirá de 15 clases que se dictarán los todos los viernes desde el 1 de febrero hasta el 17 de mayo de 2013. Los temas a tratar en cada clase son: \\ 
+
+\begin{longtable}{|l|l|}
 	\hline
 	\textbf{Fecha} & \textbf{Tema} \\
 	\hline \hline
-	Febrero 1 & Introducción a C++ y al juez de programación Codeforces\\
+	Febrero 1 & Introducción a C++ y al juez de programación Codeforces \cite{Codeforces}\\
 	          & ¿En qué consiste una maratón de programación?\\
 			  & Solución a un problema básico de maratón de programación  \qquad \qquad \qquad \qquad\\
 	\hline
@@ -179,7 +182,7 @@ El semillero consistirá de 15 clases que se dictarán los todos los viernes des
 	\hline
 	Mayo 17 & Algoritmos de geometría\\
 	\hline
-\end{tabular}
+\end{longtable}
 
 \section{Presupuesto}
 % 10.	PRESUPUESTO
@@ -199,7 +202,22 @@ El semillero consistirá de 15 clases que se dictarán los todos los viernes des
 \section{Propiedad Intelectual}
 % 11.	PROPIEDAD INTELECTUAL
 % Es de gran importancia señalar a quién pertenecerán los derechos de propiedad intelectual de los resultados a obtener, bajo qué concepto (derechos de autor, patente, registro, etc) y en qué proporción en caso de que le perteneciesen a más de un propietario, señalando las razones de acuerdo de dicha propiedad (por ejemplo, por inversión, por dedicación, etc). Se sugiere consultar la documentación existente en la Universidad (“Reglamento de propiedad intelectual” disponible en http://www.eafit.edu.co/institucional/reglamentos/Documents/Reglamento_Propiedad_Intelectual.pdf )
-Los resultados del trabajo pertenecen en un 50$\%$ a la estudiante Ana Echavarría Uribe y en un 50$\%$ al tutor Juan Francisco Cardona Mc'Cormick. El contenido del trabajo podrá ser utilizado en su totalidad para el desarrollo del semillero de programación sin previo aviso a los autores.
+Los resultados del trabajo pertenecen en un 75$\%$ a la estudiante Ana Echavarría Uribe y en un 25$\%$ al tutor Juan Francisco Cardona Mc'Cormick. El contenido del trabajo podrá ser utilizado en su totalidad para el desarrollo del semillero de programación de la Universidad sin previo aviso a los autores pero preservando los derechos de autor.
+
+\section{ Glosario}
+
+\begin{description}
+	\item[ACIS/REDIS] Alianza entre la Asociación Colombiana de Ingenieros de Sistemas (ACIS) y la Red de Decanos y Directores de Ingeniería de Sistemas y Afines (REDIS) que organiza actividades alrededor de Maratones de Programación en Colombia y Suramérica \cite{ACIS}.
+	\item[ACM-ICPC] (International Collegiate Programming Contest) es la entidad organizadora de los concursos internacionales de programación para universitarios \cite{ICPC}.
+	\item[STL] (Standard Template Library) es una librería de C++ que provee contenedores, funciones y algoritmos que pueden ser utilizadas con cualquier tipo de dato \cite{C++}.
+	\item[Juez en línea] Sistema en línea que hace un juzgamiento o evaluación automática de un conjunto de problemas de programación que se encuentren en su base de datos.
+	\item[Revisión] Discusión de un código por parte de un grupo de programadores con el fin de aprender las técnicas que se implementan allí.
+	\item[Repositorio] Estructura de datos, almacenada en un servidor, que contiene, entre otras cosas, un conjunto de archivos y el historial de los cambios hechos a estos archivos.
+	\item[BFS] (Breath-First Search) es un algoritmo de búsqueda de grafos que hace un recorrido en anchura, es decir, visita todos los nodos a distancia $k$ del nodo de inicio antes de visitar cualquier nodo a distancia $k+1$ \cite{Cormen}.
+	\item[DFS] (Depth-First Search) es un algoritmo de búsqueda de grafos que hace un recorrido en profundidad, es decir, se visitan todos los nodos salientes del nodo visto más recientemente antes de visitarlo a él \cite{Cormen}.
+	\item[KMP] Algoritmo desarrollado por Knuth, Morris y Pratt que hace una búsqueda de una palabra en un texto en tiempo lineal \cite{Cormen}.
+\end{description}
+
 
 
 % 12.	BIBLIOGRAFÍA
