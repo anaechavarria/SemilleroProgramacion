@@ -1,0 +1,267 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{listings}
+
+\setbeamercovered{invisible}
+\usetheme{Frankfurt}
+\usefonttheme{serif}
+
+% Configurar los listings (Códigos)
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	language=C++,               % Lenguaje
+	basicstyle=\ttfamily\footnotesize,  % Tipo de fuente
+	keywordstyle=\color{blue},  % Color de palabras clave
+	stringstyle=\color{red},    % Color de strings
+	commentstyle=\color{gray},  % Color de comentarios
+	showstringspaces=false,     % No muestrar el _ cuando el string tiene espacios
+	breaklines = true,          % Partir las líneas largas
+	breakatwhitespace=true,	    % Partir las líneas en un espacio
+	numbers=left,				% Numerar las líneas a la izq
+	numberstyle=\tiny,			% Poner los números de las líneas pequeños
+	numberblanklines=true,      % Numerar las líneas en blanco
+	columns=fullflexible,       % No perder el formato al dejar los espacios
+	keepspaces=true,   			% Dejar los espacios insertados
+	frame=tb,					% Poner el recuadro
+}
+
+
+\title{Semillero de Programación}
+\subtitle{Representación de grafos, getline y stringstream}
+\author{Ana Echavarría \and Juan Francisco Cardona}
+
+\institute{Universidad EAFIT}
+\date{15 de febrero de 2013}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido}
+	\tableofcontents
+\end{frame}
+
+\section{Representación de grafos}
+	\begin{frame}
+		\frametitle{Tarea}
+		\begin{alertblock}{Tarea}
+			Escrbir un programa que genere las representaciones como matriz y lista de adyacencia de un grafo \textbf{no dirigido} $G$.\\
+			La primera línea de la entrada consiste de dos enteros $n$ el número de nodos y $m$ el número de aristas $(1 \leq n \leq 10$ y $1 \leq m \leq 100)$. Las siguientes $m$ líneas tienen cada una dos enteros $u$ y $v$ $(1 \leq u, v \leq n)$ que indican que hay una arista que une los nodos $u$ y $v$.
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Solución para la matriz}
+		\begin{lstlisting}
+			using namespace std;
+			#include <iostream>
+
+			const int MAXN = 15;
+			int M [MAXN][MAXN];
+
+			int main(){
+			   int n, m;
+			   cin >> n >> m;
+
+			   for (int i = 0; i < m; ++i){
+			      int u, v; cin >> u >> v;
+			      u--; v--;
+			      M[u][v] = M[v][u] = 1;
+			   }
+			   return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Solución para la lista de adyacencia}
+		\begin{lstlisting}
+			using namespace std;
+			#include <iostream>
+			#include <vector>
+
+			const int MAXN = 15;
+			vector <int> g [MAXN];
+
+			int main(){
+			   int n, m;
+			   cin >> n >> m;
+
+			   for (int i = 0; i < m; ++i){
+			      int u, v; cin >> u >> v;
+			      u--; v--;
+			      g[u].push_back(v);
+			      if (u != v) g[v].push_back(u);
+			   }
+			   return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Limpieza de los contenedores}
+		\begin{block}{Limpiar los contenedores}
+			Si en un problema se tienen múltiples casos de prueba, entre caso y caso hay que limpiar los contenedores porque estos están definidos como variable global.
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Limpieza de la matriz}
+		\begin{lstlisting}
+			using namespace std;
+			#include <iostream>
+
+			const int MAXN = 15;
+			int M[MAXN][MAXN];
+
+			int main(){
+			   int n, m;
+			   while (cin >> n >> m){
+			      for (int i = 0; i <= n; ++i){
+			         for (int j = 0; j <= n; ++j){
+			            M[i][j] = 0;
+			         }
+			      }   
+			      // Crear el grafo
+			   }
+			   return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Limpieza del vector}
+		\begin{lstlisting}
+			using namespace std;
+			#include <iostream>
+			#include <vector>
+
+			const int MAXN = 15;
+			vector <int> g [MAXN];
+
+			int main(){
+			   int n, m;
+			   while (cin >> n >> m){ 
+			      for (int i = 0; i <= n; ++i){
+			         g[i].clear(); //Limpiar la lista del nodo i
+			      }
+			      // Crear el grafo
+			   }
+			   return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Matriz para grafos con pesos}
+		En la representación como matriz, en lugar de almacenar un 1 en la posición $u, v$ si los nodos $u$ y $v$ están conectados, almacenar el peso con el que están conectados el nodo $u$ y el nodo $v$. Si los dos nodos no están conectados almacena $+\infty$.
+		\vfill
+		\begin{equation}
+			M[u][v] =
+			\left\{
+				\begin{array}{ll}
+					W_{u,v} & \mbox{si } (u, v) \in E \mbox{ o} \\
+					+\infty & \mbox{en caso contrario.} 
+				\end{array}
+			\right.
+		\end{equation}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Lista de adyacencia para grafos con pesos}
+		\begin{itemize}
+			\item En la representación como lista de adyacencia, si el nodo $u$ está conectado con el $v$ con un peso $w$, en $g[u]$ se almacena la pareja $(v, w)$.
+			\item Para esto es útil el tipo de dato \verb|pair <int, int>| que es una pareja de enteros.
+			\item El grafo podría ser \verb| vector < pair <int, int> > g[MAXN]|.
+			\item Para conocer más del tipo de dato \verb|pair| mirar http://www.cplusplus.com/reference/utility/pair/?kw=pair
+			\item También se puede crear una estructura usando \verb|struct|.
+		\end{itemize}
+	\end{frame}
+
+\section{Entrada unsando getline y stringstream}
+
+	\begin{frame}[fragile]
+		\frametitle{La función getline}
+		Si la entrada es un texto y cada caso de prueba es una línea con del texto es necesario usar la función \verb|getline| para leer esa línea de la entrada. \\
+		Un ejemplo de un problema donde se necesite usar \verb|getline| para leer la entrada es el problema 483 - Word Scramble del juez http://uva.onlinejudge.org
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Usando getline}
+		\begin{lstlisting}
+			using namespace std;
+			#include <iostream>
+			
+			int main(){
+			   string line;
+			   while (getline(cin, line)){
+			      // Do something with line
+			   }
+			   return 0;
+			}
+		\end{lstlisting}
+		El programa se ejecuta mientras que se pueda leer una línea del texto de entrada. La línea se lee y se almacena en el string line.
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{La clase stringstream}
+		La clase \verb|stringstream| sirve para manipular strings como si fueran una entrada.\\
+		Esta clase se utiliza cuando se tiene un string de entrada y se quiere extraer la información que tiene ese string separado por espacios.\\
+		Para utilizar la clase \verb|stringstream| es necesario incluir \verb|sstream|.		
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Usando stringstream}
+		Ejemplo: Dado un texto de varias líneas diga cuántas palabras hay en cada línea.
+		\begin{lstlisting}
+			using namespace std;
+			#include <iostream>
+			#include <sstream> // Necesario para usar stringstream
+			
+			int main(){
+			   string line;
+			   while (getline(cin, line)){
+			      stringstream ss(line); // El stream ss se crea con line
+			      string word;
+			      int count = 0;
+			      while (ss >> word) count++; // ss se usa igual que cin
+			      cout << count << endl;
+			   }
+			   return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Tarea}
+		\begin{alertblock}{Tarea}
+			\begin{enumerate}
+				\item Registrarse en el sitio uva.onlinejudge.org
+				\item Entrar al sitio http://contests.factorcomun.org/contests/49 y agregar su usuario de UVa con el botón \emph{Add new team}
+				\item Resolver los 4 problemas de la competencia
+				\item El alumno que quede de primero en la competencia ganará un regalo sorpresa
+			\end{enumerate}
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Tarea}
+		\begin{exampleblock}{Pistas}
+			Algunas pistas para los problemas
+			\begin{description}
+				\item [Problema A] Usar el valor absoluto \verb|abs(x)|.
+				\item [Problema B] Implementar el algoritmo descrito en el problema.
+				\item [Problema C] Utilizar el tipo de dato \verb|double| para representar los números decimales.
+				\item [Problema D] Usar \verb|getline| y luego \verb|stringstream|.
+			\end{description}
+		\end{exampleblock}
+	\end{frame}
+
+
+\end{document}
