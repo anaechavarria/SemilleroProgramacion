@@ -1,0 +1,136 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{listings}
+
+\setbeamercovered{invisible}
+\usetheme{Frankfurt}
+\usefonttheme{serif}
+
+% Configurar los listings (Códigos)
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	language=C++,               % Lenguaje
+	basicstyle=\ttfamily\tiny,  % Tipo de fuente
+	keywordstyle=\color{blue},  % Color de palabras clave
+	stringstyle=\color{red},    % Color de strings
+	commentstyle=\color{gray},  % Color de comentarios
+	showstringspaces=false,     % No muestrar el _ cuando el string tiene espacios
+	breaklines = true,          % Partir las líneas largas
+	breakatwhitespace=true,	    % Partir las líneas en un espacio
+	numbers=left,				% Numerar las líneas a la izq
+	numberstyle=\tiny,			% Poner los números de las líneas pequeños
+	numberblanklines=true,      % Numerar las líneas en blanco
+	columns=fullflexible,       % No perder el formato al dejar los espacios
+	keepspaces=true,   			% Dejar los espacios insertados
+	frame=tb,					% Poner el recuadro
+}
+
+
+\title{Desarrollo e implementación de un programa de clase para el semillero de programación}
+\author{Por: \\ Ana Echavarría Uribe \\ \quad \\ Tutor: \\ Juan Francisco Cardona Mc'Cormick}
+
+\institute{Universidad EAFIT}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido}
+	\tableofcontents
+\end{frame}
+
+\section{Problema}
+	\begin{frame}
+		\frametitle{Problema}
+		\begin{itemize}
+			\item El semillero de programación busca enseñar nuevas técnicas de programación a estudiantes interesados en esta área.
+			\item Se preparan los alumnos para participar en las maratones de programación realizadas por ACIS/REDIS y por la ACM-ICPC.
+			\item El semillero ha estado a cargo de alumnos destacados en las maratones de programación.
+			\item No se ha desarrollado nunca un plan de trabajo para el curso.
+		\end{itemize}		
+	\end{frame}
+	
+\section{Objetivos}
+	\begin{frame}
+		\frametitle{Objetivo General}
+		\begin{block}{}
+			Desarrollar e implementar un programa de clases para el semillero de programación que busque mejorar las habilidades de programación de los estudiantes con miras que tengan las bases necesarias para participar en las maratones de programación realizadas por la ACIS/REDIS y por la ACM-ICPC.
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Objetivos Específicos}
+		\begin{itemize}
+			\item{Crear material de clase (diapositivas, programas, problemas, competencias) con los temas enseñados y compartirlo con los estudiantes para que les sirvan como material de estudio en casa.}
+			\item{Mostrarle a los estudiantes cómo pueden estudiar de manera independiente con los jueves en línea: \emph{Codeforces}, \emph{UVa} y \emph{Spoj}.}
+			\item{Buscar, resolver y sugerir problemas en los diferentes jueces que permitan a los estudiantes aplicar los conceptos aprendidos en las clases.}
+			\item{Hacer revisiones de las soluciones a los problemas propuestos luego de que los estudiantes hayan intentado resolverlos de manera independiente.}
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Objetivos Específicos}
+		\begin{itemize}
+			\item{Enseñar a utilizar C++ y su librería STL.}
+			\item{Enseñar algoritmos de grafos como DFS, BFS, caminos más cortos, árbol de mínima expansión}
+			\item{Enseñar los métodos y técnicas de programación dinámica y su solución a los problemas de la mochila, LIS, LCS, KMP.}
+			\item{Enseñar algoritmos de teoría de números como hallar los divisores de un número, factorización prima de un número, GCD, LCM.}
+			\item{Enseñar los algoritmos de geometría más usados en las competencias de programación.}
+		\end{itemize}		
+	\end{frame}
+	
+\section{Antecedentes y Justificación}
+	\begin{frame}
+		\frametitle{¿Por qué trabajar este problema?}
+		\begin{itemize}
+			\item El tema del semillero de programación era muy avanzado para los estudiantes novatos.
+			\item Se decidieron crear dos grupos unos avanzado y uno básico.
+			\item No se tenía un plan de trabajo para los estudiantes básicos.
+			\item Cuando un estudiante nuevo se encargaba del semillero no sabía el nivel en el que estaba el grupo.
+		\end{itemize}
+	\end{frame}
+
+\section{Alcance}
+	\begin{frame}
+		\frametitle{¿Qué se podría llegar a lograr?}
+		\begin{itemize}
+			\item Obtener buenos resultados en el circuito de maratones de programación ACIS/REDIS.
+			\item Participar en la Maratón Nacional de Programación ACIS/REDIS.
+			\item Clasificar a la Maratón Regional Suramericana ACM-ICPC.
+			\item Competir para clasificar a la Maratón Mundial ACM-ICPC.
+		\end{itemize}
+	\end{frame}
+	
+\section{Metodología}
+	\begin{frame}
+		\frametitle{¿Cómo se va a trabajar?}
+		Se dictarán clases de 1.5 - 2 horas de duración una vez por semana. Cada clase constará de 3 partes:
+		\begin{itemize}
+			\item{Discusión, solución y revisión de los problemas propuestos como tarea en la sesión anterior.}
+			\item{Exposición del nuevo tema a trabajar.}
+			\item{Explicación y discusión breve de los problemas propuestos como ejercicio para la siguiente sesión.}
+		\end{itemize}
+		El cronograma de clases ya está establecido.
+	\end{frame}
+
+\section{Bibliografía}
+	\begin{frame}[allowframebreaks]
+		\frametitle{Bibliografía}
+		\bibliographystyle{plain}
+		\bibliography{Biblio}
+	\end{frame}
+	
+\section{Preguntas}
+	\begin{frame}
+		\frametitle{Preguntas}
+		\includegraphics[width = 0.9\textwidth]{preguntas.jpeg}
+	\end{frame}
+
+\end{document}
