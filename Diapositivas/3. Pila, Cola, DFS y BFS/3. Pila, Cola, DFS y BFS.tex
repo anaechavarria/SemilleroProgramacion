@@ -252,8 +252,8 @@
 		\frametitle{Pregunta}
 		\begin{alertblock}{Complejidad}
 			\begin{itemize}
-				\item ¿Cúantas veces visto cada nodo?
-				\item ¿Cúantas veces visito cada arista?
+				\item ¿Cuántas veces visto cada nodo?
+				\item ¿Cuántas veces visito cada arista?
 				\item De acuerdo a lo anterior ¿Cuál sería una aproximación a la complejidad del algoritmo?
 			\end{itemize}
 		\end{alertblock}
@@ -266,7 +266,7 @@
 	\end{frame}
 	
 	\begin{frame}[fragile]
-		\frametitle{Algortimo BFS}
+		\frametitle{Algoritmo BFS}
 		\begin{lstlisting}
 			vector <int> g[MAXN];   // La lista de adyacencia
 			int d[MAXN];            // Aristas usadas desde la fuente
@@ -315,8 +315,6 @@
 \section{DFS: Depth-First Search}
 	\begin{frame}
 		\frametitle{DFS}
-		
-		Su funcionamiento consiste en ir expandiendo todos y cada uno de los nodos que va localizando, de forma recurrente, en un camino concreto. Cuando ya no quedan más nodos que visitar en dicho camino, regresa (Backtracking), de modo que repite el mismo proceso con cada uno de los hermanos del nodo ya procesado
 		\begin{itemize}
 			\item Algoritmo para recorrer o buscar elementos en un grafo.
 			\item Se comienza desde uno nodo y se marca como gris (parcialmente visitado).
@@ -340,8 +338,8 @@
 		\frametitle{Pregunta}
 		\begin{alertblock}{Complejidad}
 			\begin{itemize}
-				\item ¿Cúantas veces visto cada nodo?
-				\item ¿Cúantas veces visito cada arista?
+				\item ¿Cuántas veces visto cada nodo?
+				\item ¿Cuántas veces visito cada arista?
 				\item De acuerdo a lo anterior ¿Cuál sería una aproximación a la complejidad del algoritmo?
 			\end{itemize}
 		\end{alertblock}
@@ -354,7 +352,7 @@
 	\end{frame}
 	
 	\begin{frame}[fragile]
-		\frametitle{Algortimo DFS}
+		\frametitle{Algoritmo DFS}
 		\begin{lstlisting}
 			vector <int> g[MAXN];      // La lista de adyacencia
 			int color[MAXN];           // El arreglo de visitados
@@ -404,12 +402,22 @@
 	\begin{frame}
 		\frametitle{Tarea}
 		\begin{alertblock}{Tarea}
-			Resolver los problemas de http://contests.factorcomun.org/contests/50
-			\begin{description}
-				\item[Problema A] Construir el grafo (es general para todos los casos de prueba). Cuando se vaya a visitar un nodo, verificar que no esté en la lista de los prohibidos.
-				\item[Problema B] Se puede utilizar cualquiera de las dos técnicas (BFS o DFS). Si uno de mis vecinos ya está visitado, verificar que su color sea el contrario al mío si no es así retorne falso.
-			\end{description}
+			\begin{itemize}
+				\item Resolver los problemas de http://contests.factorcomun.org/contests/50 \\
+				\item Para cada problema pensar: ¿Cómo se construiría el grafo? ¿Es dirigido o no dirigido? ¿Debo usar BFS, DFS o cualquiera de las dos?
+			\end{itemize}
 		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ayuda para la tarea}
+		\begin{exampleblock}{Ayuda para cada problema}
+			\begin{itemize}
+				\item[A] El grafo es general para todos los casos de prueba (no cambia). Cuando se vaya a visitar un nodo, verificar que no esté en la lista de los prohibidos.
+				\item[B] Si uno de mis vecinos ya está visitado, verificar que su color sea el contrario al mío si no es así retorne falso.
+				\item[C] Pensar ¿Cuáles son las fichas que seguro tengo que derribar a mano?. Empujar esas fichas y las que ellas derriben (marcarlas como visitadas). Si luego de esto me quedan fichas sin tumbar ¿Qué característica especial cumplen esas fichas? ¿Cómo las debo derribar?
+			\end{itemize}
+		\end{exampleblock}
 	\end{frame}
 	
 \end{document}
