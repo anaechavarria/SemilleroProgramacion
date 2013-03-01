@@ -233,19 +233,19 @@
 	\begin{frame}[fragile]
 		\frametitle{Lectura de los datos}
 		\begin{lstlisting}
-			vector <int> forbidden; // The forbidden edges
+			bool forbidden[MAXN]; // The forbidden edges
 			int d[MAXN];            // The distance for start vertex
 
 			int main(){
 			   make_graph();        // Create the graph
 			   int cases; cin >> cases;
 			   while (cases--){
-			      forbidden.clear(); // Clean the forbidden vector
+			      for (int i = 0; i < MAXN; ++i) forbidden[i] = false;
 			      int s = get_num(); // Read start vertex
 			      int t = get_num(); // Read end vertex
 
 			      int n; cin >> n;   // Read all forbidden vertices
-			      while (n--) forbidden.push_back(get_num());
+			      while (n--) forbidden[get_num()] = true;
 			      sort(forbidden.begin(), forbidden.end());
 		
 			      bfs(s);               // Call bfs from the start vertex
@@ -268,11 +268,8 @@
 			      int cur = q.front(); q.pop();
 			      for (int i = 0; i < g[cur].size(); ++i){
 			         int next = g[cur][i];
-			         // Search if node is a forbidden one
-			         bool found = binary_search(forbidden.begin(), 
-			                                    forbidden.end(), next);
 			         // If not seen before and not forbidden add to queue
-			         if (!found and d[next] == -1){ 
+			         if (!forbidden[next] and d[next] == -1){ 
 			            d[next] = d[cur] + 1;
 			            q.push(next);
 			         }
