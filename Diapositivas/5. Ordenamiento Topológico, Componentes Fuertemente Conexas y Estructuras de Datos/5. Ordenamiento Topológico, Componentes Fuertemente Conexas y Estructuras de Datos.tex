@@ -28,6 +28,13 @@
 	frame=tb,					% Poner el recuadro
 }
 
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{Contenido}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=hide/show/hide]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
 
 \title{Semillero de Programación}
 \subtitle{Ordenamiento Topológico, Componentes Fuertemente Conexas y Estructuras de Datos}
@@ -298,4 +305,235 @@
 			}
 		\end{lstlisting}
 	\end{frame}
+
+\section{Map}
+	\begin{frame}[fragile]
+		\frametitle{Map}
+		\begin{block}{Map}
+			Un mapa es un contenedor que guarda parejas de elementos. El primer elemento de la pareja (key) sirve para identificarla y el segundo elemento (mapped value) es el valor asociado a la llave.\\
+		\end{block}
+		\begin{block}{Declaración}
+			\verb|#include <map>|\\
+			\verb|map <tipo_dato_key, tipo_dato_value> nombre;|\\
+			Ejemplos:\\
+			\verb|map <string, int> m;|\\
+			\verb|map <char, int> char2int;|
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Acceso a elementos de un mapa}
+		Los elementos de un mapa se llaman por su llave así:\\ \quad \\
+		\verb|map <string, int> m;|\\
+		\verb|m["Hola"] = 3;|\\
+		\verb|int a = m["Cangrejo"];|\\ \quad \\
+		
+		Para ingresar un elemento se puede hacer así:\\
+		\verb|if (m.count["Nuevo"] == 0) m["Nuevo"] = 123;|\\ \quad \\
+		Con la función \verb|count| se busca cuántas veces está el elemento con la llave \verb|"Nuevo"|. Si el elemento no está, cuando accedemos a él con \verb|[]| éste se crea automáticamente.\\
+		Cuando accedo con \verb|[]| a un elemento del mapa que no existe este se crea con valores por defecto. Para strings es el string vacío \verb|""| y para enteros es el número 0.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad del mapa}
+		\begin{block}{Complejidad}
+			\begin{itemize}
+				\item Insertar / acceder un elemento al mapa es $O(log\,n \times k)$ donde $n$ es el número de elementos en el mapa y $k$ es el tiempo que toma comparar dos llaves del mapa.
+				\item Comparar dos enteros es $O(1)$, comparar dos strings es $O(m)$ donde $m$ es la longitud de los strings.
+				\item Insertar / acceder un elemento a un mapa con llaves strings es $O(log\,n \times m)$ donde $n$ son los elementos del mapa y $m$ es la longitud del string.
+			\end{itemize}
+		\end{block}
+		\begin{block}{Nota}
+			Los elementos de un mapa se almacenan en orden de acuerdo a una función de comparación. Por defecto la función de comparación es la de menor, es decir que los elementos se almacenan de menor a mayor.
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Recorrer un mapa}
+		Para recorrer un mapa es necesario usar iteradores.\\
+		\begin{lstlisting}
+		#include <iostream>
+		#include <map>
+		using namespace std;
+
+		int main(){
+		   map <string, int> m;
+		   m["b"] = 4;
+		   m["bc"] = 1;
+		   m["a"] = 3;
+		   map <string, int> :: iterator it;
+		   for (it = m.begin(); it != m.end(); it++){
+		      cout << "( " << it->first << " " << it->second << " ) ";
+		      // cout << "( " << (*it).first << " " << (*it).second << " ) ";
+		   }
+		   return 0;
+		}
+		// La funcion imprime ( a 3 ) ( b 4 ) ( bc 1 )
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Otras funciones en el mapa}
+		Otras funciones que se pueden hacer con el mapa son:\\
+		\begin{itemize}
+			\item Recorrerlo al revés con \verb|rbegin| y \verb|rend|
+			\item Obtener el tamaño con \verb|size|
+			\item Borrar el contenido con \verb|clear|
+			\item Insertar elementos (si no están antes) con \verb|emplace|
+			\item Borrar elementos con \verb|erase|
+			\item Buscar un elemento con \verb|find|
+		\end{itemize}
+		\quad \\
+		Para más información mirar \url{http://www.cplusplus.com/reference/map/map/}
+	\end{frame}
+	
+	\section{Set}
+	\begin{frame}[fragile]
+		\frametitle{Set}
+		\begin{block}{Set}
+			Un set es un contenedor que guarda conjuntos, es decir grupos de elementos iguales donde cada elemento aparece una sola vez.\\
+			Los elementos de un set se almacenan en orden de acuerdo a una función de comparación. Por defecto la función de comparación es la de menor, es decir que los elementos se almacenan de menor a mayor.\\
+		\end{block}
+		\begin{block}{Declaración}
+			\verb|#include <set>|\\
+			\verb|set <tipo_dato> nombre;|\\
+			Ejemplos:\\
+			\verb|set <string> s;|\\
+			\verb|set <int> amigos;|
+		\end{block}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Operaciones sobre un set}
+		Sobre un set se pueden hacer las siguientes operaciones.
+		\begin{description}
+			\item[insert] Inserta un elemento al set. Ejemplo: \verb|amigos.insert(9)|
+			\item[count] Cuenta cuántas veces aparece un elemento (0 o 1 vez). Ejemplo: \verb|amigos.count(3)|
+			\item[find] Retorna un iterador al lugar donde está el elemento. Ejemplo: \verb|amigos.find(3)|
+			\item[erase] Elimina un elemento del set. Ejemplo: \verb|amigos.erase(amigos.find(3))|
+		\end{description}
+		Todas las operaciones anteriores tienen una complejidad $O(log\,n \times k)$ donde $n$ es el número de elementos del set y $k$ es el tiempo que toma comparar dos elementos.\\
+		Para más información mirar \url{http://www.cplusplus.com/reference/set/set/}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Recorrer un set}
+		Para recorrer un set es necesario usar iteradores.\\
+		\begin{lstlisting}
+		#include <iostream>
+		#include <set>
+		using namespace std;
+
+		int main(){
+		   set <int> s;
+		   s.insert(4); 
+		   s.insert(-1);
+		   s.insert(3);
+		   s.insert(4);
+		   set <int> :: iterator it;
+		   for (it = s.begin(); it != s.end(); it++){
+		      cout << *it << " ";
+		   }
+		   return 0;
+		}
+		// La funcion imprime -1 3 4
+		\end{lstlisting}
+	\end{frame}
+	
+\section{Heap}
+	\begin{frame}
+		\frametitle{Heap}
+		\begin{block}{Heap}
+			Un heap es una estructura de datos en forma de árbol binario en la que cada padre tiene un valor mayor o igual al de sus dos hijos
+		\end{block}
+		\begin{center}\includegraphics[height = 0.5\textheight]{heap.png} \end{center}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Representación en C++}
+		Un heap se puede representar en C++ como una cola de prioridades así:
+		\verb|#include <queue>|\\
+		\verb|priority_queue <tipo_dato> nombre;|\\
+		Ejemplos:\\
+		\verb|priority_queue <int> heap;|\\
+		\verb|priority_queue <pair <int, int> > q;|\\
+		\quad \\
+		Para más información mirar: \url{http://www.cplusplus.com/reference/queue/priority_queue/}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{Operaciones}
+		La cola de prioridades (heap) soporta las siguientes operaciones
+		\begin{description}
+			\item [push] Inserta un elemento
+			\item [pop] Extrae un elemento
+			\item [top] Retorna el máximo elemento de la cola (heap)
+			\item [size] Retorna el tamaño de la cola (heap)
+		\end{description}
+		\quad \\
+		La cola de prioridades se ordena de acuerdo a la función de ordenamiento $<$ (menor que) por lo que retorna el elemento con el cual todos los demás comparan menor que él, es decir, el mayor elemento.
+	\end{frame}
+	
+\section{Tarea}
+	\begin{frame}
+		\frametitle{Tarea}
+		\begin{alertblock}{Tarea}
+			Resolver los problemas de \url{http://contests.factorcomun.org/contests/51}
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Problema A}
+		\begin{itemize}
+			\item ¿Qué estructura de datos de las que han aprendido se puede usar para almacenar los datos?
+			\item Mirar que los nombres pueden tener espacios (usar getline).
+			\item Recordar que cuando leo con cin el cursor queda justo después del elemento donde leí, si luego hago getline me termina de leer esa línea.
+			\item Para imprimir con precisión de 4 cifras decimales usar \verb|printf("%.4lf", percent);| donde \verb|percent| es la variable a imprimir.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Problema B}
+		\begin{itemize}
+			\item ¿Qué estructura de datos de las que han aprendido se puede usar para verificar que cuando cierro un paréntesis / corchete sí lo acabe de abrir?
+			\item La cadena puede tener espacios (usar getline)
+			\item La cadena puede ser vacía
+			\item Ensayar los siguientes casos de prueba
+		\end{itemize}
+		\begin{center}
+			\begin{tabular}{|l|l|}
+				\hline
+				Entrada & Salida \\
+				\hline
+				6       &      \\
+				([] )   & Yes  \\
+				        & Yes  \\
+				(       & No   \\
+				(]      & No   \\
+				)(      & No   \\
+				([)]    & No   \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Problema C}
+		\begin{itemize}
+			\item Leer la implementación y tratar de entenderla
+			\item Hacer su propia implementación
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Problema D}
+		\begin{itemize}
+			\item Mmmm ¿Mínimo número de pasos? Me suena conocido ¿Qué algoritmo es el que hay que usar?
+			\item ¿Cómo se construye el grafo? ¿Cuándo uno dos nodos (palabras)?
+			\item ¿Qué estructura de datos puedo usar para que un string lo pueda representar como un entero y poder hacer el algoritmo normal?
+			\item Usar getline y stringstream para leer la entrada.
+		\end{itemize}
+	\end{frame}
+	
 \end{document}
