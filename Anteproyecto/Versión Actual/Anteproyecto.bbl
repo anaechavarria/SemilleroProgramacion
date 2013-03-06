@@ -1,0 +1,75 @@
+\begin{thebibliography}{10}
+
+\bibitem{ACIS}
+Asociación Colombiana de Ingenieros de Sistemas (ACIS).
+\newblock http://acis.org.co/index.php?id=556
+
+\bibitem{ICPC}
+International Collegiate Programming Contest (ICPC).
+\newblock http://icpc.baylor.edu/
+
+\bibitem{ProgrammingChallenges}
+SKIENA, S.S., REVILLA, M.A.
+\newblock {\em Programming Challenges: The Programming Contest Training Manuals}.
+\newblock Springer, 2003.
+
+\bibitem{Halim}
+HALIM, S., HALIM, F.
+\newblock {\em Competitive Programming: Handbook for ACM ICPC and IOI Contestants}.
+\newblock Lulu, 2010.
+
+\bibitem{Halim2}
+HALIM, S., HALIM, F.
+\newblock {\em Competitive Programming 2: Handbook for ACM ICPC and IOI Contestants}.
+\newblock Lulu, 2011.
+
+\bibitem{PaperHalim}
+HALIM, S., HALIM, F.
+\newblock {\em Competitive Programming in National University of Singapore}.
+\newblock Department of Computer Science, School of Computing, National University of Singapore.
+
+\bibitem{AlgoNUS}
+Universidad Nacional de Singapur (NUS)
+\newblock {\em Algorithmics @ NUS Wiki}.
+\newblock {http://algorithmics.comp.nus.edu.sg/wiki/}
+
+\bibitem{CourseNUS}
+HALIM, S.
+\newblock {Material de clases del curso Competitive Programming}.
+\newblock {https://sites.google.com/site/stevenhalim/home/material}
+
+\bibitem{Brasil}
+LOPATIM, A., DIAS MOREIRA, F., SCHAPOSNIK MASSOLO, F. I.
+\newblock {\em Material de Curso: Escola de Verão - Maratona de Programação 2012}.
+\newblock Instituto de Computação - UNICAMP.
+\newblock http://maratona.ic.unicamp.br/MaratonaVerao2012/
+
+\bibitem{Codeforces}
+MIRZAYANOV, M.
+\newblock {\em Codefroces}.
+\newblock http://www.codeforces.com
+
+\bibitem{UVa}
+RIVILLA, M.A.
+\newblock {\em UVa Online Judge}.
+\newblock http://uva.onlinejudge.org/
+
+\bibitem{Spoj}
+Sphere Research Labs.
+\newblock {\em Sphere Online Judge}.
+\newblock http://www.spoj.com/
+
+\bibitem{Cormen}
+CORMEN, T.H., LEISERSON, C.E., RIVEST, R.L., STEIN, C.
+\newblock {\em Introduction to Algorithms}.
+\newblock The MIT Press, 3ra ed. 2009.
+
+\bibitem{C++}
+STROUSTRUP, B.
+\newblock{\em El Lenguaje de Programación C++}.
+\newblock{Addison Wesley. 2002.}
+
+
+
+
+\end{thebibliography}
