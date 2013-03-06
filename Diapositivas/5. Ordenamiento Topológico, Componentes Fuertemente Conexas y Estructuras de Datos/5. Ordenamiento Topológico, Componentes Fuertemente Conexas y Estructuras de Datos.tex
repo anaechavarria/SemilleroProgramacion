@@ -497,8 +497,7 @@
 		\frametitle{Problema B}
 		\begin{itemize}
 			\item ¿Qué estructura de datos de las que han aprendido se puede usar para verificar que cuando cierro un paréntesis / corchete sí lo acabe de abrir?
-			\item La cadena puede tener espacios (usar getline)
-			\item La cadena puede ser vacía
+			\item La cadena puede ser vacía (usar getline)
 			\item Ensayar los siguientes casos de prueba
 		\end{itemize}
 		\begin{center}
@@ -506,13 +505,13 @@
 				\hline
 				Entrada & Salida \\
 				\hline
-				6       &      \\
-				([] )   & Yes  \\
-				        & Yes  \\
-				(       & No   \\
-				(]      & No   \\
-				)(      & No   \\
-				([)]    & No   \\
+				\verb|6|       &      \\
+				\verb|([])|    & Yes  \\
+				\verb||        & Yes  \\
+				\verb|(|       & No   \\
+				\verb|(]|      & No   \\
+				\verb|)(|      & No   \\
+				\verb|([)]|    & No   \\
 				\hline
 			\end{tabular}
 		\end{center}
