@@ -120,7 +120,7 @@
 	\begin{frame}
 		\frametitle{¿Por qué funciona?}
 		\begin{itemize}
-			\item Cuando meto un nodo a la lista, es porque ya procesé todos sus vecinos.
+			\item Cuando se inserta un nodo a la lista, es porque ya procesé todos sus vecinos.
 			\item Si ya procesé todos sus vecinos, ellos ya están en la lista.
 			\item Cuando meto un nodo a la lista, todos sus vecinos ya están antes que él en la lista, entonces en el ordenamiento van a quedar después de él.
 			\item En conclusión, en el ordenamiento que generamos, los vecinos de cada nodo van a estar después de él por lo que es un ordenamiento topológico.
@@ -187,7 +187,7 @@
 			\begin{itemize}
 				\item ¿Qué pasa con las cadenas de dominós que forman un ciclo? ¿Cuántos necesito máximo para derribarlas? \pause
 				\item ¿Puedo entonces considerar los ciclos como un sólo dominó? ¿Qué algoritmo estoy utilizando? \pause
-				\item ¿En el grafo que se forma cuando uno los elementos de una misma componentes cuántos dominós tengo que derribar?
+				\item En el grafo que se forma cuando junto los elementos de las mismas componentes ¿cuántos dominós tengo que derribar?
 			\end{itemize}
 		\end{alertblock}
 	\end{frame}
@@ -197,8 +197,8 @@
 		\begin{enumerate}
 			\item Crear el grafo dirigido y su grafo invertido
 			\item Hallar la componente fuertemente conexa de cada nodo
-			\item Hallar cuantas aristas llegan a cada componente conexa
-			\item Contar cuantas componentes hay a las cuales no lleguen aristas
+			\item Hallar cuántas aristas llegan a cada componente conexa
+			\item Contar cuántas componentes hay a las cuales no lleguen aristas
 		\end{enumerate}
 	\end{frame}
 	
