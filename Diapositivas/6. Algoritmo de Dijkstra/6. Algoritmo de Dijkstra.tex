@@ -447,7 +447,7 @@
 			Agregar a la lista de nodos pendientes el nodo s con distancia 0
 			Mientras que haya nodos en la lista de pendientes
 			   Extraer el nodo con la menor distancia (llamemoslo cur)
-			   Recorrer cada vecino de \emph{cur} (llamemoslo next)
+			   Recorrer cada vecino de cur (llamemoslo next)
 			      Sea w_extra el peso de la arista de cur a next
 			      Si d[next] > d[cur] + w_extra
 			         d[next] = d[cur] + w_extra
@@ -521,7 +521,7 @@
 	\begin{frame}[fragile]
 		\frametitle{Detalles de la implementación}
 		\begin{itemize}
-			\item El constructor de la cola de prioridades recibe primero el tipo de dato, luego el contenedor que es por defecto un vector y finalmente la función para comparar.
+			\item El constructor de la cola de prioridades recibe primero el tipo de dato, luego el contenedor que es por defecto un vector y finalmente la función para comparar que es por defecto menor.
 			\item Si se quiere que la cola de prioridades extraiga el mínimo hay que poner el comparador como como el máximo
 			\item El comparador del tipo pair ordena primero por el primer elemento y si hay empate ordena por el segundo.
 			\item Al la cola de prioridades se ingresa primero la distancia para que el comparador ordene por la distancia y se extraiga el valor de menor distancia.
@@ -540,7 +540,7 @@
 		\end{alertblock}
 		\pause
 		\begin{block}{Complejidad}
-			El algoritmo de Dijkstra implementado con una lista de adyacencia y utilizando una cola de prioridades tiene complejidad $O((V+E) \text{ log } E)$
+			El algoritmo de Dijkstra implementado con una lista de adyacencia y utilizando una cola de prioridades tiene complejidad $O((V+E) \text{ log } V)$
 		\end{block}
 	\end{frame}
 	
@@ -574,6 +574,8 @@
 \section{Tarea}
 	\begin{frame}
 		\frametitle{Tarea}
-		
+		\begin{alertblock}{Tarea}
+			Resolver los problemas de \url{http://contests.factorcomun.org/contests/52}
+		\end{alertblock}
 	\end{frame}
 \end{document}
