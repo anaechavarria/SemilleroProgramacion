@@ -59,7 +59,7 @@
 	\begin{frame}
 		\frametitle{Problema A - Hardwood Species}
 		\begin{itemize}
-			\item Para cada especia de árbol hay que guardar cuántas veces aparece.
+			\item Para cada especie de árbol hay que guardar cuántas veces aparece.
 			\item Hay que tener un contenedor que guarde esa información cuando se le dé una especie.
 		\end{itemize}
 		\pause
@@ -91,7 +91,7 @@
 			      }
 			      
 			      // Recorrer los elementos del mapa
-			      // Los elementos están ordenados en orden alfabetico
+			      // Los elementos estan ordenados en orden alfabetico
 			      map <string, int> :: iterator it;
 			      for (it = m.begin(); it != m.end(); it++){
 			         // Utilizar 100.0 para que la division no sea entera
@@ -522,9 +522,9 @@
 		\frametitle{Detalles de la implementación}
 		\begin{itemize}
 			\item El constructor de la cola de prioridades recibe primero el tipo de dato, luego el contenedor que es por defecto un vector y finalmente la función para comparar que es por defecto menor.
-			\item Si se quiere que la cola de prioridades extraiga el mínimo hay que poner el comparador como como el máximo
+			\item Si se quiere que la cola de prioridades extraiga el mínimo hay que poner el comparador como el máximo
 			\item El comparador del tipo pair ordena primero por el primer elemento y si hay empate ordena por el segundo.
-			\item Al la cola de prioridades se ingresa primero la distancia para que el comparador ordene por la distancia y se extraiga el valor de menor distancia.
+			\item A la cola de prioridades se ingresa primero la distancia para que el comparador ordene por la primera componente y se extraiga el valor menor.
 			\item La línea \verb|if (dist > d[cur]) continue;| es muy importante para reducir la complejidad. Con ella sólo se procesa el nodo \verb|cur| una sola vez ya que este puede estar varias veces en la cola de prioridades.
 		\end{itemize}
 	\end{frame}
@@ -572,10 +572,15 @@
 	\end{frame}
 
 \section{Tarea}
-	\begin{frame}
+	\begin{frame}[fragile]
 		\frametitle{Tarea}
 		\begin{alertblock}{Tarea}
 			Resolver los problemas de \url{http://contests.factorcomun.org/contests/52}
 		\end{alertblock}
+		\begin{exampleblock}{Problema opcional}
+			Opcional resolver el problema \url{http://codeforces.com/problemset/problem/20/C}\\
+			Para este problema, la distancia debe ser un long long (puede ser mayor de $10^9$)\\
+			Usar \verb|INF = 1LL << 60| ($2^{60}$), el 1LL es para especificar que es un long long.\\
+		\end{exampleblock}
 	\end{frame}
 \end{document}
