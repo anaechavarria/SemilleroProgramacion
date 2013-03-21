@@ -166,7 +166,7 @@
 		\textcolor{blue}{\large Entrada}\\
 		\begin{itemize}
 			\item Un grafo $G = (V, E)$
-			\item Una función de pesos $w : E \rightarrow \mathbb{R}$ (posiblemente w < 0)
+			\item Una función de pesos $w : E \rightarrow \mathbb{R}$ (posiblemente $w < 0$)
 			\item Un nodo $s \in V$
 		\end{itemize}
 		\quad \\
@@ -232,8 +232,12 @@
 			Crear matriz L[MAXN][MAXN]  // L[i][u]
 			Hacer L[0][s] = 0 y L[0][u] = INF para u != s
 			Para i = 1 hasta n-1
+			   // El camino más corto con i-1 arstas
 			   Para u = 0 hasta n-1
 			      L[i][u] = L[i-1][u]
+			
+			   // Mirar todas las aristas
+			   Para u = 0 hasta n-1
 			      Para k = 0 hasta g[u].size() - 1
 			         v = g[u][k].first  // El nodo
 			         w = g[u][k].second // El peso
@@ -242,6 +246,47 @@
 		\end{lstlisting}
 	\end{frame}
 	
+	\begin{frame}
+		\frametitle{Ejemplo}
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,
+			                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+				\node[main node] (1) {1};
+				\node[main node] (2) [above right of=1] {2};
+				\node[main node] (3) [below right of=1] {3};
+				\node[main node] (4) [right of=2] {4};
+				\node[main node] (5) [right of=3] {5};
+
+				\path[every node/.style={font=\sffamily\small}]
+				(1) edge node {2} (2)
+				    edge node {4} (3)
+				(2) edge node {-1} (3)
+				    edge node {2} (4)
+					edge node {1} (5)
+				(3) edge node {-2} (5)
+				(4) edge node {5} (5);
+			\end{tikzpicture}
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{alertblock}{Complejidad}
+			¿Cuál de las siguientes es la mejor aproximación a la complejidad del algoritmo cuando no hay ciclos de peso negativo?
+			\setbeamercovered{transparent}
+			\begin{itemize}
+				\item<1> [a] $O(n^2)$ 
+				\item<1,2> [b] $O(n \cdot m)$
+				\item<1> [c] $O(n ^ 3)$
+				\item<1> [d] $O(m ^ 2)$
+			\end{itemize}
+			\setbeamercovered{invisible}
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}
+	\end{frame}
 	
 
 \section{Tarea}
