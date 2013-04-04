@@ -1,0 +1,475 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\setbeamercovered{invisible}
+\usetheme{Frankfurt}
+\usefonttheme{serif}
+
+% Configurar los listings (Códigos)
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	language=C++,               % Lenguaje
+	basicstyle=\ttfamily\footnotesize,  % Tipo de fuente
+	keywordstyle=\color{blue},  % Color de palabras clave
+	stringstyle=\color{red},    % Color de strings
+	commentstyle=\color{gray},  % Color de comentarios
+	showstringspaces=false,     % No muestrar el _ cuando el string tiene espacios
+	breaklines = true,          % Partir las líneas largas
+	breakatwhitespace=true,	    % Partir las líneas en un espacio
+	numbers=left,				% Numerar las líneas a la izq
+	numberstyle=\tiny,			% Poner los números de las líneas pequeños
+	numberblanklines=true,      % Numerar las líneas en blanco
+	columns=fullflexible,       % No perder el formato al dejar los espacios
+	keepspaces=true,   			% Dejar los espacios insertados
+	frame=tb,					% Poner el recuadro
+}
+
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{Contenido}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=hide/show/hide]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
+
+\title{Semillero de Programación}
+\subtitle{Programación Dinámica}
+\author{Ana Echavarría \and Juan Francisco Cardona}
+
+\institute{Universidad EAFIT}
+\date{5 de abril de 2013}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido}
+	\tableofcontents
+\end{frame}
+
+\section{Problemas semana anterior}
+	\subsection{Problema A - The Farnsworth Parabox}
+	\begin{frame}
+		\frametitle{Problema A - The Farnsworth Parabox}
+		Verificar si en un grafo no dirigido tiene un ciclo de peso negativo que empieza en el nodo 0.
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			const int MAXN = 105;
+			const int INF = 1 << 30;
+			typedef pair <int, int> edge;
+			vector <edge> g[MAXN];
+			int d[MAXN];
+
+			bool bellman_ford(int s, int n){
+			   for (int u = 0; u <= n; ++u) d[u] = INF;
+			   d[s] = 0;
+
+			   for (int i = 1; i <= n - 1; ++i){
+			      for (int u = 0; u < n; ++u){
+			         for (int k = 0; k < g[u].size(); ++k){
+			            int v = g[u][k].first;
+			            int w = g[u][k].second;
+			            d[v] = min(d[v], d[u] + w);
+			         }
+			      }
+			   }
+
+			   for (int u = 0; u < n; ++u){
+			      for (int k = 0; k < g[u].size(); ++k){
+			         int v = g[u][k].first;
+			         int w = g[u][k].second;
+			         if (d[v] > d[u] + w){
+			            // Hay ciclo de peso negativo
+			            return true;
+			         }
+			      }
+			   }
+			   // No hubo ciclo de peso negativo
+			   return false;
+			}
+			
+			int main(){
+			   int n, m;
+			   while (cin >> n >> m){
+			      if (n == 0 and m == 0) break;
+
+			      for (int i = 0; i <= n; ++i) g[i].clear();
+
+			      for (int i = 0; i < m; ++i){
+			         int u, v, t;
+			         cin >> u >> v >> t;
+			         u--; v--;
+			         g[u].push_back(edge(v, t));
+			         g[v].push_back(edge(u, -t));
+			      }
+
+			      if (bellman_ford(0, n)) puts("Y");
+			      else puts("N");
+			   }
+			    return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Problema B - Flying to Fredericton}
+	\begin{frame}
+		\frametitle{Problema B - Flying to Fredericton}
+		Hallar la mínima distancia entre un nodo \emph{s} y un nodo \emph{t} haciendo máximo \emph{i} paradas.\\
+		Si se hacen \emph{i} paradas es porque se han utilizado \emph{i + 1} aristas.\\
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			const int MAXN = 105;
+			const int INF = 1 << 30;
+			typedef pair <int, int> edge;
+			map <string, int> city2int;
+			vector <edge> g[MAXN];
+			int L[MAXN][MAXN];
+
+			bool bellman_ford(int s, int n){
+			   for (int u = 0; u <= n; ++u) L[0][u] = INF;
+			   L[0][s] = 0;
+
+			   for (int i = 1; i <= n - 1; ++i){
+			      for (int u = 0; u < n; ++u) L[i][u] = L[i-1][u];
+			      for (int u = 0; u < n; ++u){
+			         for (int k = 0; k < g[u].size(); ++k){
+			            int v = g[u][k].first;
+			            int w = g[u][k].second;
+			            L[i][v] = min(L[i][v], L[i-1][u] + w);
+			      }
+			   }
+			}
+			int main(){
+			   int cases; cin >> cases;
+			   for (int run = 1; run <= cases; ++run){
+			      int n; cin >> n;
+
+			      city2int.clear();
+			      for (int i = 0; i < n; ++i){
+			         g[i].clear();
+			         string name; cin >> name;
+			         city2int[name] = i;
+			      }
+
+			      int m; cin >> m;
+			      for (int i = 0; i < m; ++i){
+			         string s, t; int c;
+			         cin >> s >> t >> c;
+			         int u = city2int[s];
+			         int v = city2int[t];
+			         g[u].push_back(edge(v, c));
+			      }
+			      printf("Scenario #%d\n", run);
+			      bellman_ford(0, n);
+			      int q; cin >> q;
+			      while (q--){
+			         int stops; cin >> stops;
+			         int edges = min(stops + 1, n-1);
+			         if (L[edges][n-1]; < INF) printf("Total cost of                   flight(s) is $%d\n", L[edges][n-1]);
+			         else puts("No satisfactory flights");
+			      }
+			      if (run != cases) puts("");
+			   }
+			   return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Problema C - Brick Wall Patterns}
+	\begin{frame}
+		\frametitle{Problema C - Brick Wall Patterns}
+		Sea $f(n)$ el número de formas se puede armar una pared de $2 \times n$ usando rectángulos de tamaño $2 \times 1$\\
+		\quad \\
+		$f(1) = 1$\\ \pause
+		$f(2) = 2$\\ \pause
+		$f(3) = 3$\\ \pause
+		$f(4) = 5$\\ \pause
+		.\\
+		.\\
+		.\\
+		$f(n) = f(n-1) + f(n-2)$
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			int f[51];
+			
+			int main(){
+			   f[1] = 1;
+			   f[2] = 2;
+			   for (int i = 3; i < 51; i++){
+			      f[i] = f[i-1] + f[i-2];
+			   }
+			   int n;
+			   while(cin >> n){
+			      if (n == 0) break;
+			      cout << f[n] << endl;
+			   }
+			    return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+
+\section{Motivación}
+	\begin{frame}
+		\frametitle{Problema}
+		\textcolor{blue}{\large Entrada}\\
+		\begin{itemize}
+			\item Un grafo lineal $G = (V, E)$ (grafo con dos nodos de grado 1 y el resto de nodo de grado 2 y un solo camino entre cualquier par de nodos)
+			\item Un valor de peso para cada nodo $v \in V$
+		\end{itemize}
+		
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,
+							thick, main node/.style={circle,draw}]
+
+				\node[main node] (1) {1};
+				\node[main node] (2) [right of=1] {2};
+				\node[main node] (3) [right of=2] {3};
+				\node[main node] (4) [right of=3] {4};
+
+				\draw
+					(1.north) node[above] {1}
+					(2.north) node[above] {4}
+					(3.north) node[above] {5}
+					(4.north) node[above] {4}
+					(1.south) node[above] {};
+			
+				\path[every node/.style={font=\sffamily\small}]
+					(1) edge node { } (2)
+					(2) edge node { } (3)
+					(3) edge node { } (4);
+			\end{tikzpicture}
+		\end{center}
+		\quad \\
+		\textcolor{blue}{\large Objetivo}\\
+		\begin{itemize}
+			\item Hallar el máximo peso total que se puede lograr de un subconjunto de nodos en el que no hay nodos adyacentes\\ 
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ideas}
+		\begin{block}{Ideas}
+			\begin{itemize}
+				\item Existen dos posibilidades para cada nodo: está en el subconjunto óptimo o no está
+				\item Si un nodo está en el óptimo ninguno de sus vecinos está 
+			\end{itemize}
+		\end{block}
+		\begin{alertblock}{Preguntas}
+			\begin{itemize}
+				\item ¿Cuál es la mejor solución para un grafo de $1$ nodo?
+				\item ¿Cuál es la mejor solución para un grafo de $2$ nodos?
+				\item ¿Cuál es la mejor solución para un grafo de $3$ nodos?\pause
+				\item ¿La solución óptima para un grafo de $3$ nodos se puede obtener de una solución óptima para grafos de $1$ y $2$ nodos? \pause
+				\item ¿Cuál es la solución para un grafo de $n$ nodos?
+			\end{itemize}
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Solución}
+		\begin{block}{Solución}
+			Sea $f(n)$ el máximo peso total que se puede lograr con los nodos $[1 \ldots n]$\\
+			$f(0) = 0$ porque el conjunto de los nodos está vacío\\ \quad \\
+			$f(1) = w(1)$\\
+			$f(2) = \text{max}\{\,w(2),\, w(1)\,\} = \text{max}\{\,f(0) + w(2),\, f(1)\,\}$
+			$f(3) = \text{max}\{\,f(1) + w(3),\, f(2)\,\}$\\
+			.\\
+			.\\
+			.\\
+			$f(n) = \text{max}\{\,f(n-2) + w(n),\, f(n-1)\}$
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{¿Cómo computar la solución?}
+		La solución usando la fórmula recursiva es\\
+		$f(0) = 0$ \\
+		$f(1) = w(1)$\\
+		$f(i) = \text{max}\{\,f(i-2) + w(i),\, f(i-1)\} \text{  para } 2 \leq i \leq n$\\ \quad \\
+		¿Qué pasa si pregunta por $f(4)$?\\
+		¿Cuáles son las llamadas que se hacen recursivamente?\\
+		¿Hay llamadas que se hacen repetidas veces?\\
+		¿Hay alguna forma de evitar llamar más de una vez la misma función?
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Memoización}
+		La memoización consiste en guardar los valores de la función que ya se hayan computado anteriormente y así no volverlos a computar en caso de volverlos a necesitar.\\ \quad \\
+		\begin{lstlisting}
+			int memo[MAXN]; //Arreglo de memoria inicializado en -1
+			int w[MAXN];    //Arreglo con los pesos de cada nodo
+			
+			int f(int n){
+			    if (n == 0) return 0;
+			    if (n == 1) return w[1];
+			
+			    if (memo[n] == -1){
+			        memo[n] = max( f(n-2) + w[n], f(n-1) );
+			    }
+			    return memo[n];
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Impelentación bottom-up}
+		De acuerdo a la función que se construyó, se puede ver que para computar $f(n)$ es necesario conocer los resultados de $f(0)$ hasta $f(n-1)$.\\ Se pueden entonces computar cada uno de los $f(n)$ empezando desde $f(0)$. 
+		\begin{lstlisting}
+			int f[MAXN]; //Arreglo con el valor de la función
+			int w[MAXN]; //Arreglo con los pesos de cada nodo
+			
+			int main(){
+			    int n; cin >> n;
+			    for (int i = 1; i <= n; ++i) cin >> w[i];
+			    f[0] = 0;
+			    f[1] = w[1];
+			    for (int i = 2; i <= n; ++i){
+			        f[i] = max( f[i-2] + w[i], f[i-1] );
+			    }
+			    return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{alertblock}{Preguntas}
+			\begin{itemize}
+				\item ¿Cuántos subproblemas (valores de f[i]) hay que calcular?
+				\item ¿Cuánto se demora calcular cada subproblema?
+			\end{itemize}
+		\end{alertblock}	
+		\pause
+		\begin{block}{Complejidad}
+			La complejidad de este algoritmo es $O(n)$
+		\end{block}
+	\end{frame}
+
+\section{Programación dinámica}
+	\begin{frame}
+		\frametitle{Programación dinámica}
+		Las características principales que tiene un problema de programación dinámica son:
+		\begin{itemize}
+			\item Se puede hallar la solución a un número de subproblemas triviales
+			\item La solución a los demás subproblemas se puede hallar usando la información de subproblemas más pequeños.
+		\end{itemize}
+		Usualmente los problemas de programación dinámica se pueden expresar en forma de una función recursiva.
+	\end{frame} 
+	
+	\begin{frame}
+		\frametitle{Programación dinámica}
+		Cuando se identifica un problema como de programación dinámica se deben identificar los siguientes elementos:
+		\begin{itemize}
+			\item Relación recursiva entre los problemas
+			\item Casos base
+			\item Verificar que los casos base sí sean suficientes para construir todos los valores recursivamente
+		\end{itemize}
+		%Pensar en el ejemplo de f(n) con n-2
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Programación dinámica}
+		Una vez hallada la relación entre los subproblemas, se crea una tabla que tenga capacidad para almacenar todos los subproblemas (tamaño para cada una de las variables).
+		\begin{exampleblock}{Ejemplo}
+			$w(i, j) = w(i+1, j+1) + w(i+1, j-1)$ para $1 \leq i, j \leq 100$\\
+			Se debe crear la tabla \verb|w[105][105]|
+		\end{exampleblock}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Programación dinámica}
+		Luego de crear la tabla hay que hallar la forma de llenarla.\\
+		Primero se llenan los casos base.\\
+		Luego se llenan los casos recursivos.\\
+		El orden en el que se llenan los casos recursivos en importante ya que cuando se acceda a algún valor en la tabla, este ya se debe haber calculado con anterioridad.\\
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Ejemplo}
+		\underline{Casos base:}\\
+		$w(i, 0) = 0  \,$ \quad para $0 \leq i \leq 100$\\
+		$w(100, j) = j\,$ para $0 \leq j \leq 100$\\
+		\underline{Caso recursivo:}\\
+		$w(i, j) = w(i+1, j) + w(i, j-1)$ para $0 \leq i \leq 99$, $1 \leq j \leq 100$ \\
+		\underline{Algoritmo:}
+		\begin{lstlisting}
+			int w[105][105];
+			for (int i = 0; i <= 100; ++i) w[i][0] = 0; 
+			for (int j = 0; j <= 100; ++j) w[100][j] = j;
+		
+			for (int i = 99; i >= 0; --i){
+			    for (int j = 1; j <= 100; ++j){
+			        w[i][j] = w[i+1][j] + w[i][j-1];
+			    }
+			}
+		\end{lstlisting}
+	\end{frame}
+
+\section{Problema de la mochila}
+	\begin{frame}
+		\frametitle{Problema da la mochila - Knapcack Problem}
+		Un ladrón quiere robar una casa.\\
+		Él conoce los elementos que hay en la casa, su valor y su tamaño.\\
+		Sin embargo, tiene una bolsa de capacidad limitada, por lo que no puede robar todos los elementos.\\
+		¿Cuáles elementos debe robar para obtener la mayor ganancia posible y no superar la capacidad de su bolsa?\\
+		\begin{center} \includegraphics[height = 0.4\textheight]{thief.jpg} \end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Problema da la mochila - Knapcack Problem}
+		\textcolor{blue}{\large Entrada}\\
+		\begin{itemize}
+			\item $n$ elementos cada uno con 
+				\begin{itemize}
+					\item Valor $v_i$ no negativo
+					\item Tamaño $w_i$ entero
+				\end{itemize}
+			\item Capacidad $W$ de la mochila
+		\end{itemize}
+		\textcolor{blue}{\large Objetivo}\\
+		Encontrar un subconjunto $S \subset {1, 2, \ldots , n}$ tal que:
+		\begin{itemize}
+			\item $\displaystyle\sum_{i \in S}{v_i}$ se máxima
+			\item $\displaystyle\sum_{i \in S}{w_i} \leq W$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Preguntas}
+		
+	\end{frame}
+
+
+
+\section{Tarea}
+	\begin{frame}[fragile]
+		\frametitle{Tarea}
+		\begin{alertblock}{Tarea}
+			Registrarse en las páginas:
+			\begin{itemize}
+				\item \url{http://www.codeforces.com/}
+				\item \url{http://www.spoj.com/}
+				\item \url{http://ahmed-aly.com/} - Ingresar los usuarios de codeforces, spoj y UVa.
+			\end{itemize}	
+			Resolver los problemas de \url{http://ahmed-aly.com/Contest.jsp?ID=4312}
+		\end{alertblock}
+	\end{frame}
+\end{document}
