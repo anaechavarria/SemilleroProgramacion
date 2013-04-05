@@ -60,7 +60,7 @@
 	\subsection{Problema A - The Farnsworth Parabox}
 	\begin{frame}
 		\frametitle{Problema A - The Farnsworth Parabox}
-		Verificar si en un grafo no dirigido tiene un ciclo de peso negativo que empieza en el nodo 0.
+		Verificar si en un grafo no dirigido tiene un ciclo de peso negativo alcanzable desde el nodo 0.
 	\end{frame}
 	
 	\begin{frame}[fragile, allowframebreaks]
@@ -180,7 +180,7 @@
 			      while (q--){
 			         int stops; cin >> stops;
 			         int edges = min(stops + 1, n-1);
-			         if (L[edges][n-1]; < INF) printf("Total cost of                   flight(s) is $%d\n", L[edges][n-1]);
+			         if (L[edges][n-1] < INF) printf("Total cost of                   flight(s) is $%d\n", L[edges][n-1]);
 			         else puts("No satisfactory flights");
 			      }
 			      if (run != cases) puts("");
@@ -236,8 +236,7 @@
 		\end{itemize}
 		
 		\begin{center}
-			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.5cm,
-							thick, main node/.style={circle,draw}]
+			\begin{tikzpicture}[>=stealth', node distance=2.5cm, thick, main node/.style={circle,draw}]
 
 				\node[main node] (1) {1};
 				\node[main node] (2) [right of=1] {2};
@@ -249,7 +248,7 @@
 					(2.north) node[above] {4}
 					(3.north) node[above] {5}
 					(4.north) node[above] {4}
-					(1.south) node[above] {};
+					(1.south) node[below] {};
 			
 				\path[every node/.style={font=\sffamily\small}]
 					(1) edge node { } (2)
@@ -286,8 +285,8 @@
 	\begin{frame}
 		\frametitle{Solución}
 		\begin{block}{Solución}
-			Sea $f(n)$ el máximo peso total que se puede lograr con los nodos $[1 \ldots n]$\\
-			$f(0) = 0$ porque el conjunto de los nodos está vacío\\ \quad \\
+			Sea $f(n)$ el máximo peso total que se puede lograr con los nodos $[1 \ldots n]$\\ \quad \\
+			$f(0) = 0$ porque el conjunto de los nodos está vacío\\
 			$f(1) = w(1)$\\
 			$f(2) = \text{max}\{\,w(2),\, w(1)\,\} = \text{max}\{\,f(0) + w(2),\, f(1)\,\}$
 			$f(3) = \text{max}\{\,f(1) + w(3),\, f(2)\,\}$\\
@@ -330,7 +329,7 @@
 	\end{frame}
 	
 	\begin{frame}[fragile]
-		\frametitle{Impelentación bottom-up}
+		\frametitle{Implementación bottom-up}
 		De acuerdo a la función que se construyó, se puede ver que para computar $f(n)$ es necesario conocer los resultados de $f(0)$ hasta $f(n-1)$.\\ Se pueden entonces computar cada uno de los $f(n)$ empezando desde $f(0)$. 
 		\begin{lstlisting}
 			int f[MAXN]; //Arreglo con el valor de la función
@@ -425,7 +424,7 @@
 
 \section{Problema de la mochila}
 	\begin{frame}
-		\frametitle{Problema da la mochila - Knapcack Problem}
+		\frametitle{Problema da la mochila - Knapsack Problem}
 		Un ladrón quiere robar una casa.\\
 		Él conoce los elementos que hay en la casa, su valor y su tamaño.\\
 		Sin embargo, tiene una bolsa de capacidad limitada, por lo que no puede robar todos los elementos.\\
@@ -434,7 +433,7 @@
 	\end{frame}
 
 	\begin{frame}
-		\frametitle{Problema da la mochila - Knapcack Problem}
+		\frametitle{Problema da la mochila - Knapsack Problem}
 		\textcolor{blue}{\large Entrada}\\
 		\begin{itemize}
 			\item $n$ elementos cada uno con 
@@ -453,11 +452,186 @@
 	\end{frame}
 	
 	\begin{frame}
-		\frametitle{Preguntas}
-		
+		\frametitle{Preguntas}		
+		Se quiere hallar la mejor ganancia usando los elementos $1 \ldots n$ y teniendo una capacidad máxima de $W$
+		\begin{alertblock}{Preguntas}
+			\begin{itemize}
+				\item ¿Se puede hallar esa solución basándose en la solución que usa los elementos $1 \ldots n-1$? \pause
+				\item Si se tiene la solución para $n-1$ elementos y una capacidad $W$ y se quiere hallar las solución para el $n$-ésimo elemento ¿qué opciones se tienen con ese elemento? \pause
+				\item Si no se decide agregar el $n$-ésimo elemento ¿cuál es la solución?
+				\item Si se decide agregar el $n$-ésimo elemento ¿cuál es la solución?
+			\end{itemize}
+		\end{alertblock}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Knapsack}
+		Sea $dp[i][j]$ la máxima ganancia que se puede obtener si se usan los elementos $[1 \ldots i]$ y se tiene una mochila de capacidad $j$. \\ \quad \\
+		$dp[0][j] = 0$ \quad para $0 \leq j \leq W$ \\ \quad \\
+		$ 
+			dp[i][j] = \text{max } 
+			\left\{
+				\begin{aligned}
+					& dp[i-1][j]\\
+					& dp[i-1][\,j - w[i]\,] + v[i] \text{\quad si } j \geq w[i] \\
+				\end{aligned}
+			\right\}
+			\text{ para } 
+				\begin{aligned}
+					& 1 \leq i \leq n\\
+					& 0 \leq j \leq W
+				\end{aligned}
+		$
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+		    int dp[MAXN][MAXW];
+		    // Casos base
+		    for (int j = 0; j <= W; ++j) dp[0][j] = 0;
+		    // Casos recursivos
+		    for (int i = 1; i <= n; ++i){
+		        for (int j = 0; j <= W; ++j){
+		            dp[i][j] = dp[i-1][j];
+		            if (j - w[i] >= 0){
+		                dp[i][j] = max(dp[i][j], dp[i-1][j-w[i]] + v[i]);
+		            }
+		        }
+		    }
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{block}{NP-Completo}
+			El problema de la mochila es NP-Completo, es decir que no se conoce algoritmo que lo resuelva en tiempo polinomial.
+		\end{block}
+		\pause
+		\begin{alertblock}{Preguntas}
+			¿Cuántos subproblemas hay que resolver para hallar la solución a un problema con $n$ artículos y una mochila de tamaño $W$?
+		\end{alertblock}
+		\pause
+		\begin{block}{Complejidad}
+			La solución de programación dinámica al problema de la mochila con $n$ artículos y una mochila de tamaño $W$ tiene una complejidad de $O(n \times W)$
+		\end{block}
+	\end{frame}
 
+\section{Longest Common Subsequence}
+
+	\begin{frame}
+		\frametitle{Longest Common Subsequence (LCS)}
+		\textcolor{blue}{\large Entrada}\\
+		Dos secuencias $x_1, x_2, \ldots, x_n$ y $y_1, y_2, \ldots, y_m$.\\ \quad \\
+		\textcolor{blue}{\large Objetivo}\\
+		Encontrar la longitud de la subsecuencia común más larga entre $x$ y $y$.\\
+		Una subsecuencia de una secuencia $s$ es una secuencia que se puede obtener de $s$ al borrarle algunos de sus elementos (probablemente todos) sin cambiar el orden de los elementos restantes.\\ 
+		\begin{itemize}
+			\item $(1, 6, 5)$ es una subsecuencia de $(3, 1, 6, 7, 5, 2)$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Ejemplos LCS}
+		\textcolor{blue}{\large Ejemplos}\\
+		\begin{itemize}
+			\item La subsecuencia común más larga entre $(6, 4, 1)$ y $(3, 6, 1, 8)$ es $(6, 1)$.
+			\item La subsecuencia común más larga entre $(2, 5, 1)$ y $(3, 0, 8)$ es $()$.
+			\item La subsecuencia común más larga entre ``ACAATCC'' y ``AGCATGC'' es ``ACATC''.
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Preguntas}
+		Se quiere hallar la solución usando los caracteres $1 \ldots n$ de $x$ y $1 \ldots m$ de $y$.
+		\begin{alertblock}{Preguntas}
+			\begin{itemize}
+				\item ¿Qué posibilidades se tienen si los caracteres $x_n$ y $y_m$ son diferentes?
+				\item ¿Qué posibilidades se tienen si los caracteres $x_n$ y $y_m$ son iguales?
+			\end{itemize}
+		\end{alertblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Longest Common Subsequence}
+		Sea $dp[i][j]$ la longitud de la subsecuencia común más larga entre las secuencias $x_1, x_2, \ldots, x_i$ y $y_1, y_2, \ldots, y_j$ \\ 
+		\quad \\
+		$dp[0][j] = 0$ \quad para $0 \leq j \leq m$ \\
+		$dp[i][0] = 0$ \quad para $0 \leq i \leq n$ \\ \quad \\
+		$ 
+		dp[i][j] = \text{max } 
+		\left\{
+			\begin{aligned}
+				& dp[i-1][j] \text{\quad (No usar }x_i \text{)}\\
+				& dp[i][j-1] \text{\quad (No usar }y_j \text{)}\\
+				& dp[i-1][j-1] + 1\text{\quad si } x_i = y_j \\
+			\end{aligned}
+		\right\}
+		\text{ para } 
+			\begin{aligned}
+				& 1 \leq i \leq n\\
+				& 1 \leq j \leq m
+			\end{aligned}
+		$
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			int dp[MAXN][MAXM]
+			for (int j = 0; j <= m; ++j) dp[0][j] = 0;
+			for (int i = 0; i <= n; ++i) dp[i][0] = 0;
+
+			for (int i = 1; i <= n; ++i){
+			    for (int j = 1; j <= m; ++j){
+			        dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+			        if (x[i] == y[j]){
+			            dp[i][j] = max(dp[i][j], dp[i-1][j-1] + 1);
+			        }
+			    }
+			}
+		\end{lstlisting}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{alertblock}{Preguntas}
+			¿Cuántos subproblemas hay que resolver para hallar la solución a un problema con las secuencias $x_1, x_2, \ldots, x_n$ y $y_1, y_2, \ldots, y_m$?
+		\end{alertblock}
+		\pause
+		\begin{block}{Complejidad}
+			La solución de programación dinámica al problema de LCS con dos secuencias de tamaño $n$ y $m$ tiene una complejidad de $O(n \times m)$
+		\end{block}
+	\end{frame}
+
+\section{Longest Increasing Subsequence}
+	\begin{frame}
+		\frametitle{Longest Increasing Subsequence (LIS)}
+		\textcolor{blue}{\large Entrada}\\
+		Una secuencia $x_1, x_2, \ldots, x_n$\\ \quad \\
+		\textcolor{blue}{\large Objetivo}\\
+		Encontrar la longitud de la subsecuencia creciente más larga que hay en $x$.\\ \quad \\\
+		\textcolor{blue}{\large Ejemplo}\\
+		\begin{itemize}
+			\item La subsecuencia creciente más larga de $(-7, 10, 9, 2, 3, 8, 8, 1)$ es $(-7, 2, 3, 8)$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Pregunta}
+		\begin{alertblock}{Pregunta}
+			¿Cómo se puede resolver este problema usando LCS?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuesta}
+			Hallar la solución a LCS usando la secuencia $x$ y $x$ ordenado de menor a mayor.\\
+			Complejidad $O(n^2)$
+		\end{exampleblock}
+		\pause
+		\begin{block}{Otras soluciones}
+			Existen otras soluciones para el problema de LIS, incluyendo una solución en $O(n\,\operatorname{log} n)$
+		\end{block}
+	\end{frame}
 
 \section{Tarea}
 	\begin{frame}[fragile]
@@ -472,4 +646,35 @@
 			Resolver los problemas de \url{http://ahmed-aly.com/Contest.jsp?ID=4312}
 		\end{alertblock}
 	\end{frame}
+	
+	% \begin{frame}[fragile]
+	% 	\frametitle{Ayudas}
+	% 	\begin{block}{Problema 1}
+	% 		En cada paso intentar cortar la cinta en los tres pedazos y tomar el mejor.
+	% 	\end{block}
+	% \end{frame}
+	
+	
+	\begin{frame}[fragile]
+		\frametitle{Ayudas}
+		\begin{block}{Problema 2}
+			Una forma de hacerlo es con la siguiente programación dinámica:\\
+			\verb|dp[i][j][k]| es el mínimo peso que se puede llevar si se usan los tanques $1 \ldots i$ y se quieren llevar \textbf{al menos} $j$ litros de oxígeno y $k$ litros de nitrógeno.\\
+			Pensarlo como una modificación de knapsack:\\
+			\begin{itemize}
+				% \item Ver cómo modificar knapsack para que sea minimizar en lugar de maximizar
+				\item Ver cómo modificar knapsack para que sea llevar al menos un volumen de $j$ y no un volumen de máximo $j$.
+				\item Luego de ver cómo hacer esas modificaciones tratar de hallar la fórmula recursiva y los casos base para el problema.
+			\end{itemize}
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Ayudas}
+		\begin{block}{Problema 4}
+			Cuidado que si la entrada dice \verb|2 3 4 1| significa que en la secuencia el 1 está en la segunda posición, el 2 en la tercera, el 3 en la cuarta y el 4 en la primera.\\
+			Esto quiere decir que la secuencia es \verb|4 1 2 3|
+		\end{block}
+	\end{frame}
+	
 \end{document}
