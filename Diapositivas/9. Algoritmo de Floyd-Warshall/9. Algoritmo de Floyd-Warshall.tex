@@ -1,0 +1,595 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\setbeamercovered{invisible}
+\usetheme{Frankfurt}
+\usefonttheme{serif}
+
+% Configurar los listings (Códigos)
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	language=C++,               % Lenguaje
+	basicstyle=\ttfamily\footnotesize,  % Tipo de fuente
+	keywordstyle=\color{blue},  % Color de palabras clave
+	stringstyle=\color{red},    % Color de strings
+	commentstyle=\color{gray},  % Color de comentarios
+	showstringspaces=false,     % No muestrar el _ cuando el string tiene espacios
+	breaklines = true,          % Partir las líneas largas
+	breakatwhitespace=true,	    % Partir las líneas en un espacio
+	numbers=left,				% Numerar las líneas a la izq
+	numberstyle=\tiny,			% Poner los números de las líneas pequeños
+	numberblanklines=true,      % Numerar las líneas en blanco
+	columns=fullflexible,       % No perder el formato al dejar los espacios
+	keepspaces=true,   			% Dejar los espacios insertados
+	frame=tb,					% Poner el recuadro
+}
+
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{Contenido}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=hide/show/hide]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
+
+\title{Semillero de Programación}
+\subtitle{Algoritmo de Floyd-Warshall}
+\author{Ana Echavarría \and Juan Francisco Cardona}
+
+\institute{Universidad EAFIT}
+\date{12 de abril de 2013}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido}
+	\tableofcontents
+\end{frame}
+
+\section{Problemas semana anterior}
+	\subsection{Problema 1 - Cut Ribbon}
+	\begin{frame}
+		\frametitle{Problema 1 - Cut Ribbon}
+		Hay que hallar el mínimo número de cortes que hay que hacerle a una cinta de longitud $n$ para que queden únicamente pedazos de tamaño $a$, $b$ o $c$.\\
+		Este problema es un caso del problema coin change que consiste en hallar el mínimo número de monedas/billetes que hay que usar para tener una cantidad $v$ de dinero.\\
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Problema 1 - Cut Ribbon}
+		Sea $f(n)$ el mínimo número de cortes que hay que hacerle a una cinta de tamaño $n$ para que queden solo cintas de tamaño $a$, $b$ o $c$.\\
+		$f(0) = 0$ \\
+		$
+		f(i) =  \text{min } 
+		\left\{
+			\begin{aligned}
+				& \infty\\
+				& 1 + f(i-a) \text{\quad si } i \geq a\\
+				& 1 + f(i-b) \text{\quad si } i \geq b\\
+				& 1 + f(i-c) \text{\quad si } i \geq c\\
+			\end{aligned}
+		\right\}
+		\text{ para } 
+			\begin{aligned}
+				& 1 \leq i \leq n\\
+			\end{aligned}
+		$
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			const int MAXN = 4005;
+			const int INF = 1 << 30;
+			int dp[MAXN];
+
+			int main(){
+			    int n, a, b, c;
+			    while (cin >> n >> a >> b >> c){
+			        dp[0] = 0;
+			        for (int i = 1; i <= n; ++i){
+			            dp[i] = INF;
+			            if (i >= a) dp[i] = max(dp[i], 1 + dp[i-a]);
+			            if (i >= b) dp[i] = max(dp[i], 1 + dp[i-b]);
+			            if (i >= c) dp[i] = max(dp[i], 1 + dp[i-c]);
+			        }
+			        cout << dp[n] << endl;
+			    }
+			    return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Problema 2 - Scuba diver}
+	\begin{frame}
+		\frametitle{Problema 2 - Scuba diver}
+		Este problema es parecido al problema de la mochila pero con las siguientes dos modificaciones:
+		\begin{itemize}
+			\item El problema es de minimización por lo que no se restringe a una capacidad de máximo $j$ sino una capacidad de mínimp $j$.
+			\item Se tienen dos ``mochilas'' para llenar y se deben cumplir las restricciones de ambas.
+		\end{itemize}		
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Problema 2 - Scuba diver}
+		Sea $dp(i, j, k)$ el mínimo peso que se puede llevar si se usan los tanques $1 \ldots i$ y se quieren llevar mínimo $j$ litros de oxígeno y $k$ litros de nitrógeno.\\ \quad \\
+		$dp(0, j, k) = \infty \text{\quad para } 1 \leq j \leq minOxy \text{ y } 1 \leq k \leq minNitro$ \\
+		$dp(0, 0, 0) = 0$\\
+		$dp(i, j, k) =  \text{min } 
+		\left\{
+			\begin{aligned}
+				& dp(i - 1, j, k)  \\
+			 	& dp(i - 1, j - oxy[i], k - nitro[i] )
+			\end{aligned}
+		\right\}
+		\text{ para } 
+			\begin{aligned}
+				& 1 \leq i \leq n\\
+				& 0 \leq j \leq minOxy\\
+				& 0 \leq k \leq minNitro\\
+			\end{aligned}
+		$\\ \quad \\
+		Nota: Si $j - oxy[i] < 0$ o $k - nitro[i] < 0$ se tomará el valor de 0 ya que se está cumpliendo con la restricción de la mínima cantidad de oxígeno / nitrógeno.
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+		const int MAXN = 1005;
+		const int MAXOXY = 25, MAXNITRO = 85;
+		const int INF = 1 << 30;
+		int oxy[MAXN], nitro[MAXN], weight[MAXN];
+		int dp[MAXN][MAXOXY][MAXNITRO];
+
+		int main(){
+		   int cases; cin >> cases;
+		   while (cases--){
+		      int min_oxy, min_nitro;
+		      cin >> min_oxy >> min_nitro;
+		      int n; cin >> n;
+		      for (int i = 1; i <= n; ++i)
+		         cin >> oxy[i] >> nitro[i] >> weight[i];
+
+		      for (int j = 0; j <= min_oxy; ++j){
+		         for (int k = 0; k <= min_nitro; ++k){
+		            dp[0][j][k] = INF;
+		         }
+		      }
+		      dp[0][0][0] = 0;
+
+		      for (int i = 1; i <= n; ++i){
+		         for (int j = 0; j <= min_oxy; ++j){
+		            for (int k = 0; k <= min_nitro; ++k){
+		               int dont_take = dp[i-1][j][k];
+		               int take = weight[i] +                               dp[i-1][max(0, j-oxy[i])][max(0, k-nitro[i])];
+		               dp[i][j][k] = min(dont_take, take);
+		            }
+		         }
+		      }
+		      cout << dp[n][min_oxy][min_nitro] << endl;
+		   }
+		   return 0;
+		}
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Problema 3 - Knapsack}
+	\begin{frame}
+		\frametitle{Problema 3 - Knapsack}
+		Implementar directamente el algoritmo para el problema de la mochila mostrado en la sesión anterior
+	\end{frame}
+	
+	\subsection{Problema 4 - History Grading}
+	\begin{frame}[fragile]
+		\frametitle{Problema 4 - History Grading}
+		Hay que hallar la longitud de la subsecuencia común más larga entre la secuencia base y las demás secuencias.\\
+		Hay que tener cuidado ya que la entrada \verb|s| no es la secuencia en sí sino que \verb|s[i]| es la posición del número \verb|i| en la secuencia.
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			const int MAXN = 25;
+			int order[MAXN];    // El orden de las secuencias
+			int pattern[MAXN];  // La secuencia base
+			int query[MAXN];    // La secuencia por la que se pregunta
+			int dp[MAXN][MAXN]; // La dp para LCS
+
+			int main(){
+			   int n; cin >> n;
+			   for (int i = 1; i <= n; ++i){
+			      cin >> order[i];
+			      pattern[order[i]] = i;
+			   }
+
+			   while (cin >> order[1]){
+			      query[order[1]] = 1;
+			      for (int i = 2; i <= n; ++i){
+			         cin >> order[i];
+			         query[order[i]] = i;
+			      }
+			
+			      for (int j = 0; j <= n; ++j) dp[0][j] = 0;
+			      for (int i = 0; i <= n; ++i) dp[i][0] = 0;
+
+			      for (int i = 1; i <= n; ++i){
+			         for (int j = 1; j <= n; ++j){
+			            dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+			            if (pattern[i] == query[j]){
+			               dp[i][j] = max(dp[i][j], 1 + dp[i-1][j-1]);
+			            }
+			         }
+			      }
+			      cout << dp[n][n] << endl;
+			   }
+			    return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+
+\section[APSP Problem]{All-Pair Shortest Paths Problem}
+	\begin{frame}
+		\frametitle{All-Pair Shortest Paths Problem (APSP)}
+		\textcolor{blue}{\large Entrada}\\
+		Un grafo con pesos $G = (V, E)$ \\ \quad \\
+		\textcolor{blue}{\large Objetivo}\\
+		Hallar la distancia más corta entre todos los pares de nodos o decir que hay un ciclo de peso negativo en el grafo.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{All-Pair Shortest Paths Problem (APSP)}
+		\begin{alertblock}{Preguntas}
+			Con los elementos que se han enseñado en el semillero ¿se puede hallar el camino más corto entre todas las parejas de nodos?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuesta}
+			Sí, se pueden utilizar los algoritmo de Dijkstra / Bellman-Ford que halla la distancia más corta entre un nodo y todos los demás. Estos algoritmos se corren desde cada uno de los nodos y con eso se tiene la distancia más corta cualquier nodo y todos los demás.
+		\end{exampleblock}
+	\end{frame}
+
+\section[Floyd-Warshall]{Algoritmo de Floyd-Warshall}
+	\begin{frame}
+		\frametitle{Algoritmo de Floyd-Warshall}
+		El algoritmo de Floyd-Warshall es un algoritmo que usa programación dinámica para hallar la distancia más corta entre todos los pares de nodos de un grafo con pesos. \\
+		Para propósitos del problema consideremos que el grafo tiene $n$ nodos numerados desde $1$ hasta $n$.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Algoritmo de Floyd-Warshall}
+		Sea $d(i, j, k)$ la distancia más corta entre el nodo $i$ el nodo $j$ si como nodos intermedios solo se pueden usar los nodos $1 \ldots k$.
+		
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+			                    thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+				\node[main node] (1) {1};
+				\node[main node] (2) [above right of=1] {2};
+				\node[main node] (3) [right of=2] {3};
+				\node[main node] (4) [below right of=2] {4};
+				\node[main node] (5) [below right of=3] {5};
+
+				\path[every node/.style={font=\sffamily\small}]
+				(1) edge node {2} (2)
+				    edge node {-5} (4)
+				(2) edge node {1} (3)
+				(3) edge node {-2} (5)
+				(4) edge node {5} (5);
+			\end{tikzpicture}
+		\end{center}
+		
+		\begin{itemize}
+			\item ¿Cuál sería el valor de $f(1, 2, 0)$ ? \pause \quad 2
+			\item ¿Cuál sería el valor de $f(1, 5, 2)$ ? \pause \quad $+\infty$
+			\item ¿Cuál sería el valor de $f(1, 5, 3)$ ? \pause \quad $1$
+			\item ¿Cuál sería el valor de $f(1, 5, 4)$ ? \pause \quad $0$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Algoritmo de Floyd-Warshall}
+		Sea $d(i, j, k)$ la distancia más corta entre el nodo $i$ el nodo $j$ si como nodos intermedios solo se pueden usar los nodos $1 \ldots k$. \\ \vfill
+		$d(i, j, 0) =
+		\left\{
+			\begin{aligned}
+				& 0       &\text{\quad si } i = j\\
+				& C_{i,j} &\text{\quad si } (i, j) \in E\\
+				& +\infty &\text{\quad en otro caso}
+			\end{aligned}
+		\right\}
+		\text{ para } 
+			\begin{aligned}
+				& 1 \leq i \leq n\\
+				& 1 \leq j \leq n\\
+			\end{aligned}
+		$\\ \vfill 
+		Donde $C_{i, j}$ es el costo que tiene asociado la arista $(i, j)$
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Algoritmo de Floyd-Warshall}
+		Sea $d(i, j, k)$ la distancia más corta entre el nodo $i$ el nodo $j$ si como nodos intermedios solo se pueden usar los nodos $1 \ldots k$. \\ \vfill
+		$d(i, j, k) = \text{ min }
+		\left\{
+			\begin{aligned}
+				& d(i, j, k-1)                \text{\qquad\qquad (no usar nodo } k) \\
+				& d(i, k, k-1) + d(k, j, k-1) \text{\quad(usar } k) \\
+			\end{aligned}
+		\right\}
+		$\\ \vfill
+		Para $ 1 \leq i, j, k \leq n $\\
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			for (int i = 1; i <= n; ++i) {
+			   for (int j = 1; j <= n; ++j){
+			      d[i][j][0] = INF;
+			   }
+			   d[i][i][0] = 0;
+			}
+
+			for (int edge = 0; edge < m; ++edge){
+			   int u, v, c; cin >> u >> v >> c;
+			   d[u][v][0] = min(d[u][v], c); //Por si hay un loop de peso > 0
+			}
+			
+			for (int k = 1; k <= n; ++k){
+			   for (int i = 1; i <= n; ++i){
+			      for (int j = 1; j <= n; ++j){
+			         d[i][j][k] = min(d[i][j][k-1],
+			                          d[i][k][k-1] + d[k][j][k-1]);
+			      }
+			   }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{alertblock}{Preguntas}
+			\begin{itemize}
+				\item ¿Cuál es la complejidad \textbf{en tiempo} del algoritmo de Floyd-Warshall?
+				\item ¿Cuál es la complejidad \textbf{en memoria} del algoritmo de Floyd-Warshall?
+			\end{itemize}
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuestas}
+			\begin{itemize}
+				\item $O(n^3)$
+				\item $O(n^3)$
+			\end{itemize}
+		\end{exampleblock}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Optimización del espacio}
+		El espacio del algoritmo de Floyd-Warshall se puede reducir a $O(n^2)$ (no almacenar la tercera dimensión) si se tiene en cuenta lo siguiente:
+		\begin{itemize}
+			\item si \verb|d[i][j][k] = d[i][j][k-1]| no importa que no se guarden los dos en el mismo lugar ya que son el mismo valor
+			\item para \verb|d[i][j][k]| solo se usan los valores de \verb|d[i][k][k-1]| y \verb|d[k][j][k-1]|.\\Se puede ver que \verb|d[i][k][k-1]| = \verb|d[i][k][k]| y que \verb|d[k][j][k-1]| = \verb|d[k][j][k]| por lo que ninguno de los valores se sobreescribe y el algoritmo sigue siendo correcto.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación con optimización del espacio}
+		\begin{lstlisting}
+			for (int i = 1; i <= n; ++i) {
+			   for (int j = 1; j <= n; ++j){
+			      d[i][j] = INF;
+			   }
+			   d[i][i] = 0;
+			}
+
+			for (int edge = 0; edge < m; ++edge){
+			   int u, v, c; cin >> u >> v >> c;
+			   d[u][v] = min(d[u][v], c); // Por si hay un loop de peso > 0
+			}
+			
+			for (int k = 1; k <= n; ++k){
+			   for (int i = 1; i <= n; ++i){
+			      for (int j = 1; j <= n; ++j){
+			         d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+			      }
+			   }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Detectando un ciclo de peso negativo}
+		El grafo tiene un \textbf{ciclo de peso negativo}, si y solo si luego de la ejecución del algoritmo de Floyd-Warshall \textbf{algún elemento de la diagonal es negativo}. \\
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Demostración}
+		$\rightarrow$ \\
+		Supongamos que hay un ciclo de peso negativo que empieza en el nodo $i$. Sea $j$ el nodo más grande que pertenece a ese ciclo. En la ejecución del algoritmo cuando $k = j$ \\
+		\verb|d[i][i] = min(d[i][i], d[i][j] + d[j][i])|\\
+		Pero \verb|d[i][j] + d[j][i]| es el costo del ciclo ($< 0$) ya que el mayor nodo del ciclo es el nodo $k$ luego \verb|d[i][i]| $< 0$.\\
+		\vfill 
+		$\leftarrow$ \\
+		Supongamos que \verb|d[i][i]| $< 0$ para algún $i$ luego de la ejecución del algoritmo. Claramente hay un ciclo de peso negativo que contiene el nodo $i$.
+	\end{frame}
+
+\section[Aplicaciones]{Otras aplicaciones del algoritmo de Floyd-Warshall}
+	\begin{frame}
+		\frametitle{Clausura transitiva}
+		\textcolor{blue}{\large Entrada}\\
+		Un grafo cualquiera $G = (V, E)$ \\ \quad \\
+		\textcolor{blue}{\large Objetivo}\\
+		Para cada pareja de nodos $(i, j)$ , hallar si existe un camino desde $i$ hasta $j$.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Clausura transitiva}
+		\textcolor{blue}{\large Idea}\\
+		Hay un camino desde el nodo $i$ hasta el nodo $j$ si y solo si pasa al menos una de las siguientes:
+		\begin{itemize}
+			\item El nodo $i$ es igual al nodo $j$ (caso base).
+			\item Hay una arista del nodo $i$ al nodo $j$ (caso base).
+			\item Existe un nodo $k$ tal que haya un camino del nodo $i$ al nodo $k$ y del nodo $k$ al nodo $j$ (caso recursivo).
+		\end{itemize}
+		\vfill
+		{\Large Pensar en si hay un camino de $i$ hasta $j$ que como aristas intermedias las aristas $1 \ldots k$}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			for (int i = 1; i <= n; ++i) {
+			   for (int j = 1; j <= n; ++j){
+			      d[i][j] = false;
+			   }
+			   d[i][i] = true;
+			}
+
+			for (int edge = 0; edge < m; ++edge){
+			   int u, v; cin >> u >> v;
+			   d[u][v] = true;
+			}
+			
+			for (int k = 1; k <= n; ++k){
+			   for (int i = 1; i <= n; ++i){
+			      for (int j = 1; j <= n; ++j){
+			         d[i][j] = d[i][j] or (d[i][k] and d[k][j]);
+			      }
+			   }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Minimax}
+		\textcolor{blue}{\large Entrada}\\
+		Un grafo con pesos $G = (V, E)$ \\ \quad \\
+		\textcolor{blue}{\large Objetivo}\\
+		Para cada pareja de nodos $(i, j)$ , hallar el camino de $i$ hasta $j$ donde la arista más grande del camino sea lo más pequeña posible.\\ \quad \\
+		\textcolor{blue}{\large Ejemplos}\\
+		Que el peaje más caro sea lo más barato posible.\\
+		Que la autopista más larga sea lo más corta posible.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Minimax}
+		Sea $d(i, j, k)$ el costo de la arista más pequeña entre las aristas más grandes de todos los caminos de $i$ hasta $j$ si como nodos intermedios solo se pueden usar los nodos $1 \ldots k$. \\
+		\vfill
+		$d(i, j, 0) =
+		\left\{
+			\begin{aligned}
+				& 0       &\text{\quad si } i = j\\
+				& C_{i,j} &\text{\quad si } (i, j) \in E\\
+				& +\infty &\text{\quad en otro caso}
+			\end{aligned}
+		\right\}
+		\text{ para } 
+			\begin{aligned}
+				& 1 \leq i \leq n\\
+				& 1 \leq j \leq n\\
+			\end{aligned}
+		$
+		\vfill
+		$d(i, j, k) = \text{ min }
+		\left\{
+			\begin{aligned}
+				& d(i, j, k-1)\\
+				& \text{max }\left\{ d(i, k, k-1) + d(k, j, k-1) \right\}\\
+			\end{aligned}
+		\right\}
+		$
+		\\ \begin{center} Para $ 1 \leq i, j, k \leq n$ \end{center}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			for (int i = 1; i <= n; ++i) {
+			   for (int j = 1; j <= n; ++j){
+			      d[i][j] = INF;
+			   }
+			   d[i][i] = 0;
+			}
+
+			for (int edge = 0; edge < m; ++edge){
+			   int u, v, c; cin >> u >> v >> c;
+			   d[u][v] = c;
+			}
+			
+			for (int k = 1; k <= n; ++k){
+			   for (int i = 1; i <= n; ++i){
+			      for (int j = 1; j <= n; ++j){
+			         d[i][j] = min( d[i][j] , max(d[i][k], d[k][j]) );
+			      }
+			   }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Maximin}
+		\textcolor{blue}{\large Entrada}\\
+		Un grafo con pesos $G = (V, E)$ \\ \quad \\
+		\textcolor{blue}{\large Objetivo}\\
+		Para cada pareja de nodos $(i, j)$ , hallar el camino de $i$ hasta $j$ donde la arista más pequeña del camino sea lo más grande posible.\\ \quad \\
+		\textcolor{blue}{\large Ejemplos}\\
+		Que el trayecto menos seguro sea lo más seguro posible.\\
+		Que la autopista de menos carriles tenga la mayor cantidad de carriles.
+	\end{frame}
+	
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			for (int i = 1; i <= n; ++i) {
+			   for (int j = 1; j <= n; ++j){
+			      d[i][j] = -INF;
+			   }
+			   d[i][i] = INF;
+			}
+
+			for (int edge = 0; edge < m; ++edge){
+			   int u, v, c; cin >> u >> v >> c;
+			   d[u][v] = c;
+			}
+			
+			for (int k = 1; k <= n; ++k){
+			   for (int i = 1; i <= n; ++i){
+			      for (int j = 1; j <= n; ++j){
+			         d[i][j] = max( d[i][j] , min(d[i][k], d[k][j]) );
+			      }
+			   }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\section{Tarea}
+		\begin{frame}[fragile]
+			\frametitle{Tarea}
+			\begin{alertblock}{Tarea}
+				Resolver los problemas de \url{http://contests.factorcomun.org/contests/55}
+			\end{alertblock}
+		\end{frame}
+
+		\begin{frame}[fragile]
+			\frametitle{Ayudas}
+			\begin{block}{Problema A}
+			
+			\end{block}
+			\begin{block}{Problema B}
+				
+			\end{block}
+			\begin{block}{Problema C}
+				
+			\end{block}
+		\end{frame}
+
+\end{document}
