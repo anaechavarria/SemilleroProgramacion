@@ -60,19 +60,19 @@
 	\subsection{Problema 1 - Cut Ribbon}
 	\begin{frame}
 		\frametitle{Problema 1 - Cut Ribbon}
-		Hay que hallar el mínimo número de cortes que hay que hacerle a una cinta de longitud $n$ para que queden únicamente pedazos de tamaño $a$, $b$ o $c$.\\
-		Este problema es un caso del problema coin change que consiste en hallar el mínimo número de monedas/billetes que hay que usar para tener una cantidad $v$ de dinero.\\
+		Hay que hallar el máximo número de cortes que hay que hacerle a una cinta de longitud $n$ para que queden únicamente pedazos de tamaño $a$, $b$ o $c$.\\
+		Este problema es un caso (de maximización) del problema coin change que consiste en hallar el mínimo número de monedas/billetes que hay que usar para tener una cantidad $v$ de dinero.\\
 	\end{frame}
 	
 	\begin{frame}
 		\frametitle{Problema 1 - Cut Ribbon}
-		Sea $f(n)$ el mínimo número de cortes que hay que hacerle a una cinta de tamaño $n$ para que queden solo cintas de tamaño $a$, $b$ o $c$.\\
+		Sea $f(n)$ el máximo número de cortes que hay que hacerle a una cinta de tamaño $n$ para que queden solo cintas de tamaño $a$, $b$ o $c$.\\
 		$f(0) = 0$ \\
 		$
-		f(i) =  \text{min } 
+		f(i) =  \text{max } 
 		\left\{
 			\begin{aligned}
-				& \infty\\
+				& -\infty\\
 				& 1 + f(i-a) \text{\quad si } i \geq a\\
 				& 1 + f(i-b) \text{\quad si } i \geq b\\
 				& 1 + f(i-c) \text{\quad si } i \geq c\\
@@ -85,7 +85,7 @@
 		$
 	\end{frame}
 	
-	\begin{frame}[fragile, allowframebreaks]
+	\begin{frame}[fragile]
 		\frametitle{Implementación}
 		\begin{lstlisting}
 			const int MAXN = 4005;
@@ -97,7 +97,7 @@
 			    while (cin >> n >> a >> b >> c){
 			        dp[0] = 0;
 			        for (int i = 1; i <= n; ++i){
-			            dp[i] = INF;
+			            dp[i] = -INF;
 			            if (i >= a) dp[i] = max(dp[i], 1 + dp[i-a]);
 			            if (i >= b) dp[i] = max(dp[i], 1 + dp[i-b]);
 			            if (i >= c) dp[i] = max(dp[i], 1 + dp[i-c]);
@@ -420,6 +420,29 @@
 		$\leftarrow$ \\
 		Supongamos que \verb|d[i][i]| $< 0$ para algún $i$ luego de la ejecución del algoritmo. Claramente hay un ciclo de peso negativo que contiene el nodo $i$.
 	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Resumen de algoritmos para el problema APSP}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			                   &  \textbf{Complejidad para}    &  \textbf{Complejidad para} \\
+			\textbf{Algoritmo} &  \textbf{grafos dispersos}    &  \textbf{grafos  densos}\\ 
+			                   & $(|E| \approx |V|)$           &  $(|E| \approx |V|^2)$ \\
+			\hline \hline
+			Dijkstra  & &\\
+			(Para grafos con & $O(|V|^2 \operatorname{log } |V|)$ &  $O(|V|^3 \operatorname{log } |V|)$\\
+			pesos no negativos) & & \\
+			\hline
+			Bellman-Ford & &\\
+			(Para grafos & $O(|V|^3)$ &  $O(|V|^4)$\\
+			generales) & & \\
+			\hline
+			Floyd-Warshall &  & \\
+			(Para grafos & $O(|V|^3)$ &  $O(|V|^3)$\\
+			generales) & & \\
+			\hline
+		\end{tabular}
+	\end{frame}
 
 \section[Aplicaciones]{Otras aplicaciones del algoritmo de Floyd-Warshall}
 	\begin{frame}
@@ -582,13 +605,13 @@
 		\begin{frame}[fragile]
 			\frametitle{Ayudas}
 			\begin{block}{Problema A}
-			
+				No olvidar verificar que una celda esté dentro del tablero.
 			\end{block}
 			\begin{block}{Problema B}
-				
+				Tener en cuenta que el guía turístico también debe viajar en el bus en cada trayecto.
 			\end{block}
 			\begin{block}{Problema C}
-				
+				Es posible que los nodos que entreguen no sean consecutivos o no empiecen en el nodo 1. Se puede usar un mapa para almacenar los nodos en orden.
 			\end{block}
 		\end{frame}
 
