@@ -457,7 +457,7 @@
 			}
 			// Une los conjuntos a los que pertenecen u y v
 			// Este nuevo conjunto tiene como padre el padre de v
-			void union(int u, int v){
+			void join(int u, int v){
 			     int a = find(u);
 			     int b = find(v);
 			     if (a == b) return; // Son el mismo conjunto
@@ -470,10 +470,10 @@
 		\frametitle{Ejemplo}
 		Se tiene inicialmente una colección con 5 conjuntos $\left\{\{0\}, \{1\}, \{2\}, \{3\}, \{4\}\right\}$ y se realizan las siguientes operaciones:
 		\begin{enumerate}
-			\item union(0, 1)
-			\item union(0, 2)
-			\item union(1, 3)
-			\item union(0, 4)
+			\item join(0, 1)
+			\item join(0, 2)
+			\item join(1, 3)
+			\item join(0, 4)
 		\end{enumerate}
 	\end{frame}
 	
@@ -533,7 +533,7 @@
 			   // Atributos
 			   int start, end, weight;
 			   // Constructor
-			   cable(int u, int v, int w){
+			   edge(int u, int v, int w){
 			      start = u; end = v; weight = w;
 			   }
 			   // Comparador menor
@@ -553,7 +553,7 @@
 			    return p[u] = find(p[u]);
 			}
 
-			void union(int u, int v){
+			void join(int u, int v){
 			     int a = find(u);
 			     int b = find(v);
 			     if (a == b) return;
@@ -576,7 +576,7 @@
 			      int w = edges[i].weight;
 			      if (find(u) != find(v)){ // Si no genera un ciclo
 			         total += w;
-			         union(u, v);
+			         join(u, v);
 			      }
 			   }
 			   return total;
