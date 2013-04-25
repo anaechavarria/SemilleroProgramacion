@@ -299,7 +299,7 @@
 	
 	\begin{frame}
 		\frametitle{Árboles con raíces}
-		Un árbol $T = (V, E)$ en donde uno de sus nodos se diferencia de los demás es un árbol con raíz (rooted tree). El nodo $r$ que se diferencia de los demás se llama raíz.\\
+		Un árbol $T = (V, E)$ en donde se decide diferenciar uno de sus nodos es un árbol con raíz (rooted tree). El nodo $r$ que se diferencia de los demás se llama raíz.\\
 		\begin{center} \includegraphics[height = 0.55\textheight]{RootedTree.png}  \end{center}
 	\end{frame}
 	
@@ -360,9 +360,9 @@
 	
 	\begin{frame}
 		\frametitle{¿Por qué funciona?}
-		Veamos que el algoritmo produce un árbol.
+		Veamos que el grafo que el algoritmo produce es un árbol.
 		\begin{itemize}
-			\item En cada iteración, se agrega al árbol un nodo nuevo y una arista que conecta a ese nodo con alguno de los ya elegidos anteriormente. Al final se tendrán todos los nodos conectados.
+			\item En cada iteración, se agrega al grafo un nodo nuevo y una arista que conecta a ese nodo con alguno de los ya elegidos anteriormente. Al final se tendrán todos los nodos conectados.
 			\item Nunca se agrega una arista que una a dos nodos ya elegidos por lo que no se generan ciclos.
 			\item Por las dos afirmaciones anteriores se puede concluir que el algoritmo produce un árbol.
 		\end{itemize}
@@ -506,10 +506,12 @@
 		\frametitle{¿Por qué funciona?}
 		\begin{itemize}
 			\item Claramente el grafo resultante no tiene ciclos
-			\item El grafo está conectado porque si no lo estuviera es porque quedaron dos grupos de nodos, que en el grafo original están conectados por al menos una arista y que el algoritmo de Kruskal no seleccionó esa arista pero el algoritmo tuvo que haber seleccionado esa arista porque no generaba un ciclo.
+			\item El grafo está conectado, si no lo estuviera es porque quedaron dos grupos de nodos.
+			\item Estos dos grupos de nodos estaban conectados en el grafo original están conectados por al menos una arista pero estamos suponiendo que el algoritmo de Kruskal no seleccionó ninguna de esas aristas (porque quedaron los dos grupos separados)
+			\item Sin embargo el algoritmo tuvo que haber seleccionado alguna de las aristas porque no generaban ningún ciclo.
 			\item Por los dos afirmaciones anteriores se concluye que el algoritmo produce un árbol.
 		\end{itemize}
-		La prueba de optimalidad sale de que el algoritmo de Kruskal va a tomar siempre la va a tomar la mínima arista que cruza una una partición del grafo porque empieza por la menor.
+		La prueba de optimalidad sale de que el algoritmo de Kruskal va a tomar siempre la va a tomar la mínima arista que cruza una partición del grafo porque empieza por la menor.
 	\end{frame}
 
 	\begin{frame}
@@ -520,7 +522,7 @@
 			\item A medida que se ejecuta el algoritmo de Kruskal se empiezan a unir los nodos en conjuntos disjuntos.
 			\item Un ciclo se genera si se unen dos nodos que pertenecen al mismo conjunto.
 			\item Se utiliza union-find para guardar el conjunto al que pertenece cada nodo.
-			\item Para verificar se se genera un ciclo es ver si el conjunto de $u$ es igual al conjunto de $v$.
+			\item Para verificar se genera un ciclo es ver si el conjunto de $u$ es igual al conjunto de $v$.
 		\end{itemize}
 	\end{frame}
 
