@@ -1,0 +1,128 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\setbeamercovered{invisible}
+\usetheme{Frankfurt}
+\usefonttheme{serif}
+
+% Configurar los listings (Códigos)
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	language=C++,               % Lenguaje
+	basicstyle=\ttfamily\footnotesize,  % Tipo de fuente
+	keywordstyle=\color{blue},  % Color de palabras clave
+	stringstyle=\color{red},    % Color de strings
+	commentstyle=\color{gray},  % Color de comentarios
+	showstringspaces=false,     % No muestrar el _ cuando el string tiene espacios
+	breaklines = true,          % Partir las líneas largas
+	breakatwhitespace=true,	    % Partir las líneas en un espacio
+	numbers=left,				% Numerar las líneas a la izq
+	numberstyle=\tiny,			% Poner los números de las líneas pequeños
+	numberblanklines=true,      % Numerar las líneas en blanco
+	columns=fullflexible,       % No perder el formato al dejar los espacios
+	keepspaces=true,   			% Dejar los espacios insertados
+	frame=tb,					% Poner el recuadro
+}
+
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{Contenido}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=hide/show/hide]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
+
+\title{Semillero de Programación}
+\subtitle{Algoritmo de máximo flujo}
+\author{Ana Echavarría \and Juan Francisco Cardona}
+
+\institute{Universidad EAFIT}
+\date{26 de abril de 2013}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido}
+	\tableofcontents
+\end{frame}
+
+\section{Problemas semana anterior}
+	\subsection{Problema A - }
+	
+	\begin{frame}
+		\frametitle{Problema A - }
+		\begin{itemize}
+			\item 
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Problema B - }
+	\begin{frame}
+		\frametitle{Problema B - }
+		\begin{itemize}
+			\item 
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			
+		\end{lstlisting}
+	\end{frame}
+	
+	\subsection{Problema C - }
+	\begin{frame}
+		\frametitle{Problema C - }
+		\begin{itemize}
+			\item 
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			
+		\end{lstlisting}
+	\end{frame}
+
+\section{Motivación}
+
+	\begin{frame}
+		\frametitle{Problema de flujos}
+		\begin{itemize}
+			\item De igual manera como se puede crear un grafo 
+		\end{itemize}
+		
+		Just as we can model a road map as a directed graph in order to find the shortest path from one point to another, we can also interpret a directed graph as a “flow network” and use it to answer questions about material flows. Imagine a mate- rial coursing through a system from a source, where the material is produced, to a sink, where it is consumed. The source produces the material at some steady rate, and the sink consumes the material at the same rate. The “flow” of the mate- rial at any point in the system is intuitively the rate at which the material moves. Flow networks can model many problems, including liquids flowing through pipes, parts through assembly lines, current through electrical networks, and information through communication networks.
+	\end{frame}
+	
+
+
+\section{Tarea}
+	\begin{frame}[fragile]
+		\frametitle{Tarea}
+		\begin{alertblock}{Tarea}
+			Resolver los problemas de \url{}
+		\end{alertblock}
+	\end{frame}
+
+\end{document}
