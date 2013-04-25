@@ -32,11 +32,20 @@
 }
 
 
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{Contenido}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=hide/show/hide]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
+
+
 \title{Desarrollo e implementación de un programa de trabajo para el semillero de programación}
 \author{Por: \\ Ana Echavarría Uribe \\ \quad \\ Tutor: \\ Juan Francisco Cardona Mc'Cormick}
 
 \institute{Universidad EAFIT}
-\date{26 de marzo de 2013}
+\date{26 de abril de 2013}
 
 \begin{document}
 
@@ -149,12 +158,19 @@
 			\item{Algoritmo de Knuth-Morris-Pratt}
 		\end{enumerate}
 	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Competencias}
+		\includegraphics[width = \textwidth]{Contest1.png}\\ \quad \\
+		\includegraphics[width = \textwidth]{Contest2.png}
+	\end{frame}
+	
 
 \section[Contenido en Github]{Contenido del Semillero en Github}
 	\begin{frame}
 		\frametitle{Contenido del Semillero en Github}
 		\begin{itemize}	
-			\item El contenido del Semillero se almacena en un repositorio en \url{github.com}
+			\item El contenido del Semillero se almacena en un repositorio en \url{https://github.com/anaechavarria/SemilleroProgramacion}
 			\item Se decidió compartir el contenido del repositorio con el coach de maratones de la Universidad Tecnológica de Pereira.
 			\item El coach difundió la información entre sus estudiantes.
 		\end{itemize}
@@ -167,6 +183,11 @@
 			\item Un estudiante de la Universidad Sergio Arboleda pidió permiso para usar el contenido como material de aprendizaje para él y su equipo.
 			\item Se está mirando para compartir el contenido con estudiantes de la Universidad Pontificia Bolivariana.
 		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Contenido del semillero en Github}
+		\includegraphics[width = \textwidth]{Repo.png}
 	\end{frame}
 	
 \section[Preguntas]{Preguntas}
