@@ -27,7 +27,7 @@
 \begin{document}
 
 
-\title{Manual de algoritmos del semillero de programación}
+\title{Manual de algoritmos del semillero de programación EAFIT}
 \author{Ana Echavarría}
 \date{\today}
 \maketitle
@@ -58,8 +58,10 @@
 		\source{./src/ordenamiento_topologico.cpp}
 		
 	\subsection{Componentes fuertemente conexas}
-	
-	ado un grafo dirigido $G = (V, E)$, un componente fuertemente conexa o strongly connected component (SCC) de $G$ es un subconjunto $C$ de nodos que cumple que para cada pareja $u, v \in C$ existe un camino de $u$ a $v$ y de $v$ a $u$ y que $C$ es lo más grande posible. 
+		Dado un grafo dirigido, calcula la componente fuertemente conexa (SCC) a la que pertenece cada nodo.\\
+		Para cada pareja de nodos $u, v$ que pertenecen a una misma SCC se cumple que hay un camino de $u$ a $v$ y de $v$ a $u$.\\
+		Si se comprime el grafo dejando como nodos cada una de las componentes se quedará con un DAG.\\
+		Complejidad: $O(n+m)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/componentes_conexas.cpp}
 	
 	\subsection{Algoritmo de Dijkstra}
