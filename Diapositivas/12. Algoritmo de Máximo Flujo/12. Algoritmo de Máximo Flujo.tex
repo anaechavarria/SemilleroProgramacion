@@ -53,7 +53,7 @@
 \author{Ana Echavarría \and Juan Francisco Cardona}
 
 \institute{Universidad EAFIT}
-\date{26 de abril de 2013}
+\date{3 de mayo de 2013}
 
 \begin{document}
 
@@ -212,7 +212,7 @@
 			Una red de flujos $G = (V, E)$ es un grafo conexo y dirigido en donde cada arista $(u, v) \in E$ tiene una capacidad \textbf{no negativa} $c(u,v) \geq 0$.\\ \quad \\
 			% En una red de flujos es necesario que si $(u, v) \in E$ entonces $(v, u) \not\in E$ \\ \quad \\
 			Si $(u, v) \not\in E$ entonces $c(u, v) = 0$ \\ \quad \\
-			Se distinguen dos vértices: la fuente $s$ y el sumidero $t$.
+			Se distinguen dos nodos: la fuente $s$ y el sumidero $t$.
 		\end{block}
 	\end{frame}
 
@@ -381,7 +381,7 @@
 	\begin{frame}
 		\frametitle{Cuello de botella}
 		La máxima cantidad de flujo que se puede enviar por un camino de aumentación $p$ corresponde al mínimo valor de las aristas de $p$ en la red residual.\\ \quad \\
-		Este valor se conoce como cuello de botella $$\operatorname{bottleneck}(p) = \operatorname{min}\{c_f(u,v) : (u,v) \in p\}$$
+		Este valor se conoce como cuello de botella $$\operatorname{bottleneck}(p) = \operatorname{min}\{c_f(u,v) | (u,v) \in p\}$$
 	\end{frame}
 
 	\begin{frame}
