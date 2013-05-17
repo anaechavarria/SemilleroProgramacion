@@ -164,7 +164,7 @@
 
 			int main(){
 			    int run = 1;
-				int n;
+			    int n;
 			    while (cin >> n){
 			        if (n == 0) break;
 
@@ -497,7 +497,7 @@
 			    // Se asume que se tiene y se llamo la funcion build_sieve()
 			    vector <int> ans;
 			    long long b = a;
-			    for (int i = 0; 1LL * primes[i] * primes[i] <= 1LL * a; ++i){
+			    for (int i = 0; 1LL * primes[i] * primes[i] <= a; ++i){
 			        int p = primes[i];
 			        while (b > 1 and b % p == 0){
 			            ans.push_back(p);
@@ -555,7 +555,7 @@
 			El valor de $b^{\,p} \operatorname{mod} m = \operatorname{bigmod}(b, p, m)$ se puede calcular en orden $\operatorname{log}(p)$ de la siguiente manera:
 			$$ \operatorname{bigmod}(b, p, m) =
 			\begin{cases}
-				0    & \text{si } p = 0\\
+				1    & \text{si } p = 0\\
 				\big(\operatorname{bigmod}(b, \frac{p}{2}, m)\big)^2 \operatorname{mod} \,m &  \text{si } p \text{ es par}\\
 				\big(b \cdot \operatorname{bigmod}(b, p-1, m)\big)   \operatorname{mod} \,m &  \text{si } p \text{ es impar}
 			\end{cases}$$
