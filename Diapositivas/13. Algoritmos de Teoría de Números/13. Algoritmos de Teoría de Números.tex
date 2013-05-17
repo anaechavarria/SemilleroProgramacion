@@ -1,0 +1,666 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{animate} 
+\usetikzlibrary{arrows}
+
+\setbeamercovered{invisible}
+\usetheme{Frankfurt}
+\usefonttheme{serif}
+
+% \setbeamertemplate{mini frames}{} % Para que no aparezcan las circulitos de las subsecciones
+
+% Configurar los listings (Códigos)
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	language=C++,               % Lenguaje
+	basicstyle=\ttfamily\footnotesize,  % Tipo de fuente
+	keywordstyle=\color{blue},  % Color de palabras clave
+	stringstyle=\color{red},    % Color de strings
+	commentstyle=\color{gray},  % Color de comentarios
+	showstringspaces=false,     % No muestrar el _ cuando el string tiene espacios
+	breaklines = true,          % Partir las líneas largas
+	breakatwhitespace=true,	    % Partir las líneas en un espacio
+	numbers=left,				% Numerar las líneas a la izq
+	numberstyle=\tiny,			% Poner los números de las líneas pequeños
+	numberblanklines=true,      % Numerar las líneas en blanco
+	columns=fullflexible,       % No perder el formato al dejar los espacios
+	keepspaces=true,   			% Dejar los espacios insertados
+	frame=tb,					% Poner el recuadro
+}
+
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{Contenido}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=hide/show/hide]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
+
+\title{Semillero de Programación}
+\subtitle{Algoritmos de Teoría de Números}
+\author{Ana Echavarría \and Juan Francisco Cardona}
+
+\institute{Universidad EAFIT}
+\date{17 de mayo de 2013}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contenido}
+	\tableofcontents
+\end{frame}
+
+\section[Problemas anteriores]{Problemas semana anterior}
+	\begin{frame}
+		\frametitle{Problema A - Internet Bandwidth}
+		Hay que hallar el máximo flujo que puede enviarse desde una fuente a un sumidero
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			const int MAXN = 105;
+			// Lista de adyacencia de la red residual. Solo las conexiones no 
+			// los pesos. Se usa para que el BFS sea rapido
+			vector <int> g [MAXN]; 
+			int c [MAXN][MAXN]; // Capacidad de aristas de la red de flujos
+			int f [MAXN][MAXN]; // El flujo de cada arista
+			//El predecesor de cada nodo en el camino de aumentacion de s a t
+			int prev [MAXN];
+
+			void connect (int i, int j, int cap){
+			    // Agregar SIEMPRE las dos aristas al grafo la red de flujos 
+			    // sea dirigida. Esto es porque g representa la red residual
+			    // que tiene aristas en los dos sentidos
+			    g[i].push_back(j);
+			    g[j].push_back(i);
+			    c[i][j] += cap;    
+			    // Omitir esta linea si el grafo es dirigido
+			    c[j][i] += cap; 
+			}
+
+			int maxflow(int s, int t, int n){
+			    // Inicializar el flujo en 0
+			    for (int i = 0; i <= n; i++)
+			        for (int j = 0; j <= n; j++)
+			            f[i][j] = 0;
+
+			    int flow = 0;
+			    while (true){
+			        // Encontrar camino entre s y t con bfs
+			        for (int i = 0; i <= n; i++) prev[i] = -1;
+
+			        queue <int> q;
+			        q.push(s);
+			        prev[s] = -2;  // s no tiene nodo anterior en el camino
+
+
+
+
+			        while (q.size() > 0){
+			            int u = q.front(); q.pop();
+			            if (u == t) break;
+			            for (int i = 0; i < g[u].size(); ++i){
+			                int v = g[u][i];
+			                // Si el nodo no esta visitado
+			                // y el peso en la red residual es > 0
+			                if (prev[v] == -1 and c[u][v] - f[u][v] > 0){
+			                    q.push(v);
+			                    prev[v] = u;
+			                }
+			            }
+			        }
+			        // Si no se llego a t en el camino es porque no hay mas 
+			        // caminos de aumentacion y el ciclo se detiene
+			        if (prev[t] == -1) break;
+
+
+
+
+
+
+			        // Hallar el cuello de botella
+			        // Se recorre el camino desde t hasta s
+			        int extra = 1 << 30;
+			        int end = t;
+			        while (end != s){
+			            int start = prev[end];
+			            // El cuello de botella es el minimo peso del camino 
+			            // en la red residual. El peso en la red residual es 
+			            // la capacidad de la arista menos el flujo
+			            extra = min(extra, c[start][end] - f[start][end]);
+			            end = start;
+			        }
+
+
+
+
+
+
+			        // Bombear el flujo extra por la arista
+			        end = t;
+			        while (end != s){
+			            int start = prev[end];
+			            f[start][end] += extra;
+			            f[end][start] = -f[start][end];
+			            end = start;
+			        }
+
+			        // Agregar el flujo enviado a la respuesta
+			        flow += extra;
+			    }
+
+			    return flow;
+			}
+
+			int main(){
+			    int run = 1;
+				int n;
+			    while (cin >> n){
+			        if (n == 0) break;
+
+			        // Limpiar el grafo y la capacidad
+			        for (int i = 0; i <= n; i++){
+			            g[i].clear();
+			            for (int j = 0; j <= n; j++){
+			               c[i][j] = 0; 
+			            }
+			        }
+
+			        // Leer el grafo
+			        int s, t, edges;
+			        cin >> s >> t >> edges;
+			        for (int i = 0; i < edges; i++){
+			            int n1, n2, cap;
+			            cin >> n1 >> n2 >> cap;
+			            connect(n1, n2, cap);
+			        }
+
+			        // Imprimir la respuesta
+			        printf("Network %d\n", run++);
+			        printf("The bandwidth is %d.\n\n", maxflow(s, t, n));
+
+			    }
+			    return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Problema B - Angry Programmer}
+		\begin{itemize}
+			\item Usar el algoritmo de máximo flujo para hallar el mínimo corte
+			\item Dividir cada nodo en 2 para poder tener en cuenta la capacidad de los nodos.
+			\item Para que no se puedan destruir la fuente y el sumidero ponerles capacidad infinita.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile, allowframebreaks]
+		\frametitle{Implementación}
+		\begin{lstlisting}
+			const int MAXN = 2 * 50 + 5;
+			const int INF = INT_MAX;
+			vector < int > g [MAXN];
+			int c [MAXN][MAXN];
+			int f [MAXN][MAXN];
+			int prev [MAXN];
+
+			void refresh (int n){
+			    for (int i = 0; i < 2 * n; i++){
+			        g[i].clear();
+			        for (int j = 0; j < 2 * n; j++){
+			            f[i][j] = 0;
+			            c[i][j] = 0;
+			        }
+			    }
+			}
+
+
+			void join (int u, int v, int cost){
+			    int in_u = 2 * u;
+			    int out_u = 2 * u + 1;
+
+			    int in_v = 2 * v;
+			    int out_v = 2 * v + 1;
+
+			    g[out_u].push_back(in_v);
+			    g[in_v].push_back(out_u);
+			    c[out_u][in_v] += cost;
+
+			    g[out_v].push_back(in_u);
+			    g[in_u].push_back(out_v);
+			    c[out_v][in_u] += cost;
+			}
+
+
+
+
+			void join_self (int u, int cost){
+			    g[2 * u].push_back(2 * u + 1);
+			    g[2 * u + 1].push_back(2 * u);
+			    c[2 * u][2 * u + 1] += cost;
+			    c[2 * u + 1][2 * u] += cost;
+			}
+
+			bool path(int s, int t){
+			    for (int i = 0; i <= t; i++)
+			        prev[i] = -2;
+
+			    queue <int> q;
+			    q.push(s);
+			    prev[s] = -1;
+			    while (q.size() > 0){
+			        int u = q.front();
+			        q.pop();
+			        if (u == t) return true;
+			        for (int i = 0; i < g[u].size(); i++){
+			            int v = g[u][i];
+			            if (prev[v] == -2 and c[u][v] - f[u][v] > 0){
+			                q.push(v);
+			                prev[v] = u;
+			            }
+			        }
+			    }
+			    return false;
+			}
+
+			int bottleneck(int s, int t){
+			    int curr = t;
+			    int ans = INF;
+			    while (curr != s){
+			        ans = min (ans, c[prev[curr]][curr] - f[prev[curr]][curr]);
+			        curr = prev[curr];
+			    }
+			    assert(prev[s] == -1);
+			    return ans;
+			}
+
+			void pump (int s, int t, int extra){
+			    int curr = t;
+			    while (curr != s){
+			        f[prev[curr]][curr] += extra;
+			        f[curr][prev[curr]] -= extra;
+			        curr = prev[curr];
+			    }
+			}
+
+			int max_flow(int s, int t){
+			    int ans = 0;
+			    while (true){
+			        // Find path
+			        if (!path(s, t)) break;
+			        // Find bottleneck
+			        int extra = bottleneck(s, t);
+			        // Pump bottleneck
+			        pump(s, t, extra);
+			        // Add flow to answer
+			        ans += extra;
+			    }
+			    return ans;
+			}
+
+			int main(){
+			    int nodes, edges;
+			    while (scanf("%d %d", &nodes, &edges) == 2){
+			        if (nodes == 0 and edges == 0) break;
+
+			        refresh(nodes);
+			        // Crear los nodos (entrada y salida)
+			        for (int i = 1; i < nodes - 1; i++){
+			            int j, cost; 
+			            cin >> j >> cost;
+			            j--;
+			            join_self(j, cost);
+			        }
+			        // El peso de la fuente y el sumidero es INF
+			        join_self(0, INF);
+			        join_self(nodes - 1, INF);
+
+			        // Unir las aristas
+			        for (int i = 0; i < edges; i++){
+			            int u, v, cost;
+			            cin >> u >> v >> cost;
+			            u--; v--;
+			            join(u, v, cost);
+			        }
+
+			        cout << max_flow(0, 2 * nodes - 1) << endl;
+			    }
+			    return 0;
+			}
+		\end{lstlisting}
+	\end{frame}
+
+\section[Divisores]{Hallar los divisores de un número}
+	
+	\begin{frame}
+		\frametitle{Divisores de un número}
+		\begin{itemize}
+			\item Los divisores vienen de a parejas, si $a | b$ entonces $\frac{b}{a} | b$
+			\item Es por esto que basta con mirar hasta la raíz cuadrada del número para hallar sus divisores
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Divisores de un número}
+		\begin{lstlisting}
+			void divisors(int n){
+			    int i;
+			    for (i = 1; i * i < n; ++i){
+			        if (n % i == 0) printf("%d\n%d\n", i, n/i);
+			    }
+			    // Si el numero es un cuadrado perfecto, imprimir su raiz cuadrara una sola vez
+			    if (i * i == n) printf("%d\n", i);
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{alertblock}{Pregunta}
+			¿Cuántos números hay que revisar para hallar todos los divisores de un número $n$?\\
+			De acuerdo a eso, ¿cuál es la complejidad del algoritmo?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuesta}
+			La complejidad de este algoritmo es $O(\sqrt{n})$
+		\end{exampleblock}
+	\end{frame}
+
+\section[GCD y LCM]{Máximo común divisor y mínimo común múltiplo}
+
+	\begin{frame}[fragile]
+		\frametitle{Máximo común divisor}
+		\begin{block}{GCD}
+			Para hallar el máximo común divisor entre dos números \verb|a| y \verb|b| ejecutar el comando \verb|__gcd(a, b)|
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Mínimo común múltiplo}
+		\begin{block}{LCM}
+			El mínimo común múltiplo se puede hallar en términos del máximo común divisor así:
+			$$ \operatorname{lcm}(a, b) = \frac{|a \cdot b|}{\operatorname{gcd}(a,b)}$$
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Propiedades}
+		\begin{itemize}
+			\item Si $c|a$ y $c|b$ entonces $c|\operatorname{gcd}(a, b)$
+			\item Si $a|b\cdot c$ y $\operatorname{gcd}(a,b) = 1$ entonces $a|c$
+			\item $\operatorname{gcd}(a,b)$ es una combinación lineal entera de $a$ y $b$
+		\end{itemize}
+	\end{frame}
+
+\section[Criba]{Criba de Eratóstenes}
+
+	\begin{frame}
+		\frametitle{Criba de Eratóstenes}
+		\begin{itemize}
+			\item Es un algoritmo para hallar todos los números primos hasta un límite $n$
+			\item Inicialmente asume marca todos los números de 2 hasta $n$ como no visitados y el 1 como visitado
+			\item Empieza a recorrer los números uno por uno
+			\item Cuando encuentra un número no visitado empieza a marcar todos sus múltiplos (no él) como visitados
+			\item Cuando llega al número $n$, los números que estén marcados como no visitados son los números primos del intervalo $[1, n]$
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Criba de Eratóstenes}
+		\begin{center}
+			\includegraphics<1>[height = 0.8\textheight]{./gif/Sieve_1.png}
+			\includegraphics<2>[height = 0.8\textheight]{./gif/Sieve_2.png}
+			\includegraphics<3>[height = 0.8\textheight]{./gif/Sieve_3.png}
+			\includegraphics<4>[height = 0.8\textheight]{./gif/Sieve_4.png}
+			\includegraphics<5>[height = 0.8\textheight]{./gif/Sieve_5.png}
+			\includegraphics<6>[height = 0.8\textheight]{./gif/Sieve_6.png}
+			\includegraphics<7>[height = 0.8\textheight]{./gif/Sieve_7.png}
+			\includegraphics<8>[height = 0.8\textheight]{./gif/Sieve_8.png}
+			\includegraphics<9>[height = 0.8\textheight]{./gif/Sieve_9.png}
+			\includegraphics<10>[height = 0.8\textheight]{./gif/Sieve_10.png}
+			\includegraphics<11>[height = 0.8\textheight]{./gif/Sieve_11.png}
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\begin{lstlisting}
+			const int MAXN = 1000000;
+			bool sieve[MAXN + 5];
+			vector <int> primes;
+
+			void build_sieve(){
+			    memset(sieve, false, sizeof(sieve));
+			    sieve[0] = sieve[1] = true;
+
+			    for (int i = 2; i * i <= MAXN; i ++){
+			        if (!sieve[i]){
+			            for (int j = i * i; j <= MAXN; j += i){
+			                sieve[j] = true;
+			            }
+			        }
+			    }
+			    for (int i = 2; i <= MAXN; ++i){
+			        if (!sieve[i]) primes.push_back(i);
+			    }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{alertblock}{Pregunta}
+			¿Cuántas veces se visita cada número?\\
+			De acuerdo a eso, ¿cuál es la complejidad de la criba?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuesta}
+			Como cada número se visita una única vez, la complejidad del algoritmo es $O(n)$.
+		\end{exampleblock}
+	\end{frame}
+
+\section[Factorización prima]{Hallar la factorización prima de un número}
+
+	\begin{frame}
+		\frametitle{Factorización prima}
+		\begin{alertblock}{Pregunta}
+			Si se conocen todos los primos desde 0 hasta $\sqrt{a}$ ¿cómo usarlos para hallar la factorización prima de $a$?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuesta}
+			\begin{itemize}
+				\item La factorización prima de $a$ contiene máximo un solo primo mayor que $\sqrt{a}$
+				\item Se divide $a$ por todos los primos menores o iguales a su raíz cuadrada
+				\item Hay que tener en cuenta que un primo puede aparecer varias veces en la factorización
+				\item Si luego de dividirlo queda un número mayor que 1, ese número es primo
+			\end{itemize}
+		\end{exampleblock}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Factorización prima}
+		\begin{lstlisting}
+			const int MAXN = 1000000; // MAXN > sqrt(a)
+			bool sieve[MAXN + 5];
+			vector <int> primes;
+		
+			vector <int> factorization(long long a){
+			    // Se asume que se tiene y se llamo la funcion build_sieve()
+			    vector <int> ans;
+			    long long b = a;
+			    for (int i = 0; 1LL * primes[i] * primes[i] <= 1LL * a; ++i){
+			        int p = primes[i];
+			        while (b > 1 and b % p == 0){
+			            ans.push_back(p);
+			            b /= p;
+			        }
+			    }
+			    if (b != 1) ans.push_back(b);
+			    return ans;
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{block}{Complejidad}
+			La complejidad del algoritmo para hallar la factorización prima de un número es aproximadamente $O(\sqrt{n})$
+		\end{block}
+	\end{frame}
+
+
+\section[Bigmod]{Exponenciación logarítmica}
+
+	\begin{frame}
+		\frametitle{La operación módulo}
+		La operación $a \operatorname{mod} n$ es el residuo que queda de dividir $a$ por $n$.
+		\begin{block}{Propiedades}
+			\begin{itemize}
+				\item $(a \operatorname{mod} n) \operatorname{mod} n = a \operatorname{mod} n$
+				\item $(a + b) \operatorname{mod} n = ((a \operatorname{mod} n) + (b\operatorname{mod} n)) \operatorname{mod} n$
+				\item $(a \cdot b) \operatorname{mod} n = ((a \operatorname{mod} n) \cdot (b\operatorname{mod} n)) \operatorname{mod} n$
+				\item $\displaystyle\left(\frac{a}{b} \right) \operatorname{mod} n \neq \left(\frac{a \operatorname{mod} n}{b\operatorname{mod} n}\right) \operatorname{mod} n$
+			\end{itemize}
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{La operación módulo}
+		\begin{alertblock}{Pregunta}
+			¿Cómo utilizar el módulo para hallar los últimos $k$ dígitos del número $a$?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuesta}
+			Los últimos $k$ dígitos del número $a$ se pueden hallar con la operación $a \operatorname{mod} 10^k$
+		\end{exampleblock}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Exponenciación logarítmica}
+		\begin{alertblock}{Bigmod}
+			Se quiere hallar el valor de $b^{\,p} \operatorname{mod} m$ para valores de $b$ y de $p$ muy grandes ($b^{\,p}$ no cabe en un \verb|unsigned long long|).
+			¿Cómo hacer eso eficientemente?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Algoritmo}
+			El valor de $b^{\,p} \operatorname{mod} m = \operatorname{bigmod}(b, p, m)$ se puede calcular en orden $\operatorname{log}(p)$ de la siguiente manera:
+			$$ \operatorname{bigmod}(b, p, m) =
+			\begin{cases}
+				0    & \text{si } p = 0\\
+				\big(\operatorname{bigmod}(b, \frac{p}{2}, m)\big)^2 \operatorname{mod} \,m &  \text{si } p \text{ es par}\\
+				\big(b \cdot \operatorname{bigmod}(b, p-1, m)\big)   \operatorname{mod} \,m &  \text{si } p \text{ es impar}
+			\end{cases}$$
+		\end{exampleblock}
+	\end{frame}
+
+	\begin{frame}[fragile]
+		\frametitle{Bigmod}
+		\begin{lstlisting}
+			int bigmod(int b, int p, int m){
+			    if (p == 0) return 1;
+			    if (p % 2 == 0){
+			        int mid = bigmod(b, p/2, m);
+			        return (1LL * mid * mid) % m;
+			    }else{
+			        int mid = bigmod(b, p-1, m);
+			        return (1LL * mid * b) % m;
+			    }
+			}
+		\end{lstlisting}
+	\end{frame}
+
+\section[Combinatoria]{Combinatoria}
+
+	\begin{frame}
+		\frametitle{Coeficientes binomiales}
+		El valor de $\displaystyle\binom{n}{k}$ que es el número de subconjuntos de $k$ elementos escogidos de un conjunto con $n$ elementos se puede definir como:
+		$$ \binom{n}{k} = 
+		\begin{cases}
+			\,\, 1 & \text{si } n = k \\
+			\,\, 1 & \text{si } k = 0 \\
+			\displaystyle\binom{n-1}{k-1} + \binom{n-1}{k} & \text{si } k < n
+		\end{cases}
+		$$
+		Nótese que $\displaystyle\binom{n}{k}$ está definido solo si $k \leq n$.
+	\end{frame}
+	
+	\begin{frame}[fragile]
+		\frametitle{Coeficientes binomiales}
+		\begin{lstlisting}
+			const int MAXN = 30;
+			long long choose[MAXN][MAXN];
+
+			void build_binomial(int N){
+			    for (int n = 0; n <= N; ++n) choose[n][0] = choose[n][n] = 1;
+
+			    for (int n = 1; n <= N; ++n){
+			        for (int k = 1; k < n; ++k){
+			            choose[n][k] = choose[n-1][k-1] + choose[n-1][k];
+			        }
+			    }
+			}
+		\end{lstlisting}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Complejidad}
+		\begin{alertblock}{Pregunta}
+			¿Cuál es la complejidad del algoritmo para hallar los coeficientes binomiales?
+		\end{alertblock}
+		\pause
+		\begin{exampleblock}{Respuesta}
+			El algoritmo tiene una complejidad de $O(n^2)$
+		\end{exampleblock}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Permutaciones}
+		Una permutación de un conjunto es un ordenamiento particular de sus elementos.
+		\quad \\ \quad \\
+		\begin{block}{Permutaciones de elementos diferentes}
+			El número de permutaciones de $n$ elementos diferentes es $n!$
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Permutaciones}
+		
+		\begin{block}{Permutaciones con elementos repetidos}
+			El número de permutaciones de $n$ elementos donde hay $m_1$ elementos repetidos de tipo 1, $m_2$ elementos repetidos de tipo 2,~\ldots, $m_k$ elementos repetidos de tipo $k$ es
+			$$ \frac{n!}{m_1! m_2! \cdots m_k!} $$
+		\end{block}
+		
+		\begin{exampleblock}{Ejemplo}
+			¿De cuántas formas diferentes se pueden reordenar los números 313?\\
+			\pause
+			Se pueden reordenar de $\displaystyle\frac{3!}{1!\,2!} = 3 $ maneras diferentes
+		\end{exampleblock}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Permutaciones}
+		\begin{block}{Permutaciones de subconjuntos}
+			El número de permutaciones de $k$ elementos diferentes tomados de un conjunto de $n$ elementos es
+			$$ \frac{n!}{(n-k)!} = k! \binom{n}{k}$$
+		\end{block}
+	\end{frame}
+
+
+\section{Tarea}
+	\begin{frame}[fragile]
+		\frametitle{Tarea}
+		\begin{alertblock}{Tarea}
+			Resolver los problemas de \url{http://contests.factorcomun.org/contests/60}
+		\end{alertblock}
+	\end{frame}
+
+\end{document}
