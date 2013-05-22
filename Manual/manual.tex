@@ -140,7 +140,7 @@
 		Union-Find es una estructura de datos para almacenar una colección conjuntos disjuntos (no tienen elementos en común) que cambian dinámicamente.\\
 		Identifica en cada conjunto un ``padre'' que es un elemento al azar de ese conjunto y hace que todos los elementos del conjunto ``apunten'' hacia ese padre. \\
 		Inicialmente se tiene una colección donde cada elemento es un conjunto unitario.\\
-		Complejidad aproximada de $O(m)$ donde $m$ el número total de operaciones de initialize, union y join realizadas.\\
+		Complejidad aproximada: $O(m)$ donde $m$ el número total de operaciones de initialize, union y join realizadas.\\
 		\source{./src/union-find.cpp}
 		
 		\subsubsection{Algoritmo de Kruskal}
@@ -160,18 +160,56 @@
 	
 \section{Teoría de números}
 	\subsection{Divisores de un número}
+	Imprime los divisores de un número (cuidado que no lo hace en orden).\\
+	Complejidad: $O(\sqrt{n})$ donde $n$ es el número.\\
+	\source{./src/divisors.cpp}
 	
 	\subsection{Máximo común divisor y mínimo común múltiplo}
+	Para hallar el máximo común divisor entre dos números \verb|a| y \verb|b| ejecutar el comando \verb|__gcd(a, b)|.\\
+	Para hallar el mínimo común múltiplo: \quad $ \displaystyle\operatorname{lcm}(a, b) = \frac{|a \cdot b|}{\operatorname{gcd}(a,b)}$
 	
 	\subsection{Criba de Eratóstenes}
+	Encuentra los primos desde 1 hasta un límite $n$.\\
+	Complejidad: $O(n)$ donde $n$ es el límite superior.\\
+	\source{./src/sieve.cpp}
 	
 	\subsection{Factorización prima de un número}
+	Halla la factorización prima de un número $a$ positivo. Si $a$ es negativo llamar el algoritmo con $|a|$ y agregarle -1 a la factorización.\\
+	Se asume que ya se ha ejecutado el algoritmo para generar los primos hasta al menos $\sqrt{a}$.\\
+	El algoritmo genera la lista de primos en orden de menor a mayor.\\
+	Utiliza el hecho de que en la factorización prima de $a$ aparece máximo un primo mayor a $\sqrt{a}$.\\
+	Complejidad aproximada: $O(\sqrt{a})$\\
+	\source{./src/factorization.cpp}
 	
 	\subsection{Exponenciación logarítmica}
+		\subsubsection{Propiedades de la operación módulo}
+		\begin{itemize}
+			\item $(a \operatorname{mod} n) \operatorname{mod} n = a \operatorname{mod} n$
+			\item $(a + b) \operatorname{mod} n = ((a \operatorname{mod} n) + (b\operatorname{mod} n)) \operatorname{mod} n$
+			\item $(a \cdot b) \operatorname{mod} n = ((a \operatorname{mod} n) \cdot (b\operatorname{mod} n)) \operatorname{mod} n$
+			\item $\displaystyle\left(\frac{a}{b} \right) \operatorname{mod} n \neq \left(\frac{a \operatorname{mod} n}{b\operatorname{mod} n}\right) \operatorname{mod} n$
+		\end{itemize}
+		
+		\subsubsection{Big mod}
+		Halla rápidamente el valor de $b^{\,p} \operatorname{mod} m$ para $0 \leq b,p,m \leq 2147483647$\\
+		Si se cambian los valores por \verb|long long| los límites se cambian por $0 \leq b,p \leq 9223372036854775807$ y $1 \leq m \leq 3037000499$.\\ 
+		Complejidad: $O(\operatorname{log} p)$\\
+		\source{./src/bigmod.cpp}
 	
-	\subsection{Coeficientes binomiales}
+	\subsection{Combinatoria}
+		\subsubsection{Coeficientes binomiales}
+		Halla el valor de $\binom{n}{k}$ para $0 \leq k \leq n \leq 66$. Para $n > 66$ los valores comienzan a ser muy grandes y no caben en un \verb|long long|.\\
+		Complejidad: $O(n^2)$\\
+		\source{./src/binomial.cpp}
 		
 		\subsubsection{Propiedades de combinatoria}
+		\begin{itemize}
+			\item El número de permutaciones de $n$ elementos diferentes es $n!$
+			\item El número de permutaciones de $n$ elementos donde hay $m_1$ elementos repetidos de tipo 1, $m_2$ elementos repetidos de tipo 2,~\ldots, $m_k$ elementos repetidos de tipo $k$ es $$\frac{n!}{m_1! m_2! \cdots m_k!} $$
+			\item El número de permutaciones de $k$ elementos diferentes tomados de un conjunto de $n$ elementos es $$ \frac{n!}{(n-k)!} = k! \binom{n}{k}$$
+		\end{itemize}
+		
+		
 	
 \section{Programación dinámica}
 	\subsection{Problema de la mochila}
