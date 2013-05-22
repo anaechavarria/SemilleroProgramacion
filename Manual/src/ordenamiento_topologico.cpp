@@ -1,6 +1,6 @@
 vector <int> g[MAXN];    // La lista de adyacencia
 bool seen[MAXN];         // El arreglo de visitados para el dfs
-vector <int> topo_sort;  // El vector del ordemanmiento
+vector <int> topo_sort;  // El vector del ordemamiento
 
 void dfs(int u){
    seen[u] = true;

@@ -48,6 +48,7 @@
 	\subsection{DFS}
 		Algoritmo de recorrido de grafos en profundidad que empieza visita todos los nodos del grafo.\\
 		El algoritmo puede ser modificado para que retorne información de los nodos según la necesidad del problema.\\
+		El grafo tiene un ciclo $\leftrightarrow$ si en algún momento se llega a un nodo marcado como gris.\\
 		Complejidad: $O(n+m)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/dfs.cpp}
 		
@@ -65,16 +66,49 @@
 		\source{./src/componentes_conexas.cpp}
 	
 	\subsection{Algoritmo de Dijkstra}
+		Dado un grafo con pesos \textbf{no negativos} en las aristas, halla la mínima distancia entre una fuente $s$ y los demás nodos.\\
+		Al heap se inserta primero la distancia y luego en nodo al que se llega. Si se quieren modificar los pesos por \verb|long long| o por \verb|double| se debe cambiar en los tipos de dato \verb|dist_node| y \verb|edge|.\\
+		Complejidad $O((n+m) \operatorname{log} n)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/dijkstra.cpp}
+		
+	\subsection{Algoritmo de Bellman-Ford}
+	
+	\subsection{Algoritmo de Floyd-Warshall}
+	
+	\subsection{Algoritmo de Prim}
+	
+	\subsection{Algoritmo de Kruskal + union-find}
+	
+	\subsection{Algoritmo de máximo flujo}
+	
 	
 \section{Teoría de números}
-	TBA	
+	\subsection{Divisores de un número}
+	
+	\subsection{Máximo común divisor y mínimo común múltiplo}
+	
+	\subsection{Criba de Eratóstenes}
+	
+	\subsection{Factorización prima de un número}
+	
+	\subsection{Exponenciación logarítmica}
+	
+	\subsection{Coeficientes binomiales}
+		
+		\subsubsection{Propiedades de combinatoria}
 	
 \section{Programación dinámica}
-	TBA
+	\subsection{Problema de la mochila}
+	
 	
 \section{Strings}
-	TBA
+	\subsection{Longest common subsequence}
+	
+	\subsection{Longest increasing subsequence}
+	
+	\subsection{Algoritmo de KMP}
+	
+	
 
 % \small
 % \textbf{Field-testing:}

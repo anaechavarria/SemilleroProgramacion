@@ -4,7 +4,7 @@ vector <int> topo_sort;  // El "ordenamiento topologico" del grafo
 int scc[MAXN];   // La componente a la que pertenece cada nodo
 bool seen[MAXN]; // El arreglo de visitado para el primer DFS
 
-// DFS donde se halla el ordenamiento topologico
+// DFS donde se halla el ordenamiento topológico
 void dfs1(int u){ 
    seen[u] = true;
    for (int i = 0; i < g[u].size(); ++i){
@@ -22,7 +22,7 @@ void dfs2(int u, int comp){
    }
 }
 
-// Halla las componentes fuertemente conexas del grafo usandao
+// Halla las componentes fuertemente conexas del grafo usando
 // el algoritmo de Kosaraju. Retorna la cantidad de componentes
 int find_scc(int n){ // n = número de nodos
    // Crear el grafo reversado

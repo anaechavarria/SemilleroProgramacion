@@ -23,13 +23,20 @@ using namespace std;
 #define foreach(x, v) for (typeof (v).begin() x=(v).begin(); \
                             x !=(v).end(); ++x)
 // Template que imprime valores de variables para depurar
-#define D(x) cout << #x " is " << x << endl
+#define D(x) cout << #x " = " << (x) << endl
+
+// Función para comparar dos dobles sin problemas de presición
+// Retorna -1 si x < y, 0 si x = y, 1 si x > y
+const double EPS = 1e-9;
+int cmp (double x, double y, double tol = EPS){
+    return (x <= y + tol) ? (x + tol < y) ? -1 : 0 : 1;
+}
 
 
 int main() {
     // Entrada y salida desde / hacia archivo
     // Eliminar si la entrada es estándar
-    // Cambiar in.txt / out.txt por los archivos de entrada / salida
+    // Cambiar in.txt / out.txt por los archivos de entrada/salida
     freopen("in.txt", "r", stdin);
     freopen("out.txt", "w", stdout);
     
