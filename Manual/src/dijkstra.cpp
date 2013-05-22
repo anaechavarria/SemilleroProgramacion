@@ -1,7 +1,7 @@
-typedef pair <int, int> dist_node; // Datos para el heap (dist, nodo)
-typedef pair <int, int> edge; // Dato para las arista (nodo, peso)
-const int MAXN = 100005;      // El máximo número de nodos
+const int MAXN = 100005;
 const int INF = 1 << 30;      // Usar 1LL << 60 para long long
+typedef pair <int, int> dist_node; // Datos del heap (dist, nodo)
+typedef pair <int, int> edge; // Dato de las arista (nodo, peso)
 vector <edge> g[MAXN];        // g[u] = (v = nodo, w = peso)
 int d[MAXN];    // d[u] La distancia más corta de s a u
 int p[MAXN];    // p[u] El predecesor de u en el camino más corto

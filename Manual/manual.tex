@@ -53,7 +53,7 @@
 		\source{./src/dfs.cpp}
 		
 	\subsection{Ordenamiento topológico}
-		Dado un grafo no cíclico y dirigido (DAG), ordena los nodos linealemente de tal forma que si existe una arista entre los nodos $u$ y $v$ entonces $u$ aparece antes que $v$ en el ordenamiento.\\
+		Dado un grafo no cíclico y dirigido (DAG), ordena los nodos linealmente de tal forma que si existe una arista entre los nodos $u$ y $v$ entonces $u$ aparece antes que $v$ en el ordenamiento.\\
 		Este ordenamiento se puede ver como una forma de poner todos los nodos en una línea recta y que las aristas vayan todas de izquierda a derecha.\\
 		Complejidad: $O(n+m)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/ordenamiento_topologico.cpp}
@@ -68,12 +68,66 @@
 	\subsection{Algoritmo de Dijkstra}
 		Dado un grafo con pesos \textbf{no negativos} en las aristas, halla la mínima distancia entre una fuente $s$ y los demás nodos.\\
 		Al heap se inserta primero la distancia y luego en nodo al que se llega. Si se quieren modificar los pesos por \verb|long long| o por \verb|double| se debe cambiar en los tipos de dato \verb|dist_node| y \verb|edge|.\\
-		Complejidad $O((n+m) \operatorname{log} n)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
+		Complejidad: $O((n+m) \operatorname{log} n)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/dijkstra.cpp}
 		
 	\subsection{Algoritmo de Bellman-Ford}
+		Dado un grafo con pesos cualquiera, halla la mínima distancia entre una fuente $s$ y los demás nodos.\\
+		Si hay un ciclo de peso negativo en el grafo, el algoritmo lo indica.\\
+		Complejidad: $O(n \times m)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
+		\source{./src/bellman_ford.cpp}
 	
 	\subsection{Algoritmo de Floyd-Warshall}
+		Dado un grafo con pesos cualquiera, halla la mínima distancia entre cualquier para de nodos.\\
+		Si este algoritmo es muy lento para el problema ejecutar $n$ veces el algoritmo de Dijkstra o de Bellman-Ford según el caso.\\
+		Complejidad: $O(n^3)$ donde $n$ es el número de nodos.\\ \quad \\
+		Casos base: 
+		$\verb|d[i][j]| =
+			\begin{cases}
+				0       &\text{\quad si } i = j\\
+				w_{i,j} &\text{\quad si existe una arista entre $i$ y $j$}\\
+				+\infty &\text{\quad en otro caso}
+			\end{cases}$ \\
+			
+		\quad \\ \textbf{Nota:} Utilizar el tipo de dato apropiado (\verb|int|, \verb|long long|, \verb|double|) para \verb|d| y para $+\infty$ según el problema.
+		
+		\source{./src/floyd-warshall.cpp}
+		
+		\subsubsection{Clausura transitiva}
+		Dado un grafo cualquiera, hallar si existe un camino desde $i$ hasta $j$ para cualquier pareja de nodos $i, j$\\ \quad \\
+		Casos base:
+		$\verb|d[i][j]| =
+			\begin{cases}
+				\verb|true |   &\text{\quad si } i = j\\
+				\verb|true |   &\text{\quad si existe una arista entre $i$ y $j$}\\
+				\verb|false|   &\text{\quad en otro caso}
+			\end{cases}$ \\ \quad \\
+		Caso recursivo: \verb|d[i][j] = d[i][j] or (d[i][k] and d[k][j]);|
+		
+		\subsubsection{Minimax}
+		Dado un grafo con pesos, hallar el camino de $i$ hasta $j$ donde la arista más grande del camino sea lo más pequeña posible.\\
+		Ejemplos: Que el peaje más caro sea lo más barato posible, que la autopista más larga sea lo más corta posible.\\ \quad \\
+		Casos base:
+		$\verb|d[i][j]| =
+			\begin{cases}
+				0         &\text{\quad si } i = j\\
+				w_{i,j}   &\text{\quad si existe una arista entre $i$ y $j$}\\
+				+\infty   &\text{\quad en otro caso}
+			\end{cases}$ \\ \quad \\
+		Caso recursivo: \verb|d[i][j] = min( d[i][j], max (d[i][k], d[k][j]) );|
+		
+		\subsubsection{Maximin}
+		Dado un grafo con pesos, hallar el camino de $i$ hasta $j$ donde la arista más pequeña del camino sea lo más grande posible.\\
+		Ejemplos: Que el trayecto menos seguro sea lo más seguro posible, que la autopista de menos carriles tenga la mayor cantidad de carriles.\\ \quad \\
+		Casos base:
+		$\verb|d[i][j]| =
+			\begin{cases}
+				+\infty   &\text{\quad si } i = j\\
+				w_{i,j}   &\text{\quad si existe una arista entre $i$ y $j$}\\
+				-\infty   &\text{\quad en otro caso}
+			\end{cases}$ \\ \quad \\
+		Caso recursivo: \verb|d[i][j] = max( d[i][j] , min(d[i][k], d[k][j]) )|
+		
 	
 	\subsection{Algoritmo de Prim}
 	
