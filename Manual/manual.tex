@@ -231,8 +231,12 @@
 	Complejidad: $O(n^2)$ donde $n$ es la longitud de~$s$.\\
 	\source{./src/lis.cpp}
 	
-	
 	\subsection{Algoritmo de KMP}
+	Encuentra si el string \verb|needle| aparece en en string \verb|haystack|.\\
+	Si no se retorna directamente \verb|true| cuando se halla la primera ocurrencia, el algoritmo encuentra todas las ocurrencias de \verb|needle| en \verb|haystack|.\\
+	La primera parte del algoritmo llena el arreglo \verb|border| donde \verb|border[i]| es la longitud del borde del prefijo de \verb|needle| que termina en la posición \verb|i|. Un borde de una cadena $s$ es la cadena más larga que es a la vez prefijo y sufijo de $s$ pero que es diferente de $s$.\\
+	Complejidad: $O(n)$ donde $n$ es el tamaño de \verb|haystack|.\\
+	\source{./src/kmp.cpp}
 	
 
 \end{document}
