@@ -147,10 +147,16 @@
 		Dado un grafo no dirigido y conexo, retorna el costo del árbol de mínima expansión de ese grafo.\\
 		El costo del árbol de mínima expansión también se puede ver como el mínimo costo de las aristas de manera que haya un camino entre cualquier par de nodos.\\
 		Utiliza Union-Find para ver rápidamente qué aristas generan ciclos.\\
-		Complejidad: $O(m\operatorname{log} n)$  donde $n$ es el número de nodos y $m$ es el número de aristas.\\
+		Complejidad: $O(m\operatorname{log} n)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/kruskal.cpp}
+		
 	\subsection{Algoritmo de máximo flujo}
-	
+		Dado un grafo con capacidades enteras, halla el máximo flujo entre una fuente $s$ y un sumidero $t$.\\
+		Como el máximo flujo es igual al mínimo corte, halla también el mínimo costo de cortar aristas de manera que $s$ y $t$ queden desconectados.\\
+		Si hay varias fuentes o varios sumideros poner una super-fuente / super-sumidero que se conecte a las fuentes / sumideros con capacidad infinita.\\
+		Si los nodos también tienen capacidad, dividir cada nodo en dos nodos: uno al que lleguen todas las aristas y otro del que salgan todas las aristas y conectarlos con una arista que tenga la capacidad del nodo.\\
+		Complejidad: $O(n \cdot m^2)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
+		\source{./src/maxflow.cpp}
 	
 \section{Teoría de números}
 	\subsection{Divisores de un número}
