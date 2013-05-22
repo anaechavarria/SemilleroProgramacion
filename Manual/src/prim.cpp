@@ -1,7 +1,7 @@
 const int MAXN = 10005;
 typedef pair <int, int> edge;        // Pareja (nodo, peso)
 typedef pair <int, int> weight_node; // Pareja (peso, nodo)
-vector <edge > g[MAXN];              // Lista de adyacencia
+vector <edge> g[MAXN];              // Lista de adyacencia
 bool visited[MAXN];
 
 // Retorna el costo total del MST

@@ -135,8 +135,20 @@
 	Complejidad: $O(m \operatorname{log} n)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/prim.cpp}
 	
-	\subsection{Algoritmo de Kruskal + union-find}
-	
+	\subsection{Algoritmo de Kruskal}
+		\subsubsection{Union-Find}
+		Union-Find es una estructura de datos para almacenar una colección conjuntos disjuntos (no tienen elementos en común) que cambian dinámicamente.\\
+		Identifica en cada conjunto un ``padre'' que es un elemento al azar de ese conjunto y hace que todos los elementos del conjunto ``apunten'' hacia ese padre. \\
+		Inicialmente se tiene una colección donde cada elemento es un conjunto unitario.\\
+		Complejidad aproximada de $O(m)$ donde $m$ el número total de operaciones de initialize, union y join realizadas.\\
+		\source{./src/union-find.cpp}
+		
+		\subsubsection{Algoritmo de Kruskal}
+		Dado un grafo no dirigido y conexo, retorna el costo del árbol de mínima expansión de ese grafo.\\
+		El costo del árbol de mínima expansión también se puede ver como el mínimo costo de las aristas de manera que haya un camino entre cualquier par de nodos.\\
+		Utiliza Union-Find para ver rápidamente qué aristas generan ciclos.\\
+		Complejidad: $O(m\operatorname{log} n)$  donde $n$ es el número de nodos y $m$ es el número de aristas.\\
+		\source{./src/kruskal.cpp}
 	\subsection{Algoritmo de máximo flujo}
 	
 	
