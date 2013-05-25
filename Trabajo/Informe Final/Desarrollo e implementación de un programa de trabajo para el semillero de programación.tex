@@ -29,8 +29,11 @@
 % \url{my_url_here}.
 \usepackage[spanish]{babel}
 \renewcommand{\IEEEkeywordsname}{Palabras claves}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
 \usepackage[utf8]{inputenc}
 \usepackage{hyperref}
+\usepackage{color}
+
 
 \hyphenation{}
 
@@ -84,19 +87,133 @@ Se espera que los temas enseñados a los estudiantes durante este semestre y el 
 El plan de trabajo del Semillero está basado principalmente en la metodología utilizada por Steven Halim en el curso Competitive Programming de la Universidad Nacional de Singapur (NUS). Este curso, al igual que el Semillero, busca preparar a los estudiantes para las competencias de la ACM-ICPC y está incorporado como curso electivo para estudiantes de matemáticas, ciencias de la computación e ingeniería electrónica de tercer año con conocimientos previos de programación, algoritmos y estructuras de datos. En el curso se trabajan algoritmos de nivel medio y avanzado pero, a diferencia de un curso de algoritmos corriente, se hace énfasis cómo implementarlos eficientemente y en sus aplicaciones en las competencias de programación, en lugar de enfocarse en las demostraciones de su corrección y el análisis de su complejidad\cite{PaperHalim}.\\
 El método de enseñanza del curso de la NUS consiste tener clases teóricas en las cuales se enseñen los algoritmos a trabajar y hacer las evaluaciones por medio de competencias en las que los problemas, tomados de archivos históricos de competencias anteriores de la ICPC, tengan relación con los temas enseñados. Las dos razones principales por la que decidieron trabajar con competencias en lugar de exámenes son preparar a los estudiantes para las competencias oficiales de la ACM-ICPC y motivarlos a ser cada vez mejores al ponerlos a medir sus habilidades contra los demás estudiantes. Este método ha resultado beneficioso para los estudiantes de la NUS y el Profesor Halim cree que es porque incita a los estudiantes a estudiar más para mejorar ya que buscar ser los mejores es es una característica natural de los humanos.\\
 La principal ventaja que ha tenido este curso en la NUS ha sido darle a los estudiantes talentosos e interesados en la programación un espacio en el que puedan prepararse para las competencias y conocer otras personas interesadas en este tema con las que puedan discutir, competir y formar equipos que tengan buen desempeño en las competencias de la ACM-ICPC, llegando a participar en la Maratón Mundial ACM-ICPC \cite{AlgoNUS}. El Semillero de Programación de EAFIT tiene el mismo objetivo y es por esto que se decidió desarrollar un plan de trabajo basado en esta metodología y adaptarlo para el nivel del Semillero que va dirigido a estudiantes de tercer semestre y no de tercer año como lo es en la NUS.
-	\subsection{Programa clase a clase}
-	Para el desarrollo del plan de trabajo fue necesario elaborar un programa clase a clase con el que se buscara cubrir la mayoría de los temas básicos e intermedios de programación requeridos para las maratones. Los temas a enseñar en cada clase fueron escogidos basándose en el nivel de los estudiantes del Semillero, el material de los cursos ``Competitive Programming'' de la NUS \cite{CourseNUS} y ``Escuela de verano para maratones de programación'' de la Universidad Estatal de Campinas \cite{Brasil}, los temas de varios libros acerca de algoritmos y de competencias de programación \cite{Cormen, ProgrammingChallenges, Halim, Halim2, ArtOfProgramming} y otros temas que los autores consideraron importantes de acuerdo a su experiencia obtenida gracias a la participación en múltiples competencias de programación.\\
-	La estructura de cada reunión del Semillero consiste en tres partes principales: 
+	\subsection{Contenido y estructura de las sesiones}
+	Para el desarrollo del plan de trabajo fue necesario escoger el contenido a trabajar en cada sesión de manera que se trataran de cubrir la mayoría de las técnicas básicas e intermedias de programación requeridas para las maratones. La elección de los temas si hizo basándose en el nivel de los estudiantes del Semillero, el material de los cursos ``Competitive Programming'' de la NUS \cite{CourseNUS} y ``Escuela de verano para maratones de programación'' de la Universidad Estatal de Campinas \cite{Brasil}, los temas de varios libros acerca de algoritmos y de competencias de programación \cite{Cormen, ProgrammingChallenges, Halim, Halim2, ArtOfProgramming} y otros temas que los autores consideraron importantes de acuerdo a su experiencia obtenida gracias a la participación en diferentes competencias de programación.\\
+	Cada sesión de Semillero, independiente del tema que se trabaje, consiste en tres partes principales: 
 	\begin{enumerate}
-		\item Discusión, solución y de los problemas propuestos como tarea en la sesión anterior.\\Esto se hace con el fin de que los estudiantes, luego de haber intentado resolver los problemas propuestos, entiendan su solución y de esta manera aprendan de ella. Para los estudiantes que lograron resolver los problemas este es un espacio en el que pueden compartir su solución con sus compañeros y ver una implementación diferente del problema que resolvieron; esto último les permite conocer diferentes formas de desarrollar y pensar en un mismo algoritmo y posiblemente conocer funciones y métodos del lenguaje C++ que hacen las implementaciones más cortas y sencillas.
+		\item Discusión, solución y de los problemas propuestos como tarea en la sesión anterior.\\Esto se hace con el fin de que los estudiantes, luego de haber intentado resolver los problemas propuestos de manera individual, entiendan su solución y de esta manera aprendan de ella. Para los estudiantes que lograron resolver los problemas este es un espacio en el que pueden compartir su solución con sus compañeros y ver una implementación diferente del problema que resolvieron; esto último les permite conocer diferentes formas de desarrollar y pensar en un mismo algoritmo y posiblemente conocer funciones y métodos del lenguaje C++ que hacen las implementaciones más cortas y sencillas.
 		\item Exposición del nuevo tema a trabajar, mostrando los algoritmos, los elementos matemáticos relacionados y sus implementaciones en el lenguaje C++ \cite{C++}.\\La forma de abordar los temas para llevar al estudiante al entendimiento del algoritmo está basada principalmente en las métodos de enseñanza manejados en los cursos ``Algorithms: Design and Analysis Part 1/2'' \cite{Coursera1, Coursera2} e ``Introduction to Algorithms'' \cite{CourseMIT} y ``Competitive Programming'' \cite{CourseNUS}. Por otra parte, la implementación de los algoritmos se basó en las implementaciones mostradas en \cite{Halim, Halim2, ArtOfProgramming} con el fin de tener implementaciones eficientes y lo más sencillas posibles.
 		\item Presentación breve de los problemas propuestos como ejercicio para la siguiente sesión.\\Los problemas propuestos son seleccionados entre los problemas disponibles en los jueces de programación en línea UVa \cite{UVa}, Codeforces \cite{Codeforces} y Spoj\cite{Spoj} buscando que se resuelvan utilizando los temas de la sesión y algunos temas de sesiones anteriores. Dado que el archivo de problemas en estos jueces es bastante extenso, la búsqueda de los problemas según los temas se hace con ayuda de los problemas que proponen Steven y Felix Halim en sus libros ``Competitive Programming 1/2'' \cite{Halim, Halim2}, Ahmed Shamsul Arefin en su libro ``Art of Programming Constest''\cite{ArtOfProgramming} y con ayuda de dos buscadores de problemas en los cuales la búsqueda se hace de acuerdo al tema del cual trata el problema que son: el buscador de Codeforces y el un buscador de problemas para el sitio UVa desarrollado por Mark Greve \cite{UVAToolkit}. Luego de seleccionarlos, los problemas deben se resuelven ya que sus soluciones no están disponibles en ninguna de los libros o sitios web mencionados anteriormente.
 	\end{enumerate}
 
-
-
 \section{Resultados}
 % Se reportan los resultados, sin emitir juicios ni opiniones de carácter personal. Se deben definir los símbolos y las unidades empleadas, incluir figuras y tablas que reporten los resultados obtenidos. Los datos se presentan en forma  tal que otras personas los puedan usar, haciendo énfasis en el texto de aquellos aspectos que son más importantes en las tablas, gráficos o figuras. Dar barras de errores o límites de validez para datos numéricos o gráficos. Las tablas y figuras deben ser poseer un título que describa de manera concisa el contenido de lo que se cita. Igualmente, en este ítem se extraen los principios, relaciones, o generalizaciones de los resultados logradas como consecuencia del análisis de comportamiento de los mismos.
+El Semillero se desarrolló en 15 sesiones semanales de dos horas de duración cada una. Los contenidos trabajados en cada sesión se muestran en la tabla~\ref{Tabla:temas}. Acá se puede ver que la dificultad de los algoritmos va aumentando progresivamente y los elementos necesarios para entender e implementar un algoritmo específico se enseñan antes de dicho algoritmo. Ejemplos de esto serían la necesidad de aprender a utilizar los arreglos y los vectores antes de aprender las formas de representar un grafo, la importancia de conocer y entender el algoritmo de búsquda en anchura y la estructura de datos del heap antes de implementar el algoritmo de Dijkstra, o explicar cómo funciona la programación dinámica antes de discutir el algoritmo de Floyd-Warshall.
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|l|}
+		\hline
+		Semana & Temas\\
+		\hline \hline
+		  & Introducción a C++ y a los jueces de programación \\
+		1 & ¿En qué consiste una maratón de programación?\\
+		  & Solución a un problema básico de maratón de programación\\
+		\hline
+		2 & Arreglos en C++, Vectores de C++ y Grafos\\
+		\hline
+		  & {\color{red}PONER TEMA JUAN OJO NO OLVIDAR} \\
+		3 & Representación de grafos en C++\\
+		  & Entrada usando \verb|getline| y \verb|stringstream|\\
+		\hline
+		  & Pila y Cola\\
+		4 & Búsqueda en anchura (BFS)\\
+		  & Búsqueda en profundidad (DFS)\\
+		\hline
+		5 & Problemas de BFS y DFS\\
+		\hline
+		  & Map, Set, Heap\\
+		6 & Ordenamiento topológico\\
+		  & Componentes fuertemente conexas (SCC)\\
+		\hline
+		7 & Algoritmo de Dijkstra \\
+		\hline 
+		8 & Algoritmo de Bellman-Ford\\
+		\hline 
+		9 & Programación dinámica: Problemas clásicos\\
+		\hline
+		10 & Algoritmo de Floyd-Warshall\\
+		\hline
+		11 & Árbol de mínima expansión\\
+		\hline
+		12 & Algoritmo de Knuth-Morris-Pratt\\
+		\hline
+		13 & Algoritmo de máximo flujo\\
+		\hline
+		14 & Solución de problemas de la Maratón de Programación UTP\\
+		\hline
+		15 & Algoritmos de teoría de números\\
+		\hline 
+	\end{tabular}
+	
+	\quad \\
+	\caption{Temas desarrollados en el semillero}
+	\label{Tabla:temas}
+\end{table}
+
+Con el fin de que facilitar la comprensión de los temas, de que los estudiantes tuvieran material con el cual pudieran repasar los temas de las secciones de manera independiente y de dejar un legado para las personas que vayan a estar a cargo del Semillero en el futuro, se decidieron crear diapositivas con los contenidos trabajados en cada sesión. El contenido de estas diapositivas se mantiene actualizado en el repositorio público \url{https://github.com/anaechavarria/SemilleroProgramacion/} y además se comparte con los estudiantes al final de cada sesión.\\
+Durante es transcurso del semestre, se decidió dar a conocer el contenido de este repositorio con el director de las maratones de programación de la Universidad Tecnológica de Pereira (UTP) y el de la Universidad Pontificia Bolivariana (UPB) quienes difundieron la información entre sus estudiantes. Esta información llegó también a manos de estudiantes de la Universidad Sergio Arboleda, quienes escribieron para preguntar si ellos también podían hacer uso del material para prepararse para las maratones de programación. Luego de compartir la información con estas universidades, 8 personas nuevas empezaron a seguir el contenido del repositorio y otras 3 lo marcaron como favorito.\\
+
+Como se mencionó en la metodología, las competencias son parte fundamental del programa del Semillero. Es por esto que para cada sesión se buscaron y seleccionaron entre 2 y 4 problemas que tuvieran relación con los temas vistos en dicha sesión y se crearon competencias con dichos problemas en los sitios Contests: Factor Común\cite{FactorComun} y Virtual Online Contests\cite{AhmedAly}, dos páginas web para crear competencias con problemas de los jueces de programación mostrados en el Semillero. 
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|l|c|}
+		\hline
+		Competencia & Problemas & Participantes & Problemas resueltos \\
+		\hline
+		  &   & agomezl  & 4\\
+		  &   & svanegas & 4\\
+		  &   & estebanf01 & 4\\
+		1 & 4 & cmejia49 & 3\\
+		  &   & yampyer & 3\\
+		  &   & SantiSP & 2\\
+		  &   & jlopera8 & 1\\
+		  &   & srincon2 & 1\\
+		\hline
+		  &   & agomezl  & 2\\
+		  &   & luisponce & 2\\
+		  &   & svanegas & 1\\
+		  &   & estebanf01 & 0\\
+		2 & 2 & cmejia49 & 0\\
+		  &   & yampyer & 0\\
+		  &   & SantiSP & 0\\
+		  &   & jlopera8 & 0\\
+		\hline
+		  &   & zubieta  & 4\\
+		  &   & svanegas & 3\\
+		3 & 4 & luisponce & 1\\
+		  &   & jlopera8 & 1\\
+		  &   & estebanf01 & 0\\
+		  &   & cmejia49 & 0\\
+		  &   & yampyer & 0\\
+		\hline
+		  &   & zubieta  & 3\\
+		4 & 3 & svanegas & 2\\
+		  &   & estebanf01 & 2\\
+		  &   & luisponce & 2\\
+		\hline 
+		  &   & svanegas  & 3\\
+		5 & 3 & luisponce & 3\\
+		  &   & estebanf01 & 3\\
+		  &   & zubieta & 1\\
+		\hline
+		6 & 4 & svanegas & 1 \\
+		\hline
+		7 & 3 & yampier & 0\\
+		  &   & estebanf01 & 0\\
+		\hline
+		  &   & svanegas & 1\\
+		8 & 3 & estebanf01 & 1\\
+		  &   & yampier & 0\\
+		\hline
+		
+		
+	\end{tabular}
+	\caption{Resultados de cada una de las competencias realizadas}
+	\label{Tabla:competencias}
+\end{table}
+
 
 \section{Conclusión}
 % Condensa los avances o aportes que en conocimiento dan los resultados obtenidos luego del desarrollo del proyecto.
@@ -106,8 +223,8 @@ La principal ventaja que ha tenido este curso en la NUS ha sido darle a los estu
 \begin{itemize}
 	\item Al Departamento de Ingeniería de Sistemas de la Universidad EAFIT por su aporte financiero para la realización de este proyecto.
 	\item A la Universidad EAFIT por proporcionar el espacio para las reuniones del Semillero.
+	\item Al profesor Francisco Correa por sus observaciones para la elaboración de los reportes.
 	\item Al estudiante Santiago Palacio Gómez por su constante apoyo durante las reuniones.
-	\item Al profesor Francisco Correa por su ayuda en la elaboración de los reportes.
 	\item A los integrantes del Semillero de Programación por ser nuestra motivación para ser siempre mejores.
 \end{itemize}
 
