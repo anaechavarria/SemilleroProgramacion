@@ -9,3 +9,4 @@
 *.exe
 *.fdb_latexmk
 *.blg
+*.bbl
