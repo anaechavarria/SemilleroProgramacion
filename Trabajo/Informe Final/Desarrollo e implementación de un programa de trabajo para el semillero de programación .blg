@@ -7,14 +7,19 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
+<<<<<<< HEAD:Trabajo/Informe Final/Desarrollo e implementación de un programa de trabajo para el semillero de programación .blg
 Database file #1: Bibliography.bib
 Warning--I'm ignoring CourseNUS's extra "howpublished" field
 --line 57 of file Bibliography.bib
+=======
+Database file #1: Bibliografia.bib
+>>>>>>> c818b89577a8662a0e7fdcf47eae7b0294f7098f:Trabajo/Informe Final/Desarrollo e implementación de un programa de trabajo para el semillero de programación.blg
 -- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
+<<<<<<< HEAD:Trabajo/Informe Final/Desarrollo e implementación de un programa de trabajo para el semillero de programación .blg
 You've used 19 entries,
             4039 wiz_defined-function locations,
             908 strings with 9615 characters,
@@ -57,3 +62,46 @@ while$ -- 18
 width$ -- 21
 write$ -- 156
 (There was 1 warning)
+=======
+You've used 14 entries,
+            4039 wiz_defined-function locations,
+            883 strings with 9039 characters,
+and the built_in function-call counts, 5126 in all, are:
+= -- 334
+> -- 99
+< -- 3
++ -- 46
+- -- 22
+* -- 178
+:= -- 840
+add.period$ -- 28
+call.type$ -- 14
+change.case$ -- 10
+chr.to.int$ -- 9
+cite$ -- 14
+duplicate$ -- 447
+empty$ -- 595
+format.name$ -- 28
+if$ -- 1141
+int.to.chr$ -- 0
+int.to.str$ -- 14
+missing$ -- 96
+newline$ -- 65
+num.names$ -- 12
+pop$ -- 290
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 426
+stack$ -- 0
+substring$ -- 18
+swap$ -- 227
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 14
+warning$ -- 0
+while$ -- 13
+width$ -- 16
+write$ -- 119
+>>>>>>> c818b89577a8662a0e7fdcf47eae7b0294f7098f:Trabajo/Informe Final/Desarrollo e implementación de un programa de trabajo para el semillero de programación.blg
