@@ -493,16 +493,16 @@ Subsubsection text here.
 % \hfil must be used as a separator to get equal spacing.
 % The subfigure.sty package works much the same way, except \subfigure is
 % used instead of \subfloat.
-%
-%\begin{figure*}[!t]
-%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
-%\label{fig_first_case}}
-%\hfil
-%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
-%\label{fig_second_case}}}
-%\caption{Simulation results}
-%\label{fig_sim}
-%\end{figure*}
+
+\begin{figure*}[!t]
+\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+\label{fig_first_case}}
+\hfil
+\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+\label{fig_second_case}}}
+\caption{Simulation results}
+\label{fig_sim}
+\end{figure*}
 %
 % Note that often IEEE papers with subfigures do not employ subfigure
 % captions (using the optional argument to \subfloat), but instead will
