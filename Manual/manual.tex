@@ -140,7 +140,7 @@
 		Union-Find es una estructura de datos para almacenar una colección conjuntos disjuntos (no tienen elementos en común) que cambian dinámicamente.\\
 		Identifica en cada conjunto un ``padre'' que es un elemento al azar de ese conjunto y hace que todos los elementos del conjunto ``apunten'' hacia ese padre. \\
 		Inicialmente se tiene una colección donde cada elemento es un conjunto unitario.\\
-		Complejidad aproximada: $O(m)$ donde $m$ el número total de operaciones de initialize, union y join realizadas.\\
+		Complejidad aproximada: $O(m)$ donde $m$ el número total de operaciones de \verb|initialize|, \verb|union| y \verb|join| realizadas.\\
 		\source{./src/union-find.cpp}
 		
 		\subsubsection{Algoritmo de Kruskal}
@@ -153,7 +153,7 @@
 	\subsection{Algoritmo de máximo flujo}
 		Dado un grafo con capacidades enteras, halla el máximo flujo entre una fuente $s$ y un sumidero $t$.\\
 		Como el máximo flujo es igual al mínimo corte, halla también el mínimo costo de cortar aristas de manera que $s$ y $t$ queden desconectados.\\
-		Si hay varias fuentes o varios sumideros poner una super-fuente / super-sumidero que se conecte a las fuentes / sumideros con capacidad infinita.\\
+		Si hay varias fuentes o varios sumideros poner una súper-fuente / súper-sumidero que se conecte a las fuentes / sumideros con capacidad infinita.\\
 		Si los nodos también tienen capacidad, dividir cada nodo en dos nodos: uno al que lleguen todas las aristas y otro del que salgan todas las aristas y conectarlos con una arista que tenga la capacidad del nodo.\\
 		Complejidad: $O(n \cdot m^2)$ donde $n$ es el número de nodos y $m$ es el número de aristas.\\
 		\source{./src/maxflow.cpp}
