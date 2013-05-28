@@ -9,9 +9,9 @@ int f [MAXN][MAXN];
 int prev [MAXN];
 
 void connect (int i, int j, int cap){
-    // Agregar SIEMPRE las dos aristas al grafo la red de flujos 
-    // así el grafo sea dirigido. Esto es porque g representa la 
-    // red residual que tiene aristas en los dos sentidos.
+    // Agregar SIEMPRE las dos aristas a g (red residual) así el
+    // grafo sea dirigido. Esto es porque g representa la red 
+    // residual que tiene aristas en los dos sentidos.
     g[i].push_back(j);
     g[j].push_back(i);
     c[i][j] += cap;    
