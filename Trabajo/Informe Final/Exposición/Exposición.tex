@@ -33,6 +33,14 @@
 	frame=tb,					% Poner el recuadro
 }
 
+\AtBeginSection[]{%
+  \begin{frame}<beamer>
+    \frametitle{Contenido}
+    \tableofcontents[sectionstyle=show/hide,subsectionstyle=hide/show/hide]
+  \end{frame}
+  \addtocounter{framenumber}{-1}% If you don't want them to affect the slide number
+}
+
 
 \title{Desarrollo e implementación de un programa de trabajo para el semillero de programación}
 \author{Por: \\ Ana Echavarría Uribe \\ \quad \\ Tutor: \\ Juan Francisco Cardona Mc'Cormick}
@@ -200,18 +208,154 @@
 	\end{frame}
 	
 	\begin{frame}
-		\includegraphics[width = \textwidth]{./img/manual1.png}
+		\begin{center}
+			Manual
+		\end{center}
+	\end{frame}
+	
+	% \begin{frame}
+	% 	\begin{columns}[T]
+	% 		\column{0.55\textwidth}
+	% 			\includegraphics[width = \textwidth]{./img/manual2.png}
+	% 		\column{0.45\textwidth}
+	% 			\includegraphics[width = \textwidth]{./img/manual3.png}
+	% 	\end{columns}
+	% \end{frame}
+	
+	\begin{frame}
+		\frametitle{Competencias}
+		\begin{itemize}
+			\item Se realizaron competencias 11 semanales con entre 2 y 4 problemas.
+			\item Se utilizaron dos sitios para las competencias: \url{http://contests.factorcomun.org/} y \url{http://ahmed-aly.com/}.
+		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}
-		\begin{columns}[T]
-			\column{0.55\textwidth}
-				\includegraphics[width = \textwidth]{./img/manual2.png}
-			\column{0.45\textwidth}
-				\includegraphics[width = \textwidth]{./img/manual3.png}
-		\end{columns}
+		\frametitle{Competencias}
+		
+		\begin{center}
+			\resizebox{0.75\linewidth}{!}{
+				\begin{tabular}{|c|c|l|c|}
+					\hline
+					\textbf{Competencia} & \textbf{Problemas} & \textbf{Participantes} & \textbf{Problemas resueltos} \\
+					\hline
+					  &   & agomezl  & 4\\
+					  &   & svanegas & 4\\
+					  &   & estebanf01 & 4\\
+					1 & 4 & cmejia49 & 3\\
+					  &   & yampyer & 3\\
+					  &   & SantiSP & 2\\
+					  &   & jlopera8 & 1\\
+					  &   & srincon2 & 1\\
+					\hline
+					  &   & agomezl  & 2\\
+					  &   & luisponce & 2\\
+					  &   & svanegas & 1\\
+					2 & 2 & estebanf01 & 0\\
+					  &   & cmejia49 & 0\\
+					  &   & yampyer & 0\\
+					  &   & SantiSP & 0\\
+					  &   & jlopera8 & 0\\
+					\hline
+					  &   & zubieta  & 4\\
+					  &   & svanegas & 3\\
+					  &   & luisponce & 1\\
+					3 & 4 & jlopera8 & 1\\
+					  &   & estebanf01 & 0\\
+					  &   & cmejia49 & 0\\
+					  &   & yampyer & 0\\
+					\hline
+				\end{tabular}
+			}
+		\end{center}
 	\end{frame}
 
+	\begin{frame}
+		\frametitle{Competencias}
+		\begin{center}
+			\resizebox{0.75\linewidth}{!}{
+				\begin{tabular}{|c|c|l|c|}
+					\hline
+					\textbf{Competencia} & \textbf{Problemas} & \textbf{Participantes} & \textbf{Problemas resueltos} \\
+					\hline
+					  &   & zubieta  & 3\\
+					4 & 3 & svanegas & 2\\
+					  &   & estebanf01 & 2\\
+					  &   & luisponce & 2\\
+					\hline
+					  &   & svanegas  & 3\\
+					5 & 3 & luisponce & 3\\
+					  &   & estebanf01 & 3\\
+					  &   & zubieta & 1\\
+					\hline
+					6 & 4 & svanegas & 1\\
+					  &   & spalac24 & 1\\
+					\hline
+					7 & 3 & yampyer & 0\\
+					  &   & estebanf01 & 0\\
+					\hline
+					  &   & svanegas & 1\\
+					8 & 3 & estebanf01 & 1\\
+					  &   & yampyer & 0\\
+					\hline
+					9 & 2 & svanegas & 0\\
+					  &   & estebanf01 & 0\\
+					\hline
+					10 & 2 & svanegas & 2\\
+					   &   & estebanf01 & 1\\
+					\hline
+					11 & 4 & svanegas & Competencia actualmente\\
+					   &   & estebanf01 & en ejecución\\
+					\hline
+				\end{tabular}
+			}
+		\end{center}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Problemas Resueltos}
+		\begin{block}{}
+			Se resolvieron un total de 49 problemas de programación de los temas vistos en el Semillero.
+			\begin{itemize}
+				\item 2 como parte del trabajo del Semillero
+				\item 34 problemas propuestos en competencias
+				\item 13 problemas de la IV Maratón de Programación UTP
+			\end{itemize}
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Maratones}
+		\begin{itemize}
+			\item Parte del objetivo del Semillero es motivar a los estudiantes a participar en las maratones de programación.
+			\item En 2 de las 4 competencias realizadas a nivel nacional por el Circuito Colombiano de Maratones de Programación, compitieron 2 equipos de estudiantes del Semillero.
+			\item 2 equipos compitieron en la IV Maratón de Programación UTP y uno de ellos obtuvo el cuarto lugar.
+		\end{itemize}
+	\end{frame}
+	
+	
+\section{Conclusiones}
+	\begin{frame}
+		\frametitle{Conclusiones}
+		\begin{itemize}
+			\item 3 equipos a la Maratón Mundial de Programación ACM-ICPC.
+			\item Actualmente los estudiantes del Semillero son novatos.
+			\item Con el plan de trabajo, los estudiantes se han preparado mejor para las maratones de programación.
+			\item El contenido creado sirve para desarrollos futuros del Semillero y para implementar grupos similares en otras universidades.
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Conclusiones}
+		\begin{itemize}
+			\item El número de estudiantes que participan en el Semillero disminuye con el transcurso del semestre.
+			\item Esto se debe a que el Semillero no es de caracter obligatorio.
+			\item Se sugiere implementar el Semillero como curso electivo para las carreras de Ingeniería de Sistemas e Ingeniería Matemática (Ej. NUS, Universidad de los Andes)
+			\item Se espera que los temas aprendidos este y el próximo semestre sirva para que los estudiantes tengan un buen desempeño en la Maratón Nacional de Programación ACIS/REDIS que se realizará en octubre del presente año y poder clasificar a la Maratón Regional Suramericana de Programación ACM-ICPC .
+		\end{itemize}
+	\end{frame}
+
+	
 \section{Preguntas}
 	\begin{frame}
 		\frametitle{Preguntas}
